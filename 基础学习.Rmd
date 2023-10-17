@@ -1,0 +1,827 @@
+---
+title: "基础学习"
+author: 
+  - "liulifeng@163.com" #作者信息
+  - "`r Sys.Date()`" #自动获取当前日期
+output: 
+  prettydoc::html_pretty:
+    #可以从齿轮-Output Options中设置
+    css: sspai.css #css模板，定义整个文档的格式，比如一级标题的字体字号等
+    highlight: tango #代码高亮风格
+    # number_sections: yes #是否自动按节编号
+    # theme: cayman # 1
+    # theme: tactile #2
+    # theme: architect #3
+    theme: leonids #4
+    # theme: hpstr #5
+    toc: yes #是否自动生成目录
+---
+
+# 0. base-r
+
+## 0.1 
+
+
+# 1.数据机构
+* 数据类型
+    * 数值型：数值可以用于直接结算，加减乘除
+    * 字符串型：可以进行连接、转换、提取等
+    * 逻辑型：或真或假
+    * 日期型等 
+* 数据结构
+    * 向量
+    * 矩阵
+    * 数据库
+    * 多维数组
+    * 列表
+    * 对象
+    
+
+## 1.1 数值型向量
+
+**向量**是将若干个基础类型相同的值存储在一起， 各个元素可以按序号访问。 如果将若干个数值存储在一起可以用序号访问， 就叫做一个数值型向量。<br>
+
+用c()函数把多个元素或向量组合成一个向量。如
+
+```{r}
+ # 返回x的长度, 
+length(c(1,2,3))
+```
+
+```{r}
+# 初始化一个指定元素个数而元素都等于零的数值型向量
+numeric(3)
+```
+
+### 1.1.1 标量与标量之间运算
+
+```{r}
+# + - * / ^ 加减乘除乘方
+2+1
+2-1
+3*3
+3/2
+2^3
+
+# %/% 整除 %%求余
+5 %/% 3
+5 %% 3
+```
+
+
+```{r}
+# 圆括号()改变运算的先后次序
+1.5 + 2.3 - (0.6 + 0.4)*1.5 - 1.5/0.5 + 2^3
+```
+
+### 1.1.2 向量与标量之间运算
+
+
+向量与标量的运算为每个元素与标量的运算
+
+```{r}
+x <- c(1,20)
+x+2
+x-2
+x*2
+x/2
+x^2
+x%/%2
+x%%2
+```
+ 四则运算时如果有缺失值，缺失元素参加的运算相应结果元素仍缺失。 如
+
+```{r}
+c(1,NA,3) * 2
+```
+
+### 1.1.3 等长向量运算
+
+对应元素两两运算
+```{r}
+x <- c(1,10)
+y <- c(2,9)
+x + y
+x - y
+x / y
+```
+
+### 1.1.4 不等长向量运算
+
+* 长度为倍数关系，规则是每次从头重复利用短的一个。 如
+```{r}
+x <- c(1,3)
+y <- c(2,4,6,8)
+
+x + y
+x - y
+
+```
+
+* 两个向量的长度不是倍数关系，会给出警告信息。如
+```{r}
+c(1,2) + c(1,2,3)
+```
+
+### 1.1.5 向量化函数 `help.start()`
+
+查看这些基础的数学函数的列表，运行命令`help.start()`， 点击链接“Search Engine and Keywords”， 找到“Mathematics”栏目， 浏览其中的“arith”和“math”链接中的说明。 常用的数学函数有
+```{r}
+# 舍入 ceiling, floor, round, signif, trunc, zapsmall
+
+ceiling(c(1.5, -1.2))     # 向上取整
+floor(c(1.5, -1.2))       # 向下取整
+round(c(pi), digits = 2)  # 四舍五入保留小数点2位
+signif(c(pi), digits = 2) # 四舍五入保留2位有效数字
+trunc(pi * 10^(-2:1))     # 保留整数部分
+```
+
+```{r}
+# 符号函数 sign  返回值：1 代表正数，-1 代表负数
+x <- c(1, 5, 0, -10, 100, -20, 10, -69)
+cat("Sign of elements of vector x:", sign(x), "\n")
+```
+```{r}
+# 绝对值函数
+abs(c(pi, -pi))
+```
+```{r} 
+# sqrt 平方根  x^(1/3) 立方根
+x <- seq(1,10,2)
+sqrt(x)
+x^(1/2)
+
+```
+
+
+```{r}
+# 对数与指数函数 log, exp, log10, log2
+log(4,base = 2) # 以2为底4的对数
+log2(4)         # 以2为底4的对数
+log10(100)      # 以10为底100的对数
+exp(1)          # e的多少次方
+```
+
+```{r}
+# 三角函数， 反三角函数
+sin(pi/6) 
+cos(pi/6)
+tan(pi/6)
+asin(0.5)
+acos(0.5)
+atan(1)
+#atan2(1)
+
+```
+### 1.1.6 排序函数
+
+* `sort(x)`返回排序结果。 
+* `rev(x)`返回把各元素排列次序反转后的结果。
+* `order(x)`返回排序用的下标。如
+
+```{r}
+x <- c(11,44,22)
+sort(x)                     # 默认升序(decreasing = FALSE)，
+sort(x, decreasing = TRUE)  # 设置位降序
+rev(sort(x))                # 等价与  sort(x, decreasing = TRUE)  # 设置位降序
+order(x)                    # 结果中2是x的最大元素44所在的位置下标
+x[order(x)]                 # 等价 sort(x) 
+
+```
+### 1.1.7 统计函数
+
+
+```{r}
+# 简单统计函数 max() min() range() sum() mean() sd() var()  median() quantile()
+x <- c(1:10)
+
+max(x)      # 最大值
+min(x)      # 最小值
+range(x)    # 返回2个值，分别是最小值和最大值
+sum(x)      # 求和
+mean(x)     # 均值
+var(x)      # 方差
+sqrt(var(x))# 标准差
+sd(x)       # 标准差
+median(x)   # 中位数
+quantile(x) # 四分卫位数
+quantile(x,c(0.4, 0.8)) # 指定百分比的分位数
+prod(x)     # 连乘积
+
+```
+
+cumsum和cumprod计算累加和累乘积。
+
+```{r}
+cumsum(1:5)   # 累加和
+cumprod(1:5)  # 累乘积 
+
+
+```
+### 1.1.8 生成序列函数
+`seq函数`是冒号运算符的推广。 比如，`seq(5)`等同于1:5。 `seq(2,5)`等同于2:5。
+
+```{r}
+# seq(from = 1, to = 1, by = ((to - from)/(length.out - 1)),length.out = NULL, along.with = NULL, ...)
+
+seq(from=1, to=10, by=2) # 从1到10 间隔为2
+seq(1,10,2) # 简写形式
+seq(from=1, to=10, length.out=3) # [1,10]之间取3个数，等间距
+```
+
+```{r}
+# rep 重复元素
+rep(c(1,2), time=2) # 向量重复出现2次
+
+rep(c(1,2), time=2, each=2) # 向量的每个元素重复2遍， 再重复的元素在重复2遍
+
+```
+
+小问题： 1:5和seq(5)的结果是整型（integer）的， c(1,3,5)和seq(1, 5, by=2)的结果是浮点型（double）的。
+
+
+## 1.2 逻辑型向量及运算
+
+### 1.2.1 逻辑型向量与比较运算符
+
+
+逻辑型是R的基本数据类型之一，只有两个值**TRUE**和**FALSE**, 缺失时为**NA**。逻辑值一般在比较中产生。向量比较的结果为逻辑向量。
+
+```{r}
+sele <- (log10(15) < 2); print(sele)
+
+c(1,3,4) > 3
+
+c(1:4) > c(4:1)
+
+```
+
+> 从例子可以看出，向量比较也遵从R的向量间运算的一般规则： 向量与标量的运算是向量每个元素与标量都分别运算一次， 等长向量的运算时对应元素的运算， 不等长但长度为倍数关系的向量运算是把短的从头重复利用。
+
+
+* 与NA比较产生NA，如
+```{r}
+c(1, NA, 3) > 2    # [1] FALSE    NA  TRUE
+
+NA == NA           # [1] NA
+
+```
+
+* 为了判断向量每个元素是否NA， 用is.na()函数，如
+```{r}
+is.na(c(1, NA, 3))    # [1] FALSE  TRUE FALSE
+```
+
+
+* 用is.finite()判断向量每个元素是否Inf值
+
+**比较运算符**
+<   <=  >  >=  ==  !=  %in%   
+分别表示小于、小于等于、大于、大于等于、等于、不等于、属于。 要注意**等于比较**用了两个等号
+
+* %in%是比较特殊的比较， x %in% y的运算把向量y看成集合， 运算结果是一个逻辑型向量， x向量中的每个值是否属于y向量。如
+```{r}
+c(1, 3) %in% c(2,3,4)       # [1] FALSE  TRUE
+c(1,3) %in% c(NA, 3, 4)     # [1] FALSE  TRUE
+c(NA,3) %in% c(NA, 3, 4)    # [1] TRUE TRUE
+```
+
+函数**match(x, y)**起到和x %in% y运算类似的作用， 但是其返回结果不是找到与否， 而是对x的每个元素， 找到其在y中首次出现的下标，找不到时取缺失值，如
+```{r}
+match(c(1, 3), c(2,3,4,3))  ## [1] NA  2
+```
+
+### 1.2.2 逻辑运算
+
+* 逻辑运算符为`&`, `|`和`!`, 分别表示“同时成立”、“两者至少其一成立”、“条件的反面”。运算的先后次序可以用圆括号()指定.
+
+> age<=3 & sex=='女'表示女婴,;
+> age<=3 | sex=='女'表示婴儿或妇女;
+> !(age<=3 | sex=='女')表示既非婴儿也非妇女
+
+* 在右运算符是缺失值时， 如果左运算符能够确定结果真假， 可以得到非缺失的结果。 例如，`TRUE | NA`为TRUE,` FALSE & NA`为FALSE。 不能确定结果时返回`NA`， 比如， `TRUE & NA`为NA, `FALSE | NA`为NA。
+
+* 标量之间的逻辑比较，`&&`和`||`分别为短路的标量逻辑与和短路的标量逻辑或
+`if(TRUE || sqrt(-1)>0) next` ,其中的`sqrt(-1)`部分不会执行。 其中条件的结果为`TRUE`, 第二部分没有参加计算， 否则第二部分的计算会发生函数自变量范围错误。
+
+#### 1.1.2.3 逻辑运算函数
+
+`if`结构、`while`结构都需要**逻辑标量**而且不能是缺失值。 这时，应该对缺失值结果单独考虑。
+
+若`cond`是逻辑向量
+* 用`all(cond)`测试`cond`的所有元素为真； 
+* 用`any(cond)`测试`cond`至少一个元素为真。 *
+`cond`中允许有缺失值，结果可能为缺失值。 如
+
+
+```{r}
+c(1, NA, 3) > 2         ## [1] FALSE    NA  TRUE
+all(c(1, NA, 3) > 2)    ## [1] FALSE
+any(c(1, NA, 3) > 2)    ## [1] TRUE
+all(NA)                 ## [1] NA
+any(NA)                 ## [1] NA
+```
+
+
+
+函数`which()`返回真值对应的所有下标，如
+```{r}
+which(c(T, F, T, NA))
+which(c(1:4) > 2)
+```
+函数`identical(x,y)`比较两个R对象`x`与`y`的内容是否完全相同， 结果只会取标量`TRUE`与`FALSE`两种。 如
+```{r}
+identical(c(1,2,3), c(1,2,NA))
+identical(c(1L,2L,3L), c(1,2,3))   # 结果假值是因为前一向量是整数型， 后一向量是实数型。
+```
+函数`duplicated()`返回每个元素是否为重复值的结果，用函数unique()可以返回去掉重复值的结果。如：
+
+```{r}
+duplicated(c(1,2,1,3,NA,4,NA))
+unique(c(1,2,1,3,NA,4,NA))
+```
+
+## 1.3 字符型数据及处理
+
+### 1.3.1 字符型向量
+元素为字符串的向。字符串在程序中写成用两个双撇号包围或者用两个单撇号包围的内容。 如
+```{r}
+s <- c('a', "b", NA, FALSE, '', '小明')
+cat(s)
+```
+> 注意空**字符串**并不能自动认为是缺失值， 字符型的缺失值仍用NA表示。
+
+### 1.3.2 转义字符和原始字符串
+
+* 了在字符串中表示一个双撇号， 可以用**反斜杠**在前面标明， 称为“转义”，如：
+```{r}
+cat("\"\n")
+```
+
+* 当需要转义的内容较多时， 可以使用原始字符串(raw string)， 方法是用`r"(...)"`的格式， 其中`...`是实际内容。如：
+
+```{r}
+cat(r"(F:\Code\R\00.base\n)")    # 注意其中\n也被当作普通字符解释了， 不再当作换行符。
+```
+
+原始字符串如果内容中包含了圆括号， 可以将边界的圆括号改为方括号[]或者大括号{}。 如果这样也不能避免歧义， 可以在开始和结尾加上相同个数的减号， 格式为r"--(...)--"， 其中...为实际内容， 减号个数可以根据需要增加。
+```{r}
+cat(r"--{my_str()}--")  # 等价于 cat(r"(my_str())")
+
+```
+
+### 1.3.3 字符数统计
+
+* `nchar()` 字符串向量中每个元素的字符个数
+* `length()` 向量中元素的个数，即向量的长度
+```{r}
+nchar(R.version.string)      # R version 4.3.1 (2023-06-16 ucrt)
+nchar(NA)                    # NA
+nchar(pi)                    # 16
+```
+
+> `R.version`返回一个列表
+
+```{r}
+R.version
+R.version$language
+```
+### 1.3.4 转换大小写
+
+* toupper()函数把字符型向量内容转为大写
+* tolower()函数转为小写。
+
+```{r}
+toupper(c('appLE', 'Red'))
+tolower(c('appLE', 'Red'))
+
+x <- 'JAn'; toupper(x) == "JAN"
+
+```
+
+### 1.3.5 字符串的连接
+
+* `paste()`用来连接两个字符型向量， 元素一一对应连接， 默认用空格连接(`seq = " "`)。
+    * `sep=`指定分隔符。
+    * `collapse=`参数可以把字符型向量的各个元素连接成一个单一的字符串。
+```{r}
+paste(c('ab', 'cd'), c('ef', 'gh'))     # 等价于 c("ab ef", "cd gh")
+paste('x', 1:3, sep="")                 # 等价于c("x1" "x2" "x3")
+paste('x', 1:3, collapse = "", sep = "")# 等价于c("x1x2x3")
+```
+* `paste0()` 相当于 `sep` 设为空，没有连接符.
+```{r}
+paste0("A", "B")
+paste0(c("A", "B", "C"), 1:3)
+paste0(c("A", "B", "C"), 1:3, collapse = ";")
+```
+    
+    
+### 1.3.6 字符串拆分
+`strsplit(x, split, fixed = FALSE, perl = FALSE, useBytes = FALSE)` <br/>
+
+* `x `是被拆分的字符串向量，其每个元素都会被拆分，
+* `split` 表示拆分的位置，可以用正则表达式来描述位置，拆分的结果是一个列表。
+* `fixed = FALSE` 表示正则表达式匹配，而 `fixed = TRUE` 表示正则表达式的精确匹配或者按文本字符的字面意思匹配，即按普通文本匹配。我们知道按普通文本匹配速度快。
+* 使用 `perl = TRUE` 使用`perl`语言正则语法，可以提高运算速度
+* `useBytes` 设置是否按照逐个字节地进行匹配，默认不按照字节逐个匹配
+
+
+```{r}
+x <- c(as = "abcdef", qu = "merry", "yuiop[", "b", "plot")
+strsplit(x, 'e')   # 返回列表的字符串
+strsplit("a.b.c", ".", fixed = TRUE)    # 按点号拆分, 等价于 strsplit("a.b.c", "\\.") 等价于 strsplit("a.b.c", "\\.", perl = TRUE)
+```
+
+* 一个将字符串逆序的函数
+
+```{r}
+str_rev <- function(x)
+        sapply(lapply(strsplit(x, NULL), rev), paste, collapse = "")
+str_rev(c("abc", "Statistics"))
+```
+
+### 1.3.7 正则表达式
+
+R 内置的三种匹配模式 <br>
+1. `fixed = TRUE` : 字面意思匹配,不使用正则表达式 <br>
+2. `perl = TRUE`  : 使用 Perl 正则表达式 <br>
+3. `fixed = FALSE, perl = FALSE` : 使用 POSIX 1003.2 extended 正则表达式 (默认设置). <br>
+
+正则表达式 (regular expression，简称 regexp)
+R 内支持正则表达式的函数有 `grep`、`grepl`、`sub`、`gsub`、`regexpr`、`gregexpr` 、 `regexec` 和 `strsplit`。<br>
+函数 `apropos`，`browseEnv`，`help.search`，`list.files` 和 `ls` 是通过函数 `grep` 来使用正则表达式的，它们全都使用 extended regular expressions
+* 反斜杠 `\` 本身是转义符
+```{r}
+cat("\\") 
+cat("\\n")
+```
+
+#### 1.3.7.1  字符常量
+字符常量表
+
+---
+
+|字符常量|含义| 
+|:--:|:--| 
+| `\n` | 换行 |
+| `\r` | 回车 |
+| `\t` | 制表符 |
+| `\b` | 退格 |
+| `\a` | 报警(铃) |
+| `\f` | 换页 |
+| `\v` | 垂直制表符 
+| `\\` | 反斜线\ |
+| `\'` | 单引号 |
+| `\"` | 双引号 |
+| `\nnn` | 八进制 |
+| `\xnn` | 十六进制 |
+| ` | 反引号 |
+
+
+
+
+
+
+
+
+
+
+### 1.3.8 字符串查询
+
+> grep(pattern, x,
+  ignore.case = FALSE, perl = FALSE, value = FALSE,
+  fixed = FALSE, useBytes = FALSE, invert = FALSE
+)
+
+> grepl(pattern, x,
+  ignore.case = FALSE, perl = FALSE,
+  fixed = FALSE, useBytes = FALSE
+)
+
+
+* `grep` 和 `grepl` 是一对字符串查询函数，查看字符串向量 x 中是否包含正则表达式 `pattern` 描述的内容
+    * 
+
+    * `ignore.case = TRUE` 表示忽略大小写
+    * `fixed = TRUE` 表示启用 literal regular expression 字面正则表达式,相当于`%in%`,不使用正则表达。
+    * `value=TRUE` 则返回下标对应的值,  `grep` 函数返回匹配到的字符串向量x的元素的下标
+
+```{r}
+grep("[a-z]", letters)                  # 返回下标位置
+grep("[a-z]", letters, value = TRUE)    # 返回查询到的值
+grep(x = c("apple", "banana"), pattern = "a", value = TRUE)
+grep(x = c("apple", "banana"), pattern = "b", value = TRUE)
+
+```
+* `grepl` 函数返回一个逻辑向量，检查字符串向量x中的每个元素是否匹配到，匹配到返回 `TRUE`，没有匹配到返回 `FALSE`
+        * 在 `R` 中 `writeLines(c("a\\\\b", "a\\b"))` 分别表示 `a\\b` 和 `a\b`,
+```{r}
+grepl(x = c("apple", "banana"), pattern = "b")
+grep(x = c("a\\\\b", "c\\d"), pattern = "\\", value = TRUE, fixed = TRUE)       # x向量中，包含'\\'的元素
+grep(x = c("a\\\\b", "c\\d"), pattern = "\\\\", value = TRUE, fixed = FALSE)    # 使用正则表达式
+grepl(x = "a\\\\b", pattern = "\\\\\\\\", fixed = TRUE)
+grepl(x = "a\\\\b", pattern = "\\\\\\\\", fixed = FALSE)
+
+```
+* `regexpr` 函数返回一个整型向量，第一次匹配的初始位置，`-1` 表示没有匹配到，返回的属性 `match.length` 表示匹配的字符数量，是一个整型向量，向量长度是匹配的文本的长度，`-1` 表示没有匹配到  
+
+> `regexpr(pattern, text,
+  ignore.case = FALSE, perl = FALSE,
+  fixed = FALSE, useBytes = FALSE
+)`
+
+```{r}
+text <- c("Hellow, Adam!", "Hi, Adam!", "How are you, Adam.", 'hellow, world')
+a <- regexpr("Adam", text)
+```
+* `gregexpr` 函数返回一个列表，返回列表的长度与字符串向量的长度一样，列表中每个元素的形式与 `regexpr` 的返回值一样,
+
+
+
+
+> `gregexpr(pattern, text,
+  ignore.case = FALSE, perl = FALSE,
+  fixed = FALSE, useBytes = FALSE
+)`
+
+> `regexec(pattern, text,
+  ignore.case = FALSE, perl = FALSE,
+  fixed = FALSE, useBytes = FALSE
+) `
+
+
+
+
+
+
+
+
+
+
+### 1.3.9 字符串匹配
+* `grep` 和 `agrepl` 函数做近似（模糊）匹配 (Approximate Matching or Fuzzy Matching) ，对于匹配，考虑到参数 pattern 在参数 x 中匹配时，允许参数值x存在最小可能的插入、删除和替换，这种修改叫做Levenshtein 编辑距离，max.distance 控制其细节.
+
+
+> agrep(pattern, x, max.distance = 0.1, costs = NULL,
+>      ignore.case = FALSE, value = FALSE, fixed = TRUE,
+>      useBytes = FALSE)
+
+> agrepl(pattern, x, max.distance = 0.1, costs = NULL,
+>       ignore.case = FALSE, fixed = TRUE, useBytes = FALSE)
+
+### 1.3.10 取子串
+
+* `substr(x, start, stop)`从字符串`x`中取出从第`start`个到第`stop`个的子串，字符串第一个元素是索引是1。如
+```{r}
+substr('JAN07', 1, 3)
+```
+* 如果x是一个字符型向量，`substr`将对每个元素取子串。如
+
+```{r}
+substr(c('liull', 'caoxx'), 1, 3)
+```
+* 用`substring(x, start)`可以从字符串`x`中取出从第`start`个到末尾的子串。
+
+```{r}
+substring(c('liull', 'caoxx'), 4)
+```
+### 1.3.11 字符串替换功能
+
+用`gsub()`可以替换字符串中的子串， 这样的功能经常用在数据清理中。如
+
+```{r}
+x <- 'chr1:1000:A>T'
+gsub(':', ',', x, fixed=TRUE)  # x字符串中的冒号全部替换成逗号
+```
+
+## 1.4 R向量下标和子集
+
+### 1.4.1 正整数下标
+
+* 对向量x, 在后面加**方括号**和**下标**可以访问向量的元素和子集。修改元素不返回元素。
+
+```{r}
+x <- c(1, 4, 6.25)
+x[2]                    # 取出第二个元素
+x[2] <- 99              # 修改第二个元素， 不返回任何元素
+x[c(1,3)]               # 取出第1、3号元素
+x[c(1,3)] <- c(11,13)   # 修改第1、3号元素
+x[c(1,3,1)]             # 下标可以重复
+
+```
+### 1.4.2 负整数下标
+* **负下标**返回*扣除*相应的元素后的子集，
+```{r}
+x <- c(1, 4, 6.25)
+x[-2]               # 返回删除第二个元素的剩余子集
+x[-c(1,3)]          # 返回删除第1,3个元素的剩余子集
+```
+> 负整数下标不能与正整数下标同时用来从某一向量中取子集， 比如，x[c(1,-2)]没有意义。
+
+### 1.4.3 空下标与零下标
+`
+* `x[]`表示取`x`的全部元素作为子集。 这与x本身不同，比如
+```{r}
+x <- c(1,4,6.25)
+x[] <- 999 ; x
+x <- 999 ; x
+```
+* `x[0]`是一种少见的做法， 返回类型相同、长度为零的向量， 如`numeric(0)`
+```{r}
+x <- c(1,4,6.25)
+x[0]
+```
+### 1.4.4 下标超界
+
+设向量x长度为, 则使用正整数下标时下标应在中取值。 
+* 如果使用大于的下标， 读取时返回缺失值，并不出错。 
+* 给超出的下标元素赋值， 则向量自动变长， 中间没有赋值的元素为缺失值。 例如
+```{r}
+x <- c(1,4,6.25)
+x[5]
+x[5] <- 9 ; x
+```
+> 虽然R的语法对下标超界不视作错误， 但是这样的做法往往来自不良的程序思路， 而且对程序效率有影响， 所以实际编程中应避免下标超界。
+
+### 1.4.5 逻辑下标
+
+```{r}
+x <- c(1,4,6.25)
+x[x > 3]                # 取出x的大于3的元素组成的子集
+```
+```{r}
+f <- function(x){
+    y <- numeric(length(x))
+    y[x>= 0] <- -1
+    y[x < 0] <- 0
+    y
+}
+f(c(1,3))
+
+```
+* `ifelse()函数` : 向量化的逻辑选择，上面函数等价于`y <- ifelse(x>=0, 1, 0) `
+* 缺失值的情况，如果逻辑下标中有缺失值， 对应结果也是缺失值。 所以，在用逻辑下标作子集选择时， 一定要考虑到缺失值问题。正确的做法是加上`!is.na`前提， 如
+```{r}
+x <- c(1, 4, 6.25, NA)
+x[!is.na(x) & x > 2]
+```
+### 1.4.6 `which()` `which.min()`  `which.max()`
+
+* 函数`which()`可以用来找到满足条件的下标
+*` which.min()`、`which.max`求最小值的下标和最大值的下标， 不唯一时只取第一个。如
+
+```{r}
+x <- c(3, 4, 3, 5, 7, 5, 9)
+x[which(x > 5)]     # 返回x向量大于5的值
+x[which.min(x)]     # 返回x向量中最小值
+x[which.max(x)]     # 返回x向量中最大值
+```
+
+### 1.4.7 元素名
+
+* 向量可以为每个元素命名。如
+```{r}
+ages <- c("李明"=30, "张聪"=25, "刘颖"=28)                          # 或
+ages <- c(30, 25, 28) ; names(ages) <- c("李明", "张聪", "刘颖")    # 或
+ages <- setNames(c(30, 25, 28), c("李明", "张聪", "刘颖"))
+ages
+```
+* 可以用元素名或元素名向量作为向量的下标，这实际上建立了字符串到数值的映射表。如
+```{r}
+ages[c("李明", "刘颖")]
+ages[c(1,3)]
+``` 
+* 用 `unname(x)` 返回去掉了元素名的x的副本，x向量值不变， 用 `names(x) <- NULL` 可以去掉x的元素名，不返回任何。
+
+```{r}
+ages <- c(30, 25, 28) ; names(ages) <- c("李明", "张聪", "刘颖")  
+unname(ages)       # 直接返回
+ages
+```
+```{r}
+ages <- c(30, 25, 28) ; names(ages) <- c("李明", "张聪", "刘颖")  
+names(ages) <- NULL  # 不返回x的值
+ages
+
+```
+
+### 1.4.8 向量下标作映射
+
+R在使用整数作为向量下标时，允许使用重复下标， 这样可以把数组x看成一个的整数到 x[1], x[2], , x[n]的一个映射表, 其中是x的长度。
+* sex为10个学生的性别（男、女），希望把每个学生按照性别分别对应到蓝色和红色。
+```{r}
+sex <- c("男", "男", "女", "女", "男", "女", "女", "女", "女", "男")
+sex_color <- c("男"="blue", "女"="red")
+cols <- sex_color[sex]; print(cols)
+
+cols <- unname(cols) ; cols          # 去掉元素名
+```
+
+### 1.4.9 集合运算
+
+向量x看成一个集合
+
+*  `unique(x)` 可以获得x的唯一值
+*  `a %in% x` 判断a的每个元素是否属于向量x，如
+*  `intersect(x,y)`求交集
+*  `union(x,y)` 求并集
+*  `setdiff(x,y)`求差集，即x的元素中不属于y的元素组成的集合
+*  `setequal(x,y)`判断两个集合是否相等， 不受次序与重复元素的影响
+
+```{r}
+unique(c(1, 5, 2, 5))
+c(5,6) %in% c(1,5,2)
+intersect(c(5, 7), c(1, 5, 2, 5))
+union(c(5, 7), c(1, 5, 2, 5))
+setdiff(c(5, 7), c(1, 5, 2, 5))
+setequal(c(1,5,2), c(2,5,1))
+```
+
+## 1.5 数据类型性质
+
+### 1.5.1 存储模式与基本类型
+
+* `typeof()` 函数来返回一个变量或表达式的类型
+```{r}
+typeof(c(1:4))
+typeof(c(1,4))
+typeof(factor(c('F', 'M', 'M', 'F')))
+```
+
+ R中数据的最基本的类型包括logical, integer, double, character, complex, raw, 其它数据类型都是由基本类型组合或转变得到的。
+
+* 逻辑型（logical）
+* 整数型（integer），只能用来储存正数。
+    * 缺失值是NA
+* 双整型（double），可正可负，可大可小，可含小数可不含，在数据科学里，它更常被称为数值型（numeric）
+    * 缺失值是 `NA` 和 `NaN`也算是缺失值, `is.na()`判断是否`NA`或`NaN`； `is.nan()`判断是否`NaN`
+    * `Inf`和`-Inf`不算是缺失值，·`is.infinite()`判断是否`Inf`或`-Inf`；
+```{r}
+is.integer(c(1, -3))    # 只能是整数，
+is.integer(c(1L, -3L))  # 需要明确表明某些数值是整数， 可以在数值后面附加字母L
+is.double(c(1, -3))
+is.numeric(c(1, -3))    # integer和double内容都返回真值。
+```
+```{r}
+c(-1, 0, 1)/0
+is.na(c(-1, 0, 1)/0)
+```
+* 字符型（character）
+* 复数型（complex）
+* 原始型（raw), 是直接使用其二进制内容的类型
+* `NULL`类型，只有唯一值是`NULL`值,表示不存在。 `NULL`长度为0， 不能有任何属性值。 
+    * `is.null()`函数判断某个变量是否取NULL。
+
+### 1.5.2 类型转换与类型升档
+
+* 强制类型转换：`as.xxx()` 函数
+* 隐藏类型转换：
+    * 四则运算中数值会被统一转换为double类型， 
+    * 逻辑运算中运算元素会被统一转换为logical类型。 
+    * 逻辑值转换成数值时，TRUE转换成1， FALSE转换成0
+```{r}
+as.numeric(c(F, T))
+as.character(c(1, pi))
+typeof(3+4)
+TRUE + 4
+```
+* 在用c()函数合并若干元素时， 如果元素基本类型不同， 将统一转换成最复杂的一个，复杂程度从简单到复杂依次为： `logical<integer<double<character`。 这种做法称为类型**升档**
+
+```{r}
+c(FALSE, 1L, 2.5, "3.6")     # 最复杂的是字符串型，最后都升挡为字符串型
+```
+
+* 不同类型参与要求类型相同的运算时， 也会统一转换为最复杂的类型， 也称为类型升档，
+
+```{r}
+TRUE + 10
+paste("abc", 1)
+```
+
+### 1.5.3 属性
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
