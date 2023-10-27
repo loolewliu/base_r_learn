@@ -22,8 +22,6 @@ https://zhuanlan.zhihu.com/p/269616624
 https://zhuanlan.zhihu.com/p/391832351
 
 
-
-
 # 0.数据机构
 [官网:https://ggplot2.tidyverse.org/](https://ggplot2.tidyverse.org/)
 [全图](https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-visualization-cheatsheet-thumbs.png)
