@@ -1,0 +1,313 @@
+---
+title: "ggplot2学习"
+author: 
+  - "liulifeng@163.com" #作者信息
+  - "`r Sys.Date()`" #自动获取当前日期
+output: 
+  prettydoc::html_pretty:
+    #可以从齿轮-Output Options中设置
+    css: sspai.css #css模板，定义整个文档的格式，比如一级标题的字体字号等
+    highlight: tango #代码高亮风格
+    # number_sections: yes #是否自动按节编号
+    # theme: cayman # 1
+    # theme: tactile #2
+    # theme: architect #3
+    theme: leonids #4
+    # theme: hpstr #5
+    toc: yes #是否自动生成目录
+---
+
+
+https://zhuanlan.zhihu.com/p/269616624
+https://zhuanlan.zhihu.com/p/391832351
+
+
+
+
+# 0.数据机构
+[官网:https://ggplot2.tidyverse.org/](https://ggplot2.tidyverse.org/)
+[全图](https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-visualization-cheatsheet-thumbs.png)
+
+# 1. ggplot2简介
+## 1.1 ggplot2之父简
+
+* ggplot2的作者为Hadley Wickham博士，一位为统计应用领域做出了突出贡献的统计学家，被号称为改变了R的男人；
+
+## 1.2 ggplot2绘图原理中的对象概念
+
+ggplot2是基于图层图形语法（the Grammar of Graphics），可简单粗暴的理解为，您可以先绘制好图形的每一部分，然后将各部分相加形成一张完善的图形，使用ggplot2时，会反复使用如下几个对象，简单介绍：
+
+### 1.2.1 几何对象（geom）
+`geometric objects`，譬如散点`points`、 线性`lines`、柱状`bars`及方图`Histogram`等，可绘制的geom为：
+
+
+>ggplot2::geom_ </br>
+ggplot2::geom_abline </br>
+ggplot2::geom_area </br>
+ggplot2::geom_bar </br>
+ggplot2::geom_bin2d </br>
+ggplot2::geom_blank </br>
+ggplot2::geom_boxplot </br>
+ggplot2::geom_col 条形图， x轴为类别，y轴为每个类别对应的数值</br>
+ggplot2::geom_contour </br>
+ggplot2::geom_contour_filled </br>
+ggplot2::geom_count </br>
+ggplot2::geom_crossbar </br>
+ggplot2::geom_curve </br>
+ggplot2::geom_density </br>
+ggplot2::geom_density_2d </br>
+ggplot2::geom_density2d_filled </br>
+ggplot2::geom_dotplot </br>
+ggplot2::geom_errorbar </br>
+ggplot2::geom_errorbarh </br>
+ggplot2::geom_freqpoly </br>
+ggplot2::geom_function </br>
+ggplot2::geom_hex </br>
+ggplot2::geom_histogram </br>
+ggplot2::geom_hline </br>
+ggplot2::geom_jitter </br>
+ggplot2::geom_label </br>
+ggplot2::geom_line </br>
+ggplot2::geom_linerange </br>
+ggplot2::geom_map </br>
+ggplot2::geom_point </br>
+ggplot2::geom_pointrange </br>
+ggplot2::geom_polygon </br>
+ggplot2::geom_qq </br>
+ggplot2::geom_qq_line </br>
+ggplot2::geom_quantile </br>
+ggplot2::geom_raster </br>
+ggplot2::geom_rect </br>
+ggplot2::geom_ribbon </br>
+ggplot2::geom_rug </br>
+ggplot2::geom_segment </br>
+ggplot2::geom_sf </br>
+ggplot2::geom_sf_label </br>
+ggplot2::geom_sf_text </br>
+ggplot2::geom_smooth </br>
+ggplot2::geom_spoke </br>
+ggplot2::geom_step </br>
+ggplot2::geom_text </br>
+ggplot2::geom_tile </br>
+ggplot2::geom_violin </br>
+ggplot2::geom_vline </br>
+ggplot2::get_element_tree </br>
+
+
+### 1.2.2 标度（scale）
+将数据取值映射到图形空间，使用颜色，形状，大小表示不同取值，使用图例，网格线展示标度），可使用的函数：
+> ggplot2::scale_ </br>
+ggplot2::scale_alpha_binned </br>
+ggplot2::scale_alpha_date </br>
+ggplot2::scale_alpha_datetime </br>
+ggplot2::scale_color_brewer </br>
+ggplot2::scale_color_date </br>
+ggplot2::scale_color_datetime </br>
+ggplot2::scale_color_discrete </br>
+ggplot2::scale_color_fermenter </br>
+ggplot2::scale_color_gradientn </br>
+ggplot2::scale_color_identity </br>
+ggplot2::scale_color_stepsn </br>
+ggplot2::scale_colour_continuous </br>
+ggplot2::scale_colour_datetime </br>
+ggplot2::scale_colour_discrete </br>
+ggplot2::scale_colour_identity </br>
+ggplot2::scale_colour_ordinal </br>
+ggplot2::scale_colour_stepsn </br>
+ggplot2::scale_continuous_identity </br>
+ggplot2::scale_discrete_manual </br>
+ggplot2::scale_fill_date </br>
+ggplot2::scale_fill_datetime </br>
+ggplot2::scale_fill_fermenter </br>
+ggplot2::scale_fill_grey </br>
+ggplot2::scale_fill_manual </br>
+ggplot2::scale_fill_steps </br>
+ggplot2::scale_linetype_binned </br>
+ggplot2::scale_linetype_discrete </br>
+ggplot2::scale_shape </br>
+ggplot2::scale_shape_ordinal </br>
+ggplot2::scale_size_area </br>
+ggplot2::scale_size_identity </br>
+ggplot2::scale_size_manual </br>
+ggplot2::scale_size_ordinal </br>
+ggplot2::scale_type </br>
+ggplot2::scale_x_datetime </br>
+ggplot2::scale_x_sqrt </br>
+ggplot2::scale_y_binned </br>
+ggplot2::scale_y_discrete </br>
+ggplot2::scale_y_sqrt </br>
+ggplot2::scale_y_time </br>
+
+### 1.2.3 坐标系（coord）
+描述数据如何映射到图形，同时包含坐标轴和网格线axes, gridlines 
+
+>ggplot2::coord_ </br>
+ggplot2::coord_cartesian </br>
+ggplot2::coord_equal </br>
+ggplot2::coord_fixed </br>
+ggplot2::coord_flip </br>
+ggplot2::coord_map </br>
+ggplot2::coord_munch </br>
+ggplot2::coord_polar </br>
+ggplot2::coord_quickmap </br>
+ggplot2::coord_sf </br>
+ggplot2::coord_trans </br>
+
+### 1.2.4 统计变换（stat）
+对数据的汇总，可使用的函数：
+> ggplot2::stat_ </br>
+ggplot2::stage </br>
+ggplot2::standardise_aes_names </br>
+ggplot2::stat </br>
+ggplot2::stat_bin </br>
+ggplot2::stat_bin_2d </br>
+ggplot2::stat_bin_hex </br>
+ggplot2::stat_bin2d </br>
+ggplot2::stat_binhex </br>
+ggplot2::stat_boxplot </br>
+ggplot2::stat_contour </br>
+ggplot2::stat_contour_filled </br>
+ggplot2::stat_count </br>
+ggplot2::stat_density </br>
+ggplot2::stat_density_2d </br>
+ggplot2::stat_density_2d_filled </br>
+ggplot2::stat_density2d </br>
+ggplot2::stat_density2d_filled </br>
+ggplot2::stat_ecdf </br>
+ggplot2::stat_ellipse </br>
+ggplot2::stat_function </br>
+ggplot2::stat_identity </br>
+ggplot2::stat_qq </br>
+ggplot2::stat_qq_line </br>
+ggplot2::stat_quantile </br>
+ggplot2::stat_sf </br>
+ggplot2::stat_sf_coordinates </br>
+ggplot2::stat_smooth </br>
+ggplot2::stat_spoke </br>
+ggplot2::stat_sum </br>
+ggplot2::stat_summary </br>
+ggplot2::stat_summary_2d </br>
+ggplot2::stat_summary_bin </br>
+ggplot2::stat_summary_hex </br>
+ggplot2::stat_summary2d </br>
+ggplot2::stat_unique </br>
+ggplot2::stat_ydensity </br>
+
+### 1.2.5 分面（facet）
+将数据拆分为小子集，对各子集作图并联合展示，也成条件作图或网格图），可使用的函数：
+> ggplot2::facet_
+ggplot2::facet_grid </br>
+ggplot2::facet_wrap </br>
+ggplot2::facet_null </br>
+
+### 1.2.6 绘图主题（theme）
+主题涉及图形更细的方面，如背景色，字体大小等
+>ggplot2::theme_ </br>
+ggplot2::theme_bw </br>
+ggplot2::theme_classic </br>
+ggplot2::theme_dark </br>
+ggplot2::theme_get </br>
+ggplot2::theme_gray </br>
+ggplot2::theme_grey </br>
+ggplot2::theme_light </br>
+ggplot2::theme_linedraw </br>
+ggplot2::theme_minimal </br>
+ggplot2::theme_replace </br>
+ggplot2::theme_set </br>
+ggplot2::theme_test </br>
+ggplot2::theme_update </br>
+ggplot2::theme_void </br>
+
+## 1.3 ggplot2快速绘图
+
+### 1.3.1 ggplot2内置数据集
+```{r}
+library('ggplot2')
+data(package = 'ggplot2')#查看ggplot2内置数据集
+
+# Data sets in package ‘ggplot2’:
+# 
+# diamonds         Prices of over 50,000 round cut diamonds
+# economics        US economic time series
+# economics_long   US economic time series
+# faithfuld        2d density estimate of Old Faithful data
+# luv_colours      'colors()' in Luv space
+# midwest          Midwest demographics
+# mpg              Fuel economy data from 1999 to 2008 for 38 popular models
+#                  of cars
+# msleep           An updated and expanded version of the mammals sleep
+#                  dataset
+# presidential     Terms of 12 presidents from Eisenhower to Trump
+# seals            Vector field of seal movements
+# txhousing        Housing sales in TX
+```
+
+### 1.3.2 三要素(data, aes, geom)
+* 数据集（data）
+* 图像属性（aes）, 即指定x、y轴要投影的数据
+* 几何对象（geom）, 此处为散点图
+
+```{r}
+library('ggplot2')
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y=hwy)) +
+  geom_point()
+
+```
+
+#### 1.3.2.1 aes设置
+
+* colour, size, shape 等等
+  * colour: 按变量class分类绘制不同类不同颜色的散点图
+  * shape: 按变量drv不同绘制不同类不同形状散点图
+  * size: 变量cyl值大小绘制不同类不同size散点图
+```{r}
+library('ggplot2')
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y=hwy, colour=class)) +
+  geom_point()
+
+ggplot(mpg, aes(displ, hwy, shape = drv))
+  geom_point()
+
+ggplot(mpg, aes(displ, hwy, size = cyl))
+  geom_point()
+
+```
+
+#### 1.3.2.2 分面（facet）
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() + 
+  facet_wrap(~class)
+```
+
+#### 1.3.2.3 几何对象（geom）
+```{r}
+library(gridExtra)
+p1 <- ggplot(mpg, aes(drv, hwy)) + geom_jitter()
+p2 <- ggplot(mpg, aes(drv, hwy)) + geom_boxplot()
+p3 <- ggplot(mpg, aes(drv, hwy)) + geom_violin()
+p4 <- ggplot(mpg, aes(hwy)) + geom_histogram()
+p5 <- ggplot(mpg, aes(hwy)) + geom_freqpoly()
+p6 <- ggplot(mpg, aes(manufacturer)) + geom_bar()
+p7 <- ggplot(economics, aes(date, unemploy/pop)) + geom_line()#时间序列图
+p8 <- ggplot(economics, aes(unemploy/pop, uempmed)) + geom_path() + geom_point()
+grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, nrow = 4) #分行显示子图
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
