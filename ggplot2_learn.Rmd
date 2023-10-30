@@ -491,6 +491,7 @@ ggplot(df1, aes(
 
 
 ### 1.6.3 丰富的色彩
+
  下面的例子作`gss_sm`数据集中`religion`变量的频数条形图， 并给不同的条形自动分配不同的颜色， 方法是指定`fill = religion`
  
 ```{r}
@@ -501,9 +502,30 @@ p <- ggplot(df2, aes(
   x = religion,
   y = n,
   fill = religion))
-p + geom_col() + labs(y = "")
+p + geom_col() + labs(y = "Count")
 
 ```
+> 将`religion`同时映射到`x`维与`fill`维， 所以对应fill维在图形右侧出现了图例， 这是多余的。 调用guides(fill = "none")可以人为指定不做关于填充色的图例：
+
+```{r}
+df2 <- gss_sm |> 
+  select(religion) |>
+  count(religion)
+p <- ggplot(df2, aes(
+  x = religion,
+  y = n,
+  fill = religion))
+p + geom_col() + 
+    labs(y = "Count") +
+    guides(fill = "none")
+```
+> 从可视化理论的角度看， 上图中的不同颜色是多余的， 用同一颜色更能强调数据本身。
+
+### 1.6.4 分段与并列条形图
+上面的条形图展现了单个分类变量的频数分布。 两个分类变量的交叉频数分布可以用分段条形图或者并列条形图表现。</br>
+
+
+
 
 
 

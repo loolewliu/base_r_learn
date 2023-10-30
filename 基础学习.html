@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="liulifeng@163.com" />
-<meta name="author" content="2023-10-17" />
+<meta name="author" content="2023-10-30" />
 
 
 <title>基础学习</title>
@@ -145,7 +145,7 @@ pointer-events: auto;
 <div class="cover-card table-cell table-middle">
 <span class="author_name">基础学习</span>
 <span class="author_bio mbm"><a href="mailto:liulifeng@163.com" class="email">liulifeng@163.com</a></span>
-<span class="author_bio mbm">2023-10-17</span>
+<span class="author_bio mbm">2023-10-30</span>
 </div>
 </div>
 </div>
@@ -225,6 +225,67 @@ R向量下标和子集</a>
 <li><a href="#类型转换与类型升档" id="toc-类型转换与类型升档">1.5.2
 类型转换与类型升档</a></li>
 <li><a href="#属性" id="toc-属性">1.5.3 属性</a></li>
+<li><a href="#类属性" id="toc-类属性">1.5.4 类属性</a></li>
+<li><a href="#str函数" id="toc-str函数">1.5.5 str()函数</a></li>
+</ul></li>
+<li><a href="#日期时间" id="toc-日期时间">1.6 日期时间</a>
+<ul>
+<li><a href="#日期和日期时间类型" id="toc-日期和日期时间类型">1.6.1
+日期和日期时间类型</a></li>
+<li><a href="#从字符串生成日期数据" id="toc-从字符串生成日期数据">1.6.2
+从字符串生成日期数据</a></li>
+<li><a href="#时区和时区转换" id="toc-时区和时区转换">1.6.3
+时区和时区转换</a></li>
+<li><a href="#从数值生成日期数据" id="toc-从数值生成日期数据">1.6.4
+从数值生成日期数据</a></li>
+<li><a href="#日期和日期时间之间的转换" id="toc-日期和日期时间之间的转换">1.6.5
+日期和日期时间之间的转换</a></li>
+<li><a href="#日期显示格式" id="toc-日期显示格式">1.6.6
+日期显示格式</a></li>
+<li><a href="#访问日期时间的组成值" id="toc-访问日期时间的组成值">1.6.7
+访问日期时间的组成值</a></li>
+<li><a href="#日期舍入计算" id="toc-日期舍入计算">1.6.8
+日期舍入计算</a></li>
+<li><a href="#日期计算" id="toc-日期计算">1.6.9 日期计算</a></li>
+</ul></li>
+<li><a href="#因子类型" id="toc-因子类型">1.7 因子类型</a>
+<ul>
+<li><a href="#因子" id="toc-因子">1.7.1 因子</a></li>
+<li><a href="#cut-函数分段" id="toc-cut-函数分段">1.7.2 cut()
+函数分段</a></li>
+<li><a href="#table-统计因子各水平的出现次数" id="toc-table-统计因子各水平的出现次数">1.7.3 table()
+统计因子各水平的出现次数</a></li>
+<li><a href="#tapply-按照因子分组然后每组计算另一变量的概括统计" id="toc-tapply-按照因子分组然后每组计算另一变量的概括统计">1.7.4
+tapply() 按照因子分组然后每组计算另一变量的概括统计</a></li>
+<li><a href="#forcats包的因子函数" id="toc-forcats包的因子函数">1.7.5
+forcats包的因子函数</a></li>
+</ul></li>
+<li><a href="#列表类型" id="toc-列表类型">1.8 列表类型</a>
+<ul>
+<li><a href="#列表" id="toc-列表">1.8.1 列表</a></li>
+<li><a href="#列表元素访问" id="toc-列表元素访问">1.8.2
+列表元素访问</a></li>
+<li><a href="#列表类型转换" id="toc-列表类型转换">1.8.3
+列表类型转换</a></li>
+<li><a href="#连接列表" id="toc-连接列表">1.8.4 连接列表</a></li>
+<li><a href="#返回列表的函数示例---strsplit" id="toc-返回列表的函数示例---strsplit">1.8.5 返回列表的函数示例 -
+<code>strsplit()</code></a></li>
+</ul></li>
+<li><a href="#矩阵与数组" id="toc-矩阵与数组">1.9 矩阵与数组</a>
+<ul>
+<li><a href="#矩阵" id="toc-矩阵">1.9.1 矩阵</a></li>
+<li><a href="#矩阵子集" id="toc-矩阵子集">1.9.2 矩阵子集</a></li>
+<li><a href="#cbind和rbind函数" id="toc-cbind和rbind函数">1.9.3
+cbind()和rbind()函数</a></li>
+<li><a href="#矩阵运算" id="toc-矩阵运算">1.9.4 矩阵运算</a></li>
+<li><a href="#apply函数" id="toc-apply函数">1.9.5 apply()函数</a></li>
+<li><a href="#多维数组" id="toc-多维数组">1.9.6 多维数组</a></li>
+<li><a href="#列表类型的数组" id="toc-列表类型的数组">1.9.7
+列表类型的数组</a></li>
+</ul></li>
+<li><a href="#数据框" id="toc-数据框">1.10 数据框</a>
+<ul>
+<li><a href="#数据框定义" id="toc-数据框定义">1.10.1 数据框定义</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -630,7 +691,7 @@ sex==’女’)表示既非婴儿也非妇女</p>
 <li><code>length()</code> 向量中元素的个数，即向量的长度</li>
 </ul>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="#cb188-1" tabindex="-1"></a><span class="fu">nchar</span>(R.version.string)      <span class="co"># R version 4.3.1 (2023-06-16 ucrt)</span></span></code></pre></div>
-<pre><code>## [1] 28</code></pre>
+<pre><code>## [1] 33</code></pre>
 <div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="#cb190-1" tabindex="-1"></a><span class="fu">nchar</span>(<span class="cn">NA</span>)                    <span class="co"># NA</span></span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="#cb192-1" tabindex="-1"></a><span class="fu">nchar</span>(pi)                    <span class="co"># 16</span></span></code></pre></div>
@@ -639,21 +700,22 @@ sex==’女’)表示既非婴儿也非妇女</p>
 <p><code>R.version</code>返回一个列表</p>
 </blockquote>
 <div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="#cb194-1" tabindex="-1"></a>R.version</span></code></pre></div>
-<pre><code>##                _                           
-## platform       x86_64-w64-mingw32          
-## arch           x86_64                      
-## os             mingw32                     
-## system         x86_64, mingw32             
-## status                                     
-## major          4                           
-## minor          1.2                         
-## year           2021                        
-## month          11                          
-## day            01                          
-## svn rev        81115                       
-## language       R                           
-## version.string R version 4.1.2 (2021-11-01)
-## nickname       Bird Hippie</code></pre>
+<pre><code>##                _                                
+## platform       x86_64-w64-mingw32               
+## arch           x86_64                           
+## os             mingw32                          
+## crt            ucrt                             
+## system         x86_64, mingw32                  
+## status                                          
+## major          4                                
+## minor          3.1                              
+## year           2023                             
+## month          06                               
+## day            16                               
+## svn rev        84548                            
+## language       R                                
+## version.string R version 4.3.1 (2023-06-16 ucrt)
+## nickname       Beagle Scouts</code></pre>
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="#cb196-1" tabindex="-1"></a>R.version<span class="sc">$</span>language</span></code></pre></div>
 <pre><code>## [1] &quot;R&quot;</code></pre>
 </div>
@@ -980,8 +1042,10 @@ FALSE, fixed = TRUE, useBytes = FALSE)</p>
 </div>
 <div id="空下标与零下标" class="section level3">
 <h3>1.4.3 空下标与零下标</h3>
-<p><code>*</code>x[]<code>表示取</code>x`的全部元素作为子集。
-这与x本身不同，比如</p>
+<ul>
+<li><code>x[]</code>表示取<code>x</code>的全部元素作为子集。
+这与x本身不同，比如</li>
+</ul>
 <div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="#cb263-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="fl">6.25</span>)</span>
 <span id="cb263-2"><a href="#cb263-2" tabindex="-1"></a>x[] <span class="ot">&lt;-</span> <span class="dv">999</span> ; x</span></code></pre></div>
 <pre><code>## [1] 999 999 999</code></pre>
@@ -1019,12 +1083,12 @@ FALSE, fixed = TRUE, useBytes = FALSE)</p>
 <pre><code>## [1] 4.00 6.25</code></pre>
 <div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="#cb275-1" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
 <span id="cb275-2"><a href="#cb275-2" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">length</span>(x))</span>
-<span id="cb275-3"><a href="#cb275-3" tabindex="-1"></a>    y[x<span class="sc">&gt;=</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb275-3"><a href="#cb275-3" tabindex="-1"></a>    y[x<span class="sc">&gt;=</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb275-4"><a href="#cb275-4" tabindex="-1"></a>    y[x <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb275-5"><a href="#cb275-5" tabindex="-1"></a>    y</span>
 <span id="cb275-6"><a href="#cb275-6" tabindex="-1"></a>}</span>
 <span id="cb275-7"><a href="#cb275-7" tabindex="-1"></a><span class="fu">f</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code></pre></div>
-<pre><code>## [1] -1 -1</code></pre>
+<pre><code>## [1] 1 1</code></pre>
 <ul>
 <li><code>ifelse()函数</code> :
 向量化的逻辑选择，上面函数等价于<code>y &lt;- ifelse(x&gt;=0, 1, 0)</code></li>
@@ -1042,13 +1106,13 @@ FALSE, fixed = TRUE, useBytes = FALSE)</p>
 <code>which.max()</code></h3>
 <ul>
 <li>函数<code>which()</code>可以用来找到满足条件的下标
-*<code>which.min()</code>、<code>which.max</code>求最小值的下标和最大值的下标，
+*<code>which.min()</code>、<code>which.max()</code>求最小值的下标和最大值的下标，
 不唯一时只取第一个。如</li>
 </ul>
 <div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="#cb279-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">9</span>)</span>
-<span id="cb279-2"><a href="#cb279-2" tabindex="-1"></a>x[<span class="fu">which</span>(x <span class="sc">&gt;</span> <span class="dv">5</span>)]     <span class="co"># 返回x向量大于5的值</span></span></code></pre></div>
+<span id="cb279-2"><a href="#cb279-2" tabindex="-1"></a>x[<span class="fu">which</span>(x <span class="sc">&gt;</span> <span class="dv">5</span>)]     <span class="co"># 返回x向量大于5的值, 等价于 x[x&gt;5]</span></span></code></pre></div>
 <pre><code>## [1] 7 9</code></pre>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="#cb281-1" tabindex="-1"></a>x[<span class="fu">which.min</span>(x)]     <span class="co"># 返回x向量中最小值</span></span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="#cb281-1" tabindex="-1"></a>x[<span class="fu">which.min</span>(x)]     <span class="co"># 返回x向量中最小值, 删除NA后的向量</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="#cb283-1" tabindex="-1"></a>x[<span class="fu">which.max</span>(x)]     <span class="co"># 返回x向量中最大值</span></span></code></pre></div>
 <pre><code>## [1] 9</code></pre>
@@ -1075,7 +1139,8 @@ FALSE, fixed = TRUE, useBytes = FALSE)</p>
 ##   30   28</code></pre>
 <ul>
 <li>用 <code>unname(x)</code> 返回去掉了元素名的x的副本，x向量值不变，
-用 <code>names(x) &lt;- NULL</code> 可以去掉x的元素名，不返回任何。</li>
+用 <code>names(x) &lt;- NULL</code>
+直接去掉x的元素名，不返回任何值。</li>
 </ul>
 <div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="#cb291-1" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">25</span>, <span class="dv">28</span>) ; <span class="fu">names</span>(ages) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;李明&quot;</span>, <span class="st">&quot;张聪&quot;</span>, <span class="st">&quot;刘颖&quot;</span>)  </span>
 <span id="cb291-2"><a href="#cb291-2" tabindex="-1"></a><span class="fu">unname</span>(ages)       <span class="co"># 直接返回</span></span></code></pre></div>
@@ -1092,8 +1157,10 @@ FALSE, fixed = TRUE, useBytes = FALSE)</p>
 <h3>1.4.8 向量下标作映射</h3>
 <p>R在使用整数作为向量下标时，允许使用重复下标，
 这样可以把数组x看成一个的整数到 x[1], x[2], , x[n]的一个映射表,
-其中是x的长度。 *
-sex为10个学生的性别（男、女），希望把每个学生按照性别分别对应到蓝色和红色。</p>
+其中是x的长度。</p>
+<ul>
+<li>sex为10个学生的性别（男、女），希望把每个学生按照性别分别对应到蓝色和红色。</li>
+</ul>
 <div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="#cb297-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;男&quot;</span>, <span class="st">&quot;男&quot;</span>, <span class="st">&quot;女&quot;</span>, <span class="st">&quot;女&quot;</span>, <span class="st">&quot;男&quot;</span>, <span class="st">&quot;女&quot;</span>, <span class="st">&quot;女&quot;</span>, <span class="st">&quot;女&quot;</span>, <span class="st">&quot;女&quot;</span>, <span class="st">&quot;男&quot;</span>)</span>
 <span id="cb297-2"><a href="#cb297-2" tabindex="-1"></a>sex_color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;男&quot;</span><span class="ot">=</span><span class="st">&quot;blue&quot;</span>, <span class="st">&quot;女&quot;</span><span class="ot">=</span><span class="st">&quot;red&quot;</span>)</span>
 <span id="cb297-3"><a href="#cb297-3" tabindex="-1"></a>cols <span class="ot">&lt;-</span> sex_color[sex]; <span class="fu">print</span>(cols)</span></code></pre></div>
@@ -1218,6 +1285,1084 @@ complex, raw, 其它数据类型都是由基本类型组合或转变得到的。
 </div>
 <div id="属性" class="section level3">
 <h3>1.5.3 属性</h3>
+<p>除了NULL以外， R的变量都可以看成是对象， 都可以有属性。 在R语言中，
+属性是把变量看成对象后， 除了其存储内容（如元素）之外的其它附加信息，
+如维数、类属等。
+R对象一般都有<code>length</code>和<code>mode</code>两个属性。常用属性有<code>names</code>,
+<code>dim</code>，<code>class</code>等</p>
+<div id="attribute-函数" class="section level4">
+<h4>1.5.3.1 attribute 函数</h4>
+<p><code>table()</code>函数用了输出其自变量中每个不同值的出现次数，称为频数。</p>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="#cb345-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>)); <span class="fu">print</span>(x)</span></code></pre></div>
+<pre><code>## 
+## 1 2 3 
+## 3 2 1</code></pre>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="#cb347-1" tabindex="-1"></a><span class="fu">attributes</span>(x)</span></code></pre></div>
+<pre><code>## $dim
+## [1] 3
+## 
+## $dimnames
+## $dimnames[[1]]
+## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;
+## 
+## 
+## $class
+## [1] &quot;table&quot;</code></pre>
+<blockquote>
+<p>dim和dimnames, 这是数组(array)具有的属性</p>
+</blockquote>
+<p>attributes()函数修改属性， 如</p>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="#cb349-1" tabindex="-1"></a><span class="fu">attributes</span>(x) <span class="ot">&lt;-</span> <span class="cn">NULL</span>; x    <span class="co"># 修改后x不再是数组，也不是table。</span></span></code></pre></div>
+<pre><code>## [1] 3 2 1</code></pre>
+</div>
+<div id="attrx属性名-函数" class="section level4">
+<h4>1.5.3.2 attr(x,“属性名”) 函数</h4>
+<p>读取或定义x的属性</p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="#cb351-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)</span>
+<span id="cb351-2"><a href="#cb351-2" tabindex="-1"></a><span class="fu">attr</span>(x, <span class="st">&quot;theta&quot;</span>) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb351-3"><a href="#cb351-3" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div>
+<pre><code>## [1] 1 3 5
+## attr(,&quot;theta&quot;)
+## [1] 0 1</code></pre>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="#cb353-1" tabindex="-1"></a><span class="fu">attr</span>(x, <span class="st">&quot;theta&quot;</span>)   <span class="co"># 读取属性</span></span></code></pre></div>
+<pre><code>## [1] 0 1</code></pre>
+<blockquote>
+<p>可以让向量x额外地保存一个theta属性， 这样的属性常常成为“元数据”(meta
+data)， 比如， 用来保存数据的说明、模拟数据的真实模型参数</p>
+</blockquote>
+</div>
+<div id="names-属性" class="section level4">
+<h4>1.5.3.3 names() 属性</h4>
+<ul>
+<li>有元素名的向量、列表、数据框等都有names属性，
+许多R函数的输出本质上也是列表， 所以也有names属性。
+用names(x)的格式读取或设定</li>
+<li>对于没有元素名的向量x，names(x)的返回值是NULL</li>
+</ul>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="#cb355-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> ; y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span> ; lmr <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb355-2"><a href="#cb355-2" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">names</span>(lmr))</span></code></pre></div>
+<pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
+##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
+##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre>
+</div>
+<div id="dim-属性" class="section level4">
+<h4>1.5.3.4 dim() 属性</h4>
+<ul>
+<li><code>dim</code>属性的存在表明对象是矩阵或一维、多维数组。 如：</li>
+</ul>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="#cb357-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">4</span>)</span>
+<span id="cb357-2"><a href="#cb357-2" tabindex="-1"></a><span class="fu">attr</span>(x, <span class="st">&quot;dim&quot;</span>) <span class="co"># 等同于dim(x)</span></span></code></pre></div>
+<pre><code>## [1] 3 4</code></pre>
+</div>
+</div>
+<div id="类属性" class="section level3">
+<h3>1.5.4 类属性</h3>
+<ul>
+<li>函数class()可以返回变量类型的类属</li>
+</ul>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="#cb359-1" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&#39;F&#39;</span>, <span class="st">&#39;M&#39;</span>, <span class="st">&#39;M&#39;</span>, <span class="st">&#39;F&#39;</span>)))</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="#cb361-1" tabindex="-1"></a><span class="do">## [1] &quot;integer&quot;</span></span>
+<span id="cb361-2"><a href="#cb361-2" tabindex="-1"></a><span class="fu">mode</span>(<span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&#39;F&#39;</span>, <span class="st">&#39;M&#39;</span>, <span class="st">&#39;M&#39;</span>, <span class="st">&#39;F&#39;</span>)))</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="#cb363-1" tabindex="-1"></a><span class="do">## [1] &quot;numeric&quot;</span></span>
+<span id="cb363-2"><a href="#cb363-2" tabindex="-1"></a><span class="fu">storage.mode</span>(<span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&#39;F&#39;</span>, <span class="st">&#39;M&#39;</span>, <span class="st">&#39;M&#39;</span>, <span class="st">&#39;F&#39;</span>)))</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="#cb365-1" tabindex="-1"></a><span class="do">## [1] &quot;integer&quot;</span></span>
+<span id="cb365-2"><a href="#cb365-2" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&#39;F&#39;</span>, <span class="st">&#39;M&#39;</span>, <span class="st">&#39;M&#39;</span>, <span class="st">&#39;F&#39;</span>)))</span></code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="#cb367-1" tabindex="-1"></a><span class="do">## [1] &quot;factor&quot;</span></span>
+<span id="cb367-2"><a href="#cb367-2" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">as.numeric</span>(<span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&#39;F&#39;</span>, <span class="st">&#39;M&#39;</span>, <span class="st">&#39;M&#39;</span>, <span class="st">&#39;F&#39;</span>))))</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="#cb369-1" tabindex="-1"></a><span class="do">## [1] &quot;numeric&quot;</span></span></code></pre></div>
+</div>
+<div id="str函数" class="section level3">
+<h3>1.5.5 str()函数</h3>
+<p>用<code>print()</code>函数可以显示对象内容。
+如果内容很多，显示行数可能也很多。
+用<code>str()</code>函数可以显示对象的类型和主要结构及典型内容。例如</p>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="#cb370-1" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="dv">101</span><span class="sc">:</span><span class="dv">200</span></span>
+<span id="cb370-2"><a href="#cb370-2" tabindex="-1"></a><span class="fu">attr</span>(s,<span class="st">&#39;author&#39;</span>) <span class="ot">&lt;-</span> <span class="st">&#39;李小明&#39;</span></span>
+<span id="cb370-3"><a href="#cb370-3" tabindex="-1"></a><span class="fu">attr</span>(s,<span class="st">&#39;date&#39;</span>) <span class="ot">&lt;-</span> <span class="st">&#39;2016-09-12&#39;</span></span>
+<span id="cb370-4"><a href="#cb370-4" tabindex="-1"></a><span class="fu">str</span>(s)</span></code></pre></div>
+<pre><code>##  int [1:100] 101 102 103 104 105 106 107 108 109 110 ...
+##  - attr(*, &quot;author&quot;)= chr &quot;李小明&quot;
+##  - attr(*, &quot;date&quot;)= chr &quot;2016-09-12&quot;</code></pre>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="#cb372-1" tabindex="-1"></a><span class="fu">print</span>(s)</span></code></pre></div>
+<pre><code>##   [1] 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118
+##  [19] 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136
+##  [37] 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154
+##  [55] 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172
+##  [73] 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190
+##  [91] 191 192 193 194 195 196 197 198 199 200
+## attr(,&quot;author&quot;)
+## [1] &quot;李小明&quot;
+## attr(,&quot;date&quot;)
+## [1] &quot;2016-09-12&quot;</code></pre>
+</div>
+</div>
+<div id="日期时间" class="section level2">
+<h2>1.6 日期时间</h2>
+<div id="日期和日期时间类型" class="section level3">
+<h3>1.6.1 日期和日期时间类型</h3>
+<ul>
+<li>R日期可以保存为Date类型，
+一般用整数保存，数值为从1970-1-1经过的天数。</li>
+<li>特殊的POSIXct和POSIXlt
+<ul>
+<li>POSIXct把日期时间保存为从1970年1月1日零时到该日期时间的时间间隔秒数，
+所以数据框中需要保存日期时用POSIXct比较合适，
+需要显示时再转换成字符串形式；</li>
+<li>POSIXlt把日期时间保存为一个包含年、月、日、星期、时、分、秒等成分的列表，
+所以求这些成分可以从POSIXlt格式日期的列表变量中获得。</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="#cb374-1" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
+<pre><code>## 
+## 载入程辑包：&#39;lubridate&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     date, intersect, setdiff, union</code></pre>
+</div>
+<div id="从字符串生成日期数据" class="section level3">
+<h3>1.6.2 从字符串生成日期数据</h3>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="#cb377-1" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">today</span>()  <span class="co"># 返回当前日期: &quot;2023-10-19&quot;</span></span></code></pre></div>
+<pre><code>## [1] &quot;2023-10-30&quot;</code></pre>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="#cb379-1" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">now</span>()    <span class="co"># 返回当前日期时间: &quot;2023-10-19 20:00:57 CST&quot; , CST表示时区</span></span></code></pre></div>
+<pre><code>## [1] &quot;2023-10-30 22:27:07 CST&quot;</code></pre>
+<ul>
+<li>用<code>lubridate::ymd()</code>, <code>lubridate::mdy()</code>,
+<code>lubridate::dmy()</code>将字符型向量转换为日期型向量
+<ul>
+<li>在年号只有两位数字时，默认对应到1969-2068范围。</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="#cb381-1" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">ymd</span>(<span class="fu">c</span>(<span class="st">&quot;2023-10-19&quot;</span>, <span class="st">&quot;2023.10.1&quot;</span>, <span class="st">&quot;18-1-17&quot;</span>, <span class="st">&quot;20230110&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;2023-10-19&quot; &quot;2023-10-01&quot; &quot;2018-01-17&quot; &quot;2023-01-10&quot;</code></pre>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="#cb383-1" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">mdy</span>(<span class="fu">c</span>(<span class="st">&quot;10-19-2023&quot;</span>, <span class="st">&quot;10.1.2023&quot;</span>, <span class="st">&quot;1-17-18&quot;</span>, <span class="st">&#39;01102023&#39;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;2023-10-19&quot; &quot;2023-10-01&quot; &quot;2018-01-17&quot; &quot;2023-01-10&quot;</code></pre>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="#cb385-1" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">dmy</span>(<span class="fu">c</span>(<span class="st">&quot;19-10-2023&quot;</span>, <span class="st">&quot;1.10.2023&quot;</span>, <span class="st">&quot;17-1-18&quot;</span>, <span class="st">&#39;10012023&#39;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;2023-10-19&quot; &quot;2023-10-01&quot; &quot;2018-01-17&quot; &quot;2023-01-10&quot;</code></pre>
+<ul>
+<li><code>lubridate</code>包的<code>ymd</code>、<code>mdy</code>、<code>dmy</code>等函数添加<code>hms</code>、<code>hm</code>、<code>h</code>等后缀，
+可以用于将字符串转换成日期时间。 如</li>
+</ul>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="#cb387-1" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(<span class="st">&quot;1998-03-16 13:15:45&quot;</span>, <span class="st">&#39;20231019 20:17:59&#39;</span>,  <span class="st">&#39;20231019201759&#39;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;1998-03-16 13:15:45 UTC&quot; &quot;2023-10-19 20:17:59 UTC&quot;
+## [3] &quot;2023-10-19 20:17:59 UTC&quot;</code></pre>
+</div>
+<div id="时区和时区转换" class="section level3">
+<h3>1.6.3 时区和时区转换</h3>
+<ul>
+<li>在<code>Date()</code>、<code>as.DateTime()</code>、<code>ymd()</code>等函数中，
+可以用<code>tz=指定时区</code>，
+<ul>
+<li>北京时间可指定为<code>tz=&quot;Etc/GMT-8&quot;</code>或
+<code>tz=&quot;Asia/Shanghai&quot;</code>。</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="#cb389-1" tabindex="-1"></a><span class="fu">ymd_hms</span>(<span class="fu">c</span>(<span class="st">&quot;1998-03-16 13:15:45&quot;</span>, <span class="st">&quot;2023-03-14 10:11:12&quot;</span>), <span class="at">tz=</span><span class="st">&quot;Asia/Shanghai&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;1998-03-16 13:15:45 CST&quot; &quot;2023-03-14 10:11:12 CST&quot;</code></pre>
+<ul>
+<li>为了将某个时间转换到指定的时区， 而不改变真正的时间，
+用with_tz()函数</li>
+</ul>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="#cb391-1" tabindex="-1"></a><span class="fu">with_tz</span>(<span class="fu">ymd_hms</span>(<span class="fu">c</span>(<span class="st">&quot;1990-09-08 9:11:30&quot;</span>, <span class="st">&quot;2023-10-10 10:11:12&quot;</span>), <span class="at">tz=</span><span class="st">&quot;Etc/GMT-8&quot;</span>), <span class="at">tzone=</span><span class="st">&quot;UTC&quot;</span>) <span class="co"># 改用东八区时间，原始时间减8小时</span></span></code></pre></div>
+<pre><code>## [1] &quot;1990-09-08 01:11:30 UTC&quot; &quot;2023-10-10 02:11:12 UTC&quot;</code></pre>
+<ul>
+<li>为了保持表面的时间（时钟显示的日期时间）不变，
+但将<strong>真正的时间修改到另外的时区</strong>，
+用<code>force_tz()</code>或<code>force_tzs()</code>，
+其中<code>force_tzs()</code>可以将每个时间单独应用不同的时区。 如：</li>
+</ul>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="#cb393-1" tabindex="-1"></a><span class="fu">force_tz</span>(<span class="fu">ymd_hms</span>(<span class="fu">c</span>(<span class="st">&quot;20100908 101030&quot;</span>, <span class="st">&quot;20231019 101030&quot;</span>), <span class="at">tz=</span><span class="st">&quot;Etc/GMT-8&quot;</span>), <span class="at">tzone =</span> <span class="st">&quot;UTC&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;2010-09-08 10:10:30 UTC&quot; &quot;2023-10-19 10:10:30 UTC&quot;</code></pre>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="#cb395-1" tabindex="-1"></a><span class="fu">force_tzs</span>(<span class="fu">ymd_hms</span>(<span class="fu">c</span>(<span class="st">&quot;1998-03-16 13:15:45&quot;</span>, <span class="st">&quot;2023-03-14 10:11:12&quot;</span>),</span>
+<span id="cb395-2"><a href="#cb395-2" tabindex="-1"></a>                  <span class="at">tz=</span><span class="st">&quot;Asia/Shanghai&quot;</span>), </span>
+<span id="cb395-3"><a href="#cb395-3" tabindex="-1"></a>          <span class="at">tzones=</span><span class="fu">c</span>(<span class="st">&quot;Etc/GMT-6&quot;</span>, <span class="st">&quot;Etc/GMT-10&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;1998-03-16 07:15:45 UTC&quot; &quot;2023-03-14 00:11:12 UTC&quot;</code></pre>
+<blockquote>
+<p>这将北京时间”1998-03-16 13:15:45”改成了东6区时间，
+对应到UTC就是钟面时间减6， 所以13点变成7点， 将北京时间”2023-03-14
+10:11:12”改成了东10区时间， 对应到UTC就是钟面时间减10，所以10点变成0点。
+输入的日期中的时区”Asia/Shanghai”不起作用，
+仅该时区的钟面时间起作用。</p>
+</blockquote>
+</div>
+<div id="从数值生成日期数据" class="section level3">
+<h3>1.6.4 从数值生成日期数据</h3>
+<ul>
+<li><code>lubridate::make_date(year, month, day)</code>可以从三个数值构成日期向量。
+如</li>
+</ul>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="#cb397-1" tabindex="-1"></a><span class="fu">make_date</span>(<span class="dv">2023</span>, <span class="dv">10</span>,<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;2023-10-01&quot;</code></pre>
+<ul>
+<li><code>lubridate::make_datetime(year, month, day, hour, min, sec)</code>
+可以从最多六个数值组成日期时间， 其中时分秒缺省值都是0。 如</li>
+</ul>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="#cb399-1" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">make_datetime</span>(<span class="dv">2023</span>, <span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">0</span> ,<span class="dv">0</span>), <span class="fu">make_datetime</span>(<span class="dv">2023</span>, <span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">0</span> ,<span class="dv">0</span>, <span class="at">tz=</span><span class="st">&quot;Etc/GMT-0&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;2023-10-01 10:00:00 UTC&quot; &quot;2023-10-01 10:00:00 UTC&quot;</code></pre>
+</div>
+<div id="日期和日期时间之间的转换" class="section level3">
+<h3>1.6.5 日期和日期时间之间的转换</h3>
+<ul>
+<li><code>lubridate::as_date()</code>可以将日期时间型转换为日期型，如</li>
+</ul>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="#cb401-1" tabindex="-1"></a><span class="fu">as_date</span>(<span class="fu">ymd_hms</span>(<span class="st">&quot;20231001 10:08:00&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;2023-10-01&quot;</code></pre>
+<ul>
+<li><code>lubridate::as_datetime()</code>可以将日期型数据转换为日期时间型</li>
+</ul>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="#cb403-1" tabindex="-1"></a><span class="fu">as.Date</span>(<span class="st">&quot;2023-10-01&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb403-2"><a href="#cb403-2" tabindex="-1"></a>    <span class="fu">as_datetime</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb403-3"><a href="#cb403-3" tabindex="-1"></a>    <span class="fu">class</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;POSIXct&quot; &quot;POSIXt&quot;</code></pre>
+</div>
+<div id="日期显示格式" class="section level3">
+<h3>1.6.6 日期显示格式</h3>
+<ul>
+<li>用<code>as.character()</code>函数把日期型数据转换为字符型</li>
+</ul>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="#cb405-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(<span class="fu">c</span>(<span class="st">&#39;1998-03-16&#39;</span>, <span class="st">&#39;2015-11-22&#39;</span>))</span>
+<span id="cb405-2"><a href="#cb405-2" tabindex="-1"></a><span class="fu">as.character</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;1998-03-16&quot; &quot;2015-11-22&quot;</code></pre>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="#cb407-1" tabindex="-1"></a><span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&quot;12/6/2022&quot;</span>, <span class="st">&quot;1/1/2023&quot;</span>), <span class="at">format=</span><span class="st">&quot;%m/%d/%Y&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;2022-12-06&quot; &quot;2023-01-01&quot;</code></pre>
+</div>
+<div id="访问日期时间的组成值" class="section level3">
+<h3>1.6.7 访问日期时间的组成值</h3>
+<ul>
+<li>lubridate包的如下函数可以取出日期型或日期时间型数据中的组成部分：
+<ul>
+<li><code>year()</code>取出年</li>
+<li><code>month()</code>取出月份数值</li>
+<li><code>mday()</code>取出日数值</li>
+<li><code>yday()</code>取出日期在一年中的序号，元旦为1</li>
+<li><code>wday()</code>取出日期在一个星期内的序号，
+但是一个星期从星期天开始， 星期天为1,星期一为2，星期六为7。</li>
+<li><code>hour()</code>取出小时</li>
+<li><code>minute()</code>取出分钟</li>
+<li><code>second()</code>取出秒</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="#cb409-1" tabindex="-1"></a><span class="fu">mday</span>(<span class="fu">as.POSIXct</span>(<span class="st">&quot;2018-1-17 13:15:40&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] 17</code></pre>
+<ul>
+<li>lubridate的这些成分函数还允许被赋值，
+结果就修改了相应元素的值，如</li>
+</ul>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="#cb411-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(<span class="st">&quot;2018-1-17 13:15:40&quot;</span>) ; <span class="fu">year</span>(x) <span class="ot">&lt;-</span> <span class="dv">2000</span> ; x</span></code></pre></div>
+<pre><code>## [1] &quot;2000-01-17 13:15:40 CST&quot;</code></pre>
+</div>
+<div id="日期舍入计算" class="section level3">
+<h3>1.6.8 日期舍入计算</h3>
+<p>lubridate包提供了floor_date(), round_date(), ceiling_date()等函数，
+对日期可以用unit=指定一个时间单位进行舍入。 时间单位为字符串，
+如seconds, 5 seconds, minutes, 2 minutes, hours, days, weeks, months,
+years等。</p>
+<blockquote>
+<p>比如，以10 minutes为单位， *
+<code>floor_date()</code>将时间向前归一化到10分钟的整数倍， *
+<code>ceiling_date()</code>将时间向后归一化到10分钟的整数倍， *
+<code>round_date()</code>将时间归一化到最近的10分钟的整数倍，
+时间恰好是5分钟倍数时按照类似四舍五入的原则向上取整。 例如</p>
+</blockquote>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="#cb413-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(<span class="st">&quot;2018-01-11 08:32:44&quot;</span>)</span>
+<span id="cb413-2"><a href="#cb413-2" tabindex="-1"></a><span class="fu">floor_date</span>(x, <span class="at">unit=</span><span class="st">&quot;10 minutes&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;2018-01-11 08:30:00 UTC&quot;</code></pre>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="#cb415-1" tabindex="-1"></a><span class="fu">floor_date</span>(x, <span class="st">&quot;season&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;2017-12-01 UTC&quot;</code></pre>
+</div>
+<div id="日期计算" class="section level3">
+<h3>1.6.9 日期计算</h3>
+<p>在lubridate的支持下日期可以相减， 可以进行加法、除法。
+lubridate包提供了如下的三种与时间长短有关的数据类型：</p>
+<ul>
+<li>时间长度(duration)，按整秒计算;</li>
+<li>时间周期(period)，如日、周;</li>
+<li>时间区间(interval)，包括一个开始时间和一个结束时间。</li>
+</ul>
+<div id="时间长度" class="section level4">
+<h4>1.6.9.1 时间长度</h4>
+<ul>
+<li>R的POSIXct日期时间之间可以相减，如</li>
+</ul>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="#cb417-1" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(<span class="st">&quot;2023-10-24 0:0:0&quot;</span>)</span>
+<span id="cb417-2"><a href="#cb417-2" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(<span class="st">&quot;2000-01-01 12:0:5&quot;</span>)</span>
+<span id="cb417-3"><a href="#cb417-3" tabindex="-1"></a>di <span class="ot">&lt;-</span> d1 <span class="sc">-</span> d2; di                   <span class="co"># 结果是类型是difftime,  可以用as.double(di, units=&quot;secs&quot;)转化</span></span></code></pre></div>
+<pre><code>## Time difference of 8696.5 days</code></pre>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="#cb419-1" tabindex="-1"></a><span class="fu">as.double</span>(di, <span class="at">units =</span> <span class="st">&quot;days&quot;</span>)       <span class="co"># days / hours / mins / secs</span></span></code></pre></div>
+<pre><code>## [1] 8696.5</code></pre>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="#cb421-1" tabindex="-1"></a><span class="fu">as.duration</span>(di)                     <span class="co"># 固定以秒作为基本单位</span></span></code></pre></div>
+<pre><code>## [1] &quot;751377595s (~23.81 years)&quot;</code></pre>
+<p><code>* lubridate的</code>dseconds()<code>,</code>dminutes()<code>,</code>dhours()<code>,</code>ddays()<code>,</code>dweeks()<code>,</code>dyears()`函数可以直接生成时间长度类型的数据，如</p>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="#cb423-1" tabindex="-1"></a><span class="fu">dhours</span>(<span class="dv">1</span>) <span class="sc">+</span> <span class="fu">dseconds</span>(<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;3605s (~1 hours)&quot;</code></pre>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="#cb425-1" tabindex="-1"></a><span class="fu">dhours</span>(<span class="dv">1</span>)<span class="sc">*</span><span class="dv">10</span></span></code></pre></div>
+<pre><code>## [1] &quot;36000s (~10 hours)&quot;</code></pre>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="#cb427-1" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(<span class="st">&quot;2000-01-02 12:0:5&quot;</span>)</span>
+<span id="cb427-2"><a href="#cb427-2" tabindex="-1"></a>d2 <span class="sc">-</span> <span class="fu">dhours</span>(<span class="dv">5</span>)      <span class="co"># 日期加或者减去一个时间长度， 结果严格按推移的秒数计算</span></span></code></pre></div>
+<pre><code>## [1] &quot;2000-01-02 07:00:05 UTC&quot;</code></pre>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="#cb429-1" tabindex="-1"></a>d2 <span class="sc">+</span> <span class="fu">ddays</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;2000-01-12 12:00:05 UTC&quot;</code></pre>
+</div>
+</div>
+</div>
+<div id="因子类型" class="section level2">
+<h2>1.7 因子类型</h2>
+<div id="因子" class="section level3">
+<h3>1.7.1 因子</h3>
+<p>R中用因子代表数据中<strong>分类变量</strong>, 如性别、省份、职业。
+有序因子代表有序量度，如打分结果，疾病严重程度等。</p>
+<ul>
+<li>用<code>factor()</code>函数把字符型向量转换成因子，如</li>
+</ul>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="#cb431-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;男&quot;</span>, <span class="st">&quot;女&quot;</span>, <span class="st">&quot;男&quot;</span>, <span class="st">&quot;男&quot;</span>,  <span class="st">&quot;女&quot;</span>)</span>
+<span id="cb431-2"><a href="#cb431-2" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(x)</span>
+<span id="cb431-3"><a href="#cb431-3" tabindex="-1"></a>sex</span></code></pre></div>
+<pre><code>## [1] 男 女 男 男 女
+## Levels: 男 女</code></pre>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="#cb433-1" tabindex="-1"></a><span class="fu">attributes</span>(sex)</span></code></pre></div>
+<pre><code>## $levels
+## [1] &quot;男&quot; &quot;女&quot;
+## 
+## $class
+## [1] &quot;factor&quot;</code></pre>
+<blockquote>
+<p><code>read.csv()</code>函数的默认操作会把输入文件的字符型列自动转换成因子，
+这对于性别、职业、地名这样的列是合适的，
+但是对于姓名、日期、详细地址这样的列则不合适。
+所以，在read.csv()调用中经常加选项<code>stringsAsFactors=FALSE</code>选项禁止这样的自动转换，还可以用colClasses选项逐个指定每列的类型。
+readr包的<code>read_csv()</code>函数， 这个函数读入CSV时不自动转换因子，
+生成data.frame的替代类型tibble。</p>
+</blockquote>
+<ul>
+<li>用<code>as.numeric()</code>可以把因子转换为纯粹的整数值，如</li>
+</ul>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="#cb435-1" tabindex="-1"></a><span class="fu">as.numeric</span>(sex)</span></code></pre></div>
+<pre><code>## [1] 1 2 1 1 2</code></pre>
+<ul>
+<li>用<code>as.character()</code>可以把因子转换成原来的字符型，如</li>
+</ul>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="#cb437-1" tabindex="-1"></a><span class="fu">as.character</span>(sex)</span></code></pre></div>
+<pre><code>## [1] &quot;男&quot; &quot;女&quot; &quot;男&quot; &quot;男&quot; &quot;女&quot;</code></pre>
+<ul>
+<li><code>factor()</code>的一般形式
+<ul>
+<li><code>levels</code>自行指定各水平值, 不指定时由x的不同值来求</li>
+<li><code>labels</code>指定各水平的标签,
+不指定时用各水平值的对应字符串</li>
+<li></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="#cb439-1" tabindex="-1"></a><span class="co"># factor(x = character(), levels, labels = levels,</span></span>
+<span id="cb439-2"><a href="#cb439-2" tabindex="-1"></a> <span class="co">#      exclude = NA, ordered = is.ordered(x), nmax = NA)</span></span></code></pre></div>
+</div>
+<div id="cut-函数分段" class="section level3">
+<h3>1.7.2 cut() 函数分段</h3>
+<ul>
+<li>连续取值的变量，可以用cut()函数将其分段， 转换成因子。
+<ul>
+<li><code>breaks=n</code> 等间距分组,分组个数是n.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="#cb440-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb440-2"><a href="#cb440-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>), <span class="dv">2</span>))</span>
+<span id="cb440-3"><a href="#cb440-3" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">cut</span>(x, <span class="at">breaks=</span><span class="dv">4</span>); f</span></code></pre></div>
+<pre><code>##  [1] (-2.21,-1.26]  (-1.26,-0.305] (-1.26,-0.305] (-1.26,-0.305] (-1.26,-0.305]
+##  [6] (-1.26,-0.305] (-0.305,0.647] (-0.305,0.647] (-0.305,0.647] (-0.305,0.647]
+## [11] (-0.305,0.647] (-0.305,0.647] (-0.305,0.647] (-0.305,0.647] (0.647,1.6]   
+## [16] (0.647,1.6]    (0.647,1.6]    (0.647,1.6]    (0.647,1.6]    (0.647,1.6]   
+## Levels: (-2.21,-1.26] (-1.26,-0.305] (-0.305,0.647] (0.647,1.6]</code></pre>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="#cb442-1" tabindex="-1"></a><span class="fu">levels</span>(f) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>); f       <span class="co"># 修改水平标记</span></span></code></pre></div>
+<pre><code>##  [1] a b b b b b c c c c c c c c d d d d d d
+## Levels: a b c d</code></pre>
+<ul>
+<li>各组个数平均分组，
+可以利用<code>quantile()</code>函数计算分位数作为分组
+<ul>
+<li><code>oredered_result=TRUE</code>表示生成有序因子</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="#cb444-1" tabindex="-1"></a>cu <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>, <span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span>))</span>
+<span id="cb444-2"><a href="#cb444-2" tabindex="-1"></a>cu[<span class="dv">1</span>] <span class="ot">&lt;-</span> cu[<span class="dv">1</span>] <span class="sc">-</span> <span class="fl">0.01</span><span class="sc">*</span>(cu[<span class="dv">5</span>] <span class="sc">-</span> cu[<span class="dv">1</span>])</span>
+<span id="cb444-3"><a href="#cb444-3" tabindex="-1"></a>f2 <span class="ot">&lt;-</span> <span class="fu">cut</span>(x, <span class="at">breaks=</span>cu, <span class="at">oredered_result=</span><span class="cn">TRUE</span>)</span>
+<span id="cb444-4"><a href="#cb444-4" tabindex="-1"></a><span class="fu">levels</span>(f2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>); f2</span></code></pre></div>
+<pre><code>##  [1] a a a a a b b b b b c c c c c d d d d d
+## Levels: a b c d</code></pre>
+</div>
+<div id="table-统计因子各水平的出现次数" class="section level3">
+<h3>1.7.3 table() 统计因子各水平的出现次数</h3>
+<ul>
+<li>一般的向量统计每个不同元素的出现次数</li>
+</ul>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="#cb446-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;男&quot;</span>, <span class="st">&quot;女&quot;</span>, <span class="st">&quot;男&quot;</span>, <span class="st">&quot;男&quot;</span>,  <span class="st">&quot;女&quot;</span>)</span>
+<span id="cb446-2"><a href="#cb446-2" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(x)</span>
+<span id="cb446-3"><a href="#cb446-3" tabindex="-1"></a><span class="fu">table</span>(sex)</span></code></pre></div>
+<pre><code>## sex
+## 男 女 
+##  3  2</code></pre>
+</div>
+<div id="tapply-按照因子分组然后每组计算另一变量的概括统计" class="section level3">
+<h3>1.7.4 tapply() 按照因子分组然后每组计算另一变量的概括统计</h3>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="#cb448-1" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">165</span>, <span class="dv">170</span>, <span class="dv">168</span>, <span class="dv">172</span>, <span class="dv">159</span>)</span>
+<span id="cb448-2"><a href="#cb448-2" tabindex="-1"></a><span class="fu">tapply</span>(h, sex, mean)</span></code></pre></div>
+<pre><code>##       男       女 
+## 168.3333 164.5000</code></pre>
+<blockquote>
+<p>第一自变量h与与第二自变量sex是等长的，
+对应元素分别为同一人的身高和性别，
+tapply()函数分男女两组计算了身高平均值。</p>
+</blockquote>
+</div>
+<div id="forcats包的因子函数" class="section level3">
+<h3>1.7.5 forcats包的因子函数</h3>
+<p><a href="https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/prog-type-fact.html#summ-by-forcats" class="uri">https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/prog-type-fact.html#summ-by-forcats</a></p>
+</div>
+</div>
+<div id="列表类型" class="section level2">
+<h2>1.8 列表类型</h2>
+<div id="列表" class="section level3">
+<h3>1.8.1 列表</h3>
+<ul>
+<li>列表(list)类型来保存不同类型的数据,
+一个主要目的是提供R分析结果输出包装。</li>
+<li>列表的不同元素的类型可以不同, 列表不要求各列等长。</li>
+</ul>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="#cb450-1" tabindex="-1"></a>rec <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name=</span><span class="st">&quot;李明&quot;</span>, <span class="at">age=</span><span class="dv">30</span>,</span>
+<span id="cb450-2"><a href="#cb450-2" tabindex="-1"></a>  <span class="at">scores=</span><span class="fu">c</span>(<span class="dv">85</span>, <span class="dv">76</span>, <span class="dv">90</span>))</span>
+<span id="cb450-3"><a href="#cb450-3" tabindex="-1"></a>rec</span></code></pre></div>
+<pre><code>## $name
+## [1] &quot;李明&quot;
+## 
+## $age
+## [1] 30
+## 
+## $scores
+## [1] 85 76 90</code></pre>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="#cb452-1" tabindex="-1"></a><span class="fu">typeof</span>(rec)     <span class="co"># 查看类型</span></span></code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="#cb454-1" tabindex="-1"></a><span class="fu">is.list</span>(rec)    <span class="co"># 判断某个对象是否列表类型</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="#cb456-1" tabindex="-1"></a><span class="fu">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="dv">5</span>)   <span class="co"># 生成元素为空的长度为n的列表</span></span></code></pre></div>
+<pre><code>## [[1]]
+## NULL
+## 
+## [[2]]
+## NULL
+## 
+## [[3]]
+## NULL
+## 
+## [[4]]
+## NULL
+## 
+## [[5]]
+## NULL</code></pre>
+</div>
+<div id="列表元素访问" class="section level3">
+<h3>1.8.2 列表元素访问</h3>
+<div id="查" class="section level4">
+<h4>1.8.2.1 查</h4>
+<ul>
+<li>方式1：<strong>双层</strong>中括号,返回子元素的实际类型</li>
+</ul>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="#cb458-1" tabindex="-1"></a>rec[[<span class="dv">3</span>]]</span></code></pre></div>
+<pre><code>## [1] 85 76 90</code></pre>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="#cb460-1" tabindex="-1"></a>rec[[<span class="dv">3</span>]][<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] 76</code></pre>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="#cb462-1" tabindex="-1"></a>rec[[<span class="st">&#39;age&#39;</span>]]</span></code></pre></div>
+<pre><code>## [1] 30</code></pre>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="#cb464-1" tabindex="-1"></a><span class="fu">typeof</span>(rec[[<span class="dv">1</span>]])   <span class="co"># 返回 character</span></span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<ul>
+<li>方式2：<code>$</code>访问</li>
+</ul>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="#cb466-1" tabindex="-1"></a><span class="fu">typeof</span>(rec<span class="sc">$</span>name)   <span class="co"># 返回 character</span></span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<ul>
+<li>方式3：单中括号，取列表的子集，返回的结果是列表</li>
+</ul>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="#cb468-1" tabindex="-1"></a>rec[<span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## $scores
+## [1] 85 76 90</code></pre>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="#cb470-1" tabindex="-1"></a>rec[<span class="st">&#39;age&#39;</span>]</span></code></pre></div>
+<pre><code>## $age
+## [1] 30</code></pre>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="#cb472-1" tabindex="-1"></a><span class="fu">is.list</span>(rec[<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="元素名-1" class="section level4">
+<h4>1.8.1.2 元素名</h4>
+<ul>
+<li>列表一般都应该有元素名， 元素名可以看成是变量名，
+列表中的每个元素看成一个变量。 用names()函数查看和修改元素名</li>
+</ul>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="#cb474-1" tabindex="-1"></a><span class="fu">names</span>(rec)                                       <span class="co"># 查看列表中所有的元素名</span></span></code></pre></div>
+<pre><code>## [1] &quot;name&quot;   &quot;age&quot;    &quot;scores&quot;</code></pre>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="#cb476-1" tabindex="-1"></a><span class="fu">names</span>(rec)[<span class="fu">names</span>(rec)<span class="sc">==</span><span class="st">&quot;scores&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;三科分数&quot;</span>   <span class="co"># 修改元素名</span></span>
+<span id="cb476-2"><a href="#cb476-2" tabindex="-1"></a>rec[[<span class="st">&quot;三科分数&quot;</span>]]</span></code></pre></div>
+<pre><code>## [1] 85 76 90</code></pre>
+</div>
+<div id="修改列表元素内容" class="section level4">
+<h4>1.8.2.3 修改列表元素内容</h4>
+<ol style="list-style-type: decimal">
+<li>修改已经存在元素</li>
+</ol>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="#cb478-1" tabindex="-1"></a>rec[[<span class="st">&#39;三科分数&#39;</span>]][<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>给列表<strong>不存在的元素</strong>名定义元素值就添加了新元素</li>
+</ol>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="#cb479-1" tabindex="-1"></a>rec[[<span class="st">&quot;身高&quot;</span>]] <span class="ot">&lt;-</span> <span class="dv">175</span></span>
+<span id="cb479-2"><a href="#cb479-2" tabindex="-1"></a>rec</span></code></pre></div>
+<pre><code>## $name
+## [1] &quot;李明&quot;
+## 
+## $age
+## [1] 30
+## 
+## $三科分数
+## [1] 85  0 90
+## 
+## $身高
+## [1] 175</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>某个<strong>列表元素</strong>赋值为<code>NULL</code>就删掉这个元素</li>
+</ol>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="#cb481-1" tabindex="-1"></a>rec[[<span class="st">&quot;age&quot;</span>]] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb481-2"><a href="#cb481-2" tabindex="-1"></a><span class="fu">print</span>(rec)</span></code></pre></div>
+<pre><code>## $name
+## [1] &quot;李明&quot;
+## 
+## $三科分数
+## [1] 85  0 90
+## 
+## $身高
+## [1] 175</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>在list()函数中允许定义元素为NULL，这样的元素是存在的</li>
+</ol>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="#cb483-1" tabindex="-1"></a>li <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a=</span><span class="dv">120</span>, <span class="at">b=</span><span class="st">&quot;F&quot;</span>, <span class="at">c=</span><span class="cn">NULL</span>); li</span></code></pre></div>
+<pre><code>## $a
+## [1] 120
+## 
+## $b
+## [1] &quot;F&quot;
+## 
+## $c
+## NULL</code></pre>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="#cb485-1" tabindex="-1"></a>li[<span class="st">&#39;b&#39;</span>] <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="cn">NULL</span>); li</span></code></pre></div>
+<pre><code>## $a
+## [1] 120
+## 
+## $b
+## NULL
+## 
+## $c
+## NULL</code></pre>
+</div>
+</div>
+<div id="列表类型转换" class="section level3">
+<h3>1.8.3 列表类型转换</h3>
+<ul>
+<li>用<code>as.list()</code>把一个其它类型的对象转换成列表；</li>
+<li>用<code>unlist()</code>函数把列表转换成基本向量</li>
+</ul>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="#cb487-1" tabindex="-1"></a>li1 <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>); li1</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2
+## 
+## [[3]]
+## [1] 3</code></pre>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="#cb489-1" tabindex="-1"></a>li2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x=</span><span class="dv">1</span>, <span class="at">y=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>));<span class="fu">unlist</span>(li2)</span></code></pre></div>
+<pre><code>##  x y1 y2 
+##  1  2  3</code></pre>
+</div>
+<div id="连接列表" class="section level3">
+<h3>1.8.4 连接列表</h3>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="#cb491-1" tabindex="-1"></a>li <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb491-2"><a href="#cb491-2" tabindex="-1"></a>li <span class="ot">&lt;-</span> <span class="fu">c</span>(li, <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span>
+<span id="cb491-3"><a href="#cb491-3" tabindex="-1"></a>li <span class="ot">&lt;-</span> <span class="fu">c</span>(li, <span class="fu">list</span>(<span class="dv">11</span><span class="sc">:</span><span class="dv">13</span>))</span>
+<span id="cb491-4"><a href="#cb491-4" tabindex="-1"></a>li</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 1 2 3
+## 
+## [[2]]
+## [1] 11 12 13</code></pre>
+</div>
+<div id="返回列表的函数示例---strsplit" class="section level3">
+<h3>1.8.5 返回列表的函数示例 - <code>strsplit()</code></h3>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="#cb493-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;10, 8, 7&quot;</span>, <span class="st">&quot;5, 2, 2&quot;</span>, <span class="st">&quot;3, 7, 8&quot;</span>, <span class="st">&quot;8, 8, 9&quot;</span>)</span>
+<span id="cb493-2"><a href="#cb493-2" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(x, <span class="st">&quot;,&quot;</span>); res                <span class="co"># 返回列表</span></span></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;10&quot; &quot; 8&quot; &quot; 7&quot;
+## 
+## [[2]]
+## [1] &quot;5&quot;  &quot; 2&quot; &quot; 2&quot;
+## 
+## [[3]]
+## [1] &quot;3&quot;  &quot; 7&quot; &quot; 8&quot;
+## 
+## [[4]]
+## [1] &quot;8&quot;  &quot; 8&quot; &quot; 9&quot;</code></pre>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="#cb495-1" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">sapply</span>(res, as.numeric))</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]   10    8    7
+## [2,]    5    2    2
+## [3,]    3    7    8
+## [4,]    8    8    9</code></pre>
+<blockquote>
+<p>列表、向量或数据帧作为输入，并以向量或矩阵的形式给出输出。</p>
+</blockquote>
+</div>
+</div>
+<div id="矩阵与数组" class="section level2">
+<h2>1.9 矩阵与数组</h2>
+<div id="矩阵" class="section level3">
+<h3>1.9.1 矩阵</h3>
+<p>矩阵用matrix函数定义，实际存储成一个向量，根据保存的行数和列数对应到矩阵的元素，
+默认的存储次序为<strong>按列</strong>存储，用<code>byrow=TRUE</code>选项可以设置成<strong>按行</strong>填入。</p>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="#cb497-1" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">11</span><span class="sc">:</span><span class="dv">16</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">2</span>,<span class="at">byrow =</span> <span class="cn">TRUE</span>); <span class="fu">print</span>(A)</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   11   12
+## [2,]   13   14
+## [3,]   15   16</code></pre>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="#cb499-1" tabindex="-1"></a><span class="fu">attributes</span>(A)<span class="sc">$</span>dim    <span class="co"># 等价于 dim(A),返回A的维度</span></span></code></pre></div>
+<pre><code>## [1] 3 2</code></pre>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="#cb501-1" tabindex="-1"></a><span class="fu">nrow</span>(A)     <span class="co"># A的行数</span></span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="#cb503-1" tabindex="-1"></a><span class="fu">ncol</span>(A)     <span class="co"># A的列数</span></span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="#cb505-1" tabindex="-1"></a><span class="fu">t</span>(A)        <span class="co"># 返回A的转置</span></span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]   11   13   15
+## [2,]   12   14   16</code></pre>
+</div>
+<div id="矩阵子集" class="section level3">
+<h3>1.9.2 矩阵子集</h3>
+<div id="子集" class="section level4">
+<h4>1.9.2.1 子集</h4>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="#cb507-1" tabindex="-1"></a>A[<span class="dv">1</span>,] <span class="co"># 取出A的第一行，变成一个普通向量。 </span></span></code></pre></div>
+<pre><code>## [1] 11 12</code></pre>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="#cb509-1" tabindex="-1"></a>A[,<span class="dv">1</span>] <span class="co"># 取出A的第一列，变成一个普通向量。 </span></span></code></pre></div>
+<pre><code>## [1] 11 13 15</code></pre>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="#cb511-1" tabindex="-1"></a>A[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>),<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]    <span class="co">#取出指定行、列对应的子矩阵</span></span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   11   12
+## [2,]   15   16</code></pre>
+</div>
+<div id="行列命名" class="section level4">
+<h4>1.9.2.2 行列命名</h4>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="#cb513-1" tabindex="-1"></a><span class="fu">colnames</span>(A) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;X&#39;</span>, <span class="st">&#39;Y&#39;</span>)        <span class="co"># 给矩阵每列命名， 也可以访问矩阵列名</span></span>
+<span id="cb513-2"><a href="#cb513-2" tabindex="-1"></a><span class="fu">rownames</span>(A) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>)   <span class="co"># 给矩阵每行命名， 也可以访问矩阵行名</span></span>
+<span id="cb513-3"><a href="#cb513-3" tabindex="-1"></a>A[<span class="fu">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;c&#39;</span>), <span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
+<pre><code>##  a  c 
+## 12 16</code></pre>
+</div>
+<div id="dropfalse参数生成列向量" class="section level4">
+<h4>1.9.2.3. <code>drop=FALSE</code>参数生成列向量</h4>
+<p>矩阵取子集时， 如果取出的子集仅有一行或仅有一列，
+结果就不再是矩阵而是变成了R向量， R向量既不是行向量也不是列向量</p>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="#cb515-1" tabindex="-1"></a>A[,<span class="dv">1</span>,drop<span class="ot">=</span><span class="cn">FALSE</span>]</span></code></pre></div>
+<pre><code>##    X
+## a 11
+## b 13
+## c 15</code></pre>
+</div>
+</div>
+<div id="cbind和rbind函数" class="section level3">
+<h3>1.9.3 cbind()和rbind()函数</h3>
+<ul>
+<li>若x1, x2, x3是等长的向量，
+<code>cbind(x1, x2, x3)</code>把它们看成列向量并在一起组成一个矩阵。</li>
+</ul>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="#cb517-1" tabindex="-1"></a><span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>), <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">6</span>))</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="#cb519-1" tabindex="-1"></a><span class="fu">cbind</span>(A,<span class="at">Z=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span></code></pre></div>
+<pre><code>##    X  Y Z
+## a 11 12 1
+## b 13 14 2
+## c 15 16 3</code></pre>
+<ul>
+<li><code>cbind()</code>的自变量中也允许有标量，
+这时此标量被重复使用</li>
+</ul>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="#cb521-1" tabindex="-1"></a><span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">c</span>(<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">10</span>))</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    1
+## [2,]    1   -1
+## [3,]    1   10</code></pre>
+<ul>
+<li><code>rbind()</code>用法类似，
+可以等长的向量看成行向量上下摞在一起，
+可以是矩阵与长度等于矩阵列数的向量上下摞在一起，
+向量长度为1也可以。</li>
+</ul>
+</div>
+<div id="矩阵运算" class="section level3">
+<h3>1.9.4 矩阵运算</h3>
+<div id="四则运算-" class="section level4">
+<h4>1.9.4.1 四则运算（+-*/）</h4>
+<ol style="list-style-type: decimal">
+<li>与标量,结果为每个元素进行相应运算</li>
+<li>两个同形状的矩阵进行加、减运算， 即对应元素相加、相减，
+这就是线性代数中矩阵的加、减运算。</li>
+<li>两个同形状的矩阵进行乘、除运算， 即对应元素相乘、相除。</li>
+</ol>
+</div>
+<div id="矩阵乘法" class="section level4">
+<h4>1.9.4.2 矩阵乘法</h4>
+<p>用<code>%*%</code>表示矩阵乘法而不是用<code>*</code>表示，
+注意矩阵乘法要求<em>左边的矩阵的列数</em>等于<em>右边的矩阵的行数</em></p>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="#cb523-1" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">11</span><span class="sc">:</span><span class="dv">16</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb523-2"><a href="#cb523-2" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb523-3"><a href="#cb523-3" tabindex="-1"></a>A<span class="sc">%*%</span>B</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   25    3
+## [2,]   27    3
+## [3,]   29    3</code></pre>
+</div>
+<div id="向量与矩阵向乘" class="section level4">
+<h4>1.9.4.3 向量与矩阵向乘</h4>
+<p>矩阵与向量进行乘法运算时， 向量按需要解释成列向量或行向量。
+当向量左乘矩阵时，看成行向量； 当向量右乘矩阵时，看成列向量</p>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="#cb525-1" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>) <span class="sc">%*%</span> B    <span class="co"># 行向量 ： 1X2 %*% 2X2 == 1X2</span></span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    2    0</code></pre>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="#cb527-1" tabindex="-1"></a>B <span class="sc">%*%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)    <span class="co"># 列向量 ： 2X2 %*% 2X1 == 1X2</span></span></code></pre></div>
+<pre><code>##      [,1]
+## [1,]    0
+## [2,]    2</code></pre>
+</div>
+<div id="内积" class="section level4">
+<h4>1.9.4.4 内积</h4>
+<p>设x, y是两个向量， 计算向量内积， 可以用sum(x*y)表示。</p>
+</div>
+<div id="外积" class="section level4">
+<h4>1.9.4.5 外积</h4>
+<p>外积: <code>%o%</code>, 结果为矩阵。
+<code>x %o% y</code>的第i行第j列元素等于x[i]乘以y[j]</p>
+</div>
+</div>
+<div id="apply函数" class="section level3">
+<h3>1.9.5 apply()函数</h3>
+<ol style="list-style-type: decimal">
+<li><code>apply(A, 2, FUN)</code>把矩阵A的每一列分别输入到函数FUN中，
+得到对应于每一列的结果</li>
+</ol>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="#cb529-1" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">1</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">2</span>); <span class="fu">apply</span>(D, <span class="dv">2</span>, sum)</span></code></pre></div>
+<pre><code>## [1] 11 10</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><code>apply(A, 1, FUN)</code>把矩阵A的每一行分别输入到函数FUN中，
+得到与每一行对应的结果</li>
+</ol>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="#cb531-1" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">1</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">2</span>); <span class="fu">apply</span>(D, <span class="dv">1</span>,mean)</span></code></pre></div>
+<pre><code>## [1] 5.5 3.0 2.0</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>函数FUN返回多个结果， 则<code>apply(A, 2, FUN)</code>结果为矩阵，
+矩阵的每一列是输入矩阵相应列输入到FUN的结果， 结果列数等于A的列数</li>
+</ol>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="#cb533-1" tabindex="-1"></a><span class="fu">apply</span>(D, <span class="dv">2</span>, range)    <span class="co"># 返回每列的min和max,在同一列</span></span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    2    1
+## [2,]    6    5</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>函数FUN返回多个结果， 为了对每行计算FUN的结果，
+结果存入一个与输入的矩阵行数相同的矩阵， 应该用t(apply(A, 1,
+FUN))的形式</li>
+</ol>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="#cb535-1" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">apply</span>(D, <span class="dv">1</span>, range) )</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    5    6
+## [2,]    2    4
+## [3,]    1    3</code></pre>
+</div>
+<div id="多维数组" class="section level3">
+<h3>1.9.6 多维数组</h3>
+<p>矩阵是多维数组(array)的特例，也称二维数组。 定义语法：
+<code>数组名 &lt;- array(数组元素, dim=c(第一下标个数, 第二下标个数, ..., 第s下标个数))</code>
+其中数组元素的填入次序是第一下标变化最快， 第二下标次之，
+最后一个下标是变化最慢的。 这种次序称为FORTRAN次序。</p>
+<p>如:定义一个三维数组</p>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="#cb537-1" tabindex="-1"></a>ara <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>, <span class="at">dim=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)); ara</span></code></pre></div>
+<pre><code>## , , 1
+## 
+##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6
+## 
+## , , 2
+## 
+##      [,1] [,2] [,3]
+## [1,]    7    9   11
+## [2,]    8   10   12
+## 
+## , , 3
+## 
+##      [,1] [,2] [,3]
+## [1,]   13   15   17
+## [2,]   14   16   18
+## 
+## , , 4
+## 
+##      [,1] [,2] [,3]
+## [1,]   19   21   23
+## [2,]   20   22   24</code></pre>
+</div>
+<div id="列表类型的数组" class="section level3">
+<h3>1.9.7 列表类型的数组</h3>
+<p>矩阵一般用于数值计算，所以其元素一般是数值。
+但是，在更复杂的编程场景中，可能需要在矩阵（或数组）元素中保存复杂结构，
+比如，
+每个元素是一个长度可变的向量。这时，可以将矩阵元素设为列表类型，但访问其元素需要使用部分列表访问语法格式。</p>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="#cb539-1" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">list</span>(), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>); L          <span class="co"># s1. 生成未初始化的列表类型的矩阵</span></span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,] NULL NULL
+## [2,] NULL NULL</code></pre>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="#cb541-1" tabindex="-1"></a>L[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) ; L[<span class="dv">1</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>) </span>
+<span id="cb541-2"><a href="#cb541-2" tabindex="-1"></a>L[<span class="dv">2</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>) ; L[<span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">11</span><span class="sc">:</span><span class="dv">15</span>)    <span class="co"># s2. 给每个矩阵元素赋值为仅有一个元素的列表：</span></span>
+<span id="cb541-3"><a href="#cb541-3" tabindex="-1"></a>L[<span class="dv">2</span>,<span class="dv">2</span>]                                     <span class="co"># s3. 元素为仅一个元素的列表</span></span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 11 12 13 14 15</code></pre>
+</div>
+</div>
+<div id="数据框" class="section level2">
+<h2>1.10 数据框</h2>
+<div id="数据框定义" class="section level3">
+<h3>1.10.1 数据框定义</h3>
+<ol style="list-style-type: decimal">
+<li>数据框类似于一个矩阵，有个横行、个纵列，
+但各列允许有不同类型：数值型向量、因子、字符型向量、日期时间向量。
+同一列的数据类型相同。</li>
+</ol>
+<p>函数<code>data.frame()</code>可以生成数据框，<code>data.frame()</code>函数会将字符型列转换成因子，
+加选项<code>stringsAsFactors=FALSE</code>可以避免这样的转换.如:</p>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="#cb543-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb543-2"><a href="#cb543-2" tabindex="-1"></a>    <span class="at">name=</span><span class="fu">c</span>(<span class="st">&quot;李明&quot;</span>, <span class="st">&quot;张聪&quot;</span>, <span class="st">&quot;王建&quot;</span>), </span>
+<span id="cb543-3"><a href="#cb543-3" tabindex="-1"></a>    <span class="at">age=</span><span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">35</span>, <span class="dv">28</span>), </span>
+<span id="cb543-4"><a href="#cb543-4" tabindex="-1"></a>    <span class="at">height=</span><span class="fu">c</span>(<span class="dv">180</span>, <span class="dv">162</span>, <span class="dv">175</span>),</span>
+<span id="cb543-5"><a href="#cb543-5" tabindex="-1"></a>    <span class="at">stringsAsFactors=</span><span class="cn">FALSE</span>)</span>
+<span id="cb543-6"><a href="#cb543-6" tabindex="-1"></a><span class="fu">print</span>(d)</span></code></pre></div>
+<pre><code>##   name age height
+## 1 李明  30    180
+## 2 张聪  35    162
+## 3 王建  28    175</code></pre>
+<div id="赋值" class="section level4">
+<h4>1.10.1.1 赋值</h4>
+<p>如果数据框的某一列为常数， 可以在data.frame()调用中仅给该列赋一个值，
+生成的结果会自动重复这个值使得该列与其他列等长。</p>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="#cb545-1" tabindex="-1"></a>d<span class="sc">$</span>age <span class="ot">=</span><span class="dv">1</span>; <span class="fu">print</span>(d)</span></code></pre></div>
+<pre><code>##   name age height
+## 1 李明   1    180
+## 2 张聪   1    162
+## 3 王建   1    175</code></pre>
+</div>
+<div id="行列数" class="section level4">
+<h4>1.10.1.2 行列数</h4>
+<ul>
+<li>``</li>
+</ul>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="#cb547-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;数据框d的行数：&quot;</span>, <span class="fu">nrow</span>(d), <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
+<pre><code>## 数据框d的行数： 3</code></pre>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="#cb549-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;数据框d的列数/变量数：&quot;</span>, <span class="fu">ncol</span>(d), <span class="fu">length</span>(d))</span></code></pre></div>
+<pre><code>## 数据框d的列数/变量数： 3 3</code></pre>
+</div>
+<div id="列变量名" class="section level4">
+<h4>1.10.1.3 列/变量名</h4>
+<p>数据框每列叫做一个变量， 每列都有名字，称为列名或变量名，
+可以用<code>names()</code>函数和`colnames()函数访问</p>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="#cb551-1" tabindex="-1"></a><span class="fu">names</span>(d)</span></code></pre></div>
+<pre><code>## [1] &quot;name&quot;   &quot;age&quot;    &quot;height&quot;</code></pre>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="#cb553-1" tabindex="-1"></a><span class="fu">colnames</span>(d)</span></code></pre></div>
+<pre><code>## [1] &quot;name&quot;   &quot;age&quot;    &quot;height&quot;</code></pre>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="#cb555-1" tabindex="-1"></a><span class="fu">rownames</span>(d)</span></code></pre></div>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
+<blockquote>
+<p>给<code>names(d)</code>或<code>colnames(d)</code>赋值可以修改列名。</p>
+</blockquote>
+<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="#cb557-1" tabindex="-1"></a><span class="fu">names</span>(d) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;姓名&quot;</span>, <span class="st">&quot;年龄&quot;</span>,<span class="st">&quot;身高&quot;</span>); <span class="fu">names</span>(d)</span></code></pre></div>
+<pre><code>## [1] &quot;姓名&quot; &quot;年龄&quot; &quot;身高&quot;</code></pre>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="#cb559-1" tabindex="-1"></a><span class="fu">names</span>(d)[<span class="dv">2</span>] <span class="ot">=</span> <span class="st">&quot;age&quot;</span> ; <span class="fu">names</span>(d)</span></code></pre></div>
+<pre><code>## [1] &quot;姓名&quot; &quot;age&quot;  &quot;身高&quot;</code></pre>
+</div>
+<div id="转换成数据框" class="section level4">
+<h4>1.10.1.4 转换成数据框</h4>
+<ul>
+<li>用as.data.frame(x)可以把x转换成数据框。
+<ol style="list-style-type: decimal">
+<li>如果x是一个向量， 转换结果是以x为唯一一列的数据框。</li>
+<li>如果x是一个列表并且列表元素都是长度相同的向量，
+转换结果中每个列表变成数据框的一列。</li>
+<li>如果x是一个矩阵，转换结果把矩阵的每列变成数据框的一列。</li>
+</ol></li>
+</ul>
+<p>数据框是一个随着R语言前身S语言继承下来的概念，
+现在已经有一些不足之处，
+<code>tibble包</code>提供了<code>tibble</code>类，
+这是数据框的一个改进版本</p>
+</div>
+<div id="数据框显示" class="section level4">
+<h4>1.10.1.5 数据框显示</h4>
+<ul>
+<li><code>knitr::kable()</code>使得数据框保存的表格显示更丰富。</li>
+</ul>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="#cb561-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb561-2"><a href="#cb561-2" tabindex="-1"></a>    <span class="at">name=</span><span class="fu">c</span>(<span class="st">&quot;李明&quot;</span>, <span class="st">&quot;张聪&quot;</span>, <span class="st">&quot;王建&quot;</span>), </span>
+<span id="cb561-3"><a href="#cb561-3" tabindex="-1"></a>    <span class="at">age=</span><span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">35</span>, <span class="dv">28</span>), </span>
+<span id="cb561-4"><a href="#cb561-4" tabindex="-1"></a>    <span class="at">height=</span><span class="fu">c</span>(<span class="dv">180</span>, <span class="dv">162</span>, <span class="dv">175</span>),</span>
+<span id="cb561-5"><a href="#cb561-5" tabindex="-1"></a>    <span class="at">stringsAsFactors=</span><span class="cn">FALSE</span>)</span>
+<span id="cb561-6"><a href="#cb561-6" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">name</th>
+<th align="right">age</th>
+<th align="right">height</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">李明</td>
+<td align="right">30</td>
+<td align="right">180</td>
+</tr>
+<tr class="even">
+<td align="left">张聪</td>
+<td align="right">35</td>
+<td align="right">162</td>
+</tr>
+<tr class="odd">
+<td align="left">王建</td>
+<td align="right">28</td>
+<td align="right">175</td>
+</tr>
+</tbody>
+</table>
+<div id="数据框内容访问" class="section level5">
+<h5>1.10.1.5.1 数据框内容访问</h5>
+<ul>
+<li>数据框可以用矩阵格式访问</li>
+</ul>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="#cb562-1" tabindex="-1"></a>d[<span class="dv">2</span>,<span class="dv">3</span>]    <span class="co"># 第2行, 第3列</span></span></code></pre></div>
+<pre><code>## [1] 162</code></pre>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="#cb564-1" tabindex="-1"></a>d[,<span class="dv">3</span>]     <span class="co"># 第3列, 但是这种作法与tibble不兼容， 所以应避免使用。</span></span></code></pre></div>
+<pre><code>## [1] 180 162 175</code></pre>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="#cb566-1" tabindex="-1"></a>d[[<span class="dv">3</span>]]    <span class="co"># 第3列</span></span></code></pre></div>
+<pre><code>## [1] 180 162 175</code></pre>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="#cb568-1" tabindex="-1"></a><span class="co"># 新增</span></span>
+<span id="cb568-2"><a href="#cb568-2" tabindex="-1"></a>d[[<span class="st">&#39;wight&#39;</span>]] <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">52</span>, <span class="dv">51</span>)    <span class="co"># 新增1列</span></span></code></pre></div>
+<ul>
+<li>按列名访问列可用如</li>
+</ul>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="#cb569-1" tabindex="-1"></a>d[[<span class="st">&#39;age&#39;</span>]]      <span class="co"># 访问age列</span></span></code></pre></div>
+<pre><code>## [1] 30 35 28</code></pre>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="#cb571-1" tabindex="-1"></a>d[, <span class="st">&#39;age&#39;</span>]      <span class="co"># 访问age列。用法与tibble不兼容，应避免使用。</span></span></code></pre></div>
+<pre><code>## [1] 30 35 28</code></pre>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="#cb573-1" tabindex="-1"></a>d<span class="sc">$</span>age           <span class="co"># 访问age列</span></span></code></pre></div>
+<pre><code>## [1] 30 35 28</code></pre>
+</div>
+<div id="子集-1" class="section level5">
+<h5>1.10.1.5.2 子集</h5>
+<ul>
+<li>因为数据框的一行不一定是相同数据类型， 所以数据框的一行作为子集，
+结果还是数据框，而不是向量。</li>
+</ul>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="#cb575-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> d[<span class="dv">2</span>,] ; <span class="fu">is.data.frame</span>(x)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="#cb577-1" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>##   name age height wight
+## 2 张聪  35    162    52</code></pre>
+<ul>
+<li>同时取行子集和列子集</li>
+</ul>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="#cb579-1" tabindex="-1"></a>d[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="st">&quot;age&quot;</span>]            <span class="co"># 因为只取了1个列，返回结果是向量</span></span></code></pre></div>
+<pre><code>## [1] 30 35</code></pre>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="#cb581-1" tabindex="-1"></a>d[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;height&quot;</span>)]  <span class="co"># 返回结果是数据框</span></span></code></pre></div>
+<pre><code>##   age height
+## 1  30    180
+## 2  35    162</code></pre>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="#cb583-1" tabindex="-1"></a>d[d[[<span class="st">&quot;age&quot;</span>]] <span class="sc">&gt;=</span> <span class="dv">30</span>,]        <span class="co"># 筛选年龄大于30的行</span></span></code></pre></div>
+<pre><code>##   name age height wight
+## 1 李明  30    180    50
+## 2 张聪  35    162    52</code></pre>
+<blockquote>
+<p>对一般的数据框，
+可以在取子集的方括号内加上<code>drop=FALSE</code>选项，
+确保取列子集的结果总是数据框。
+数据框的改进类型<code>tibble</code>在用<code>d[,ind]</code>这种语法取出列子集时保持为<code>tibble格式</code>，
+为了取出<code>tibble</code>中的一列作为向量，
+应该使用<code>d[[ind]]</code>这样的语法。</p>
+</blockquote>
+</div>
+</div>
+<div id="数据框的行名" class="section level4">
+<h4>1.10.1.6 数据框的行名</h4>
+<p>数据框每一行可以有行名， 这在原始的S语言和传统的R语言中是重要的技术，
+但是在改进类型tibble中则取消了行名，
+需要用行名实现的功能一般改用left_join()函数实现。</p>
+<ul>
+<li>用数据框的行名可以建立一个值到多个值的对应表。
+比如，有如下的数据框：
+<ul>
+<li>其中“出游”是每个年级安排的出游次数，</li>
+<li>“疫苗”是该年级有全体无计划免疫注射。</li>
+<li>把年级变成行名，可以建立<strong>年级</strong>到<strong>出游次数与疫苗注射</strong>的对应表：</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="#cb585-1" tabindex="-1"></a>dm <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb585-2"><a href="#cb585-2" tabindex="-1"></a>  <span class="st">&quot;年级&quot;</span><span class="ot">=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb585-3"><a href="#cb585-3" tabindex="-1"></a>  <span class="st">&quot;出游&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb585-4"><a href="#cb585-4" tabindex="-1"></a>  <span class="st">&quot;疫苗&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb585-5"><a href="#cb585-5" tabindex="-1"></a>)</span>
+<span id="cb585-6"><a href="#cb585-6" tabindex="-1"></a><span class="fu">rownames</span>(dm) <span class="ot">&lt;-</span> dm[[<span class="st">&quot;年级&quot;</span>]]</span>
+<span id="cb585-7"><a href="#cb585-7" tabindex="-1"></a>dm[[<span class="st">&quot;年级&quot;</span>]] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb585-8"><a href="#cb585-8" tabindex="-1"></a>dm</span></code></pre></div>
+<pre><code>##   出游  疫苗
+## 1    0  TRUE
+## 2    2 FALSE
+## 3    2 FALSE
+## 4    2 FALSE
+## 5    2  TRUE
+## 6    1 FALSE</code></pre>
+<ul>
+<li>设某个社区的小学中抽取的4个班的年级为 <code>c(2,1,1,3)</code>，
+其对应的出游和疫苗注射信息可查询</li>
+</ul>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="#cb587-1" tabindex="-1"></a>ind <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>)</span>
+<span id="cb587-2"><a href="#cb587-2" tabindex="-1"></a>xx <span class="ot">&lt;-</span> dm[<span class="fu">as.character</span>(ind),]</span>
+<span id="cb587-3"><a href="#cb587-3" tabindex="-1"></a><span class="fu">rownames</span>(xx) <span class="ot">&lt;-</span> <span class="cn">NULL</span>;xx</span></code></pre></div>
+<pre><code>##   出游  疫苗
+## 1    2 FALSE
+## 2    0  TRUE
+## 3    0  TRUE
+## 4    2 FALSE</code></pre>
+<p><code>* 这个例子可以不用行名而是用</code>match()<code>函数实现。</code>match(x,
+table)`对x的每个元素返回其在table中出现的位置序号。 找不到的元素返回NA。
+如：</p>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="#cb589-1" tabindex="-1"></a>dm <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb589-2"><a href="#cb589-2" tabindex="-1"></a>  <span class="st">&quot;年级&quot;</span><span class="ot">=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb589-3"><a href="#cb589-3" tabindex="-1"></a>  <span class="st">&quot;出游&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb589-4"><a href="#cb589-4" tabindex="-1"></a>  <span class="st">&quot;疫苗&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb589-5"><a href="#cb589-5" tabindex="-1"></a>)</span>
+<span id="cb589-6"><a href="#cb589-6" tabindex="-1"></a>ind <span class="ot">&lt;-</span> <span class="fu">match</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>), dm[[<span class="st">&#39;年级&#39;</span>]])</span>
+<span id="cb589-7"><a href="#cb589-7" tabindex="-1"></a>dm[ind,]</span></code></pre></div>
+<pre><code>##     年级 出游  疫苗
+## 2      2    2 FALSE
+## 1      1    0  TRUE
+## 1.1    1    0  TRUE
+## 3      3    2 FALSE</code></pre>
+<blockquote>
+<p>对于代替数据框的tibble类型， 如果要实现行名的功能，
+可以将行名作为单独的一列，
+然后用dplyr包的inner_join()、left_join()、full_join()等函数横向合并数据集。参考<a href="#id_1.9.1">1.9.1</a></p>
+</blockquote>
+</div>
 </div>
 </div>
 </div>
