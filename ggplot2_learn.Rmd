@@ -31,9 +31,300 @@ https://zhuanlan.zhihu.com/p/391832351
 
 * ggplot2的作者为Hadley Wickham博士，一位为统计应用领域做出了突出贡献的统计学家，被号称为改变了R的男人；
 
-## 1.2 ggplot2绘图原理中的对象概念
+## 1.2 ggplot2绘图步骤
 
 ggplot2是基于图层图形语法（the Grammar of Graphics），可简单粗暴的理解为，您可以先绘制好图形的每一部分，然后将各部分相加形成一张完善的图形，使用ggplot2时，会反复使用如下几个对象，简单介绍：
+
+一般步骤：
+1. 准备数据，一般为数据框， 且一般为长表， 即每个观测时间占一行， 每个观测变量占一列。
+2. 将数据输入到ggplot()函数中， 并指定参与作图的每个变量分别映射到哪些图形特性， 比如映射为x坐标、y坐标、颜色、形状等。 这些映射称为aesthetic mappings或aesthetics。
+3. 选择一个合适的图形类型， 函数名以geom_开头， 如`geom_point()`表示散点图。 图形类型简称为geom。 将ggplot()部分与geom_xxx()部分用加号连接。 到此已经可以作图，下面的步骤是进一步的细化设定。
+4. 设定适当的坐标系统， 如`coord_cartesian()`, `scale_x_log10()`等。 仍用加号连接。
+5. 设定标题和图例位置等，如labs()。 仍用加号连接。
+
+```{r}
+# p <- ggplot(data=<输入数据框>, mapping=aes(<维度>=<变量名>, <维度>=<变量名>, <...>))
+# p + geom_<图形类型>(<...>) + 
+#   scale_<映射>_<类型>(<...>) +
+#   coord_<类型>(<...>) +
+#   labs(<...>)
+```
+其中<...>表示额外的选项。 变量p包含做出的图形的所有数据与设定， 变量名可以任意取。
+
+## 1.3 数据集
+```{r}
+# devtools::install_github("kjhealy/socviz")
+# install.packages('gapminder')
+library('gapminder')
+```
+
+1. `gapminder`扩展包的`gapminder`数据集， 有若干个国家不同年份的一些数据， 包括所属洲、期望寿命、人口数、人均GDP。 有1704个观测和6个变量。
+2. socviz包的`gss_sm`数据集，是2016年美国一般社会调查数据的部分内容。 有2867个观测，32个变量。 社会调查数据的变量主要取属性值， 比如无序分类、有序分类、分组的数值、整数值等。
+3. socviz包的`organdata`数据集， 是17个OECD国家历年的器官捐献情况以及一些其它记录。
+4. socviz扩展包的`elections_historic`数据集。 包括美国历次总统大选当选人、所属党派、支持比例等。
+5. socviz扩展包的`asasec`数据集。 这是美国社会学学会(ASA)的各分会2005年到2015年的一些数据。
+6. ggplot2包中的`midwest`数据集包含了美国中西部的一些县的统计数据， 如面积等。
+7. ggplot2包的`钻石`数据集。
+
+## 1.4 作图的一般原则
+1. 坏的图形可能有如下缺点：
+
+*. 坏的品味。统计图形应该用尽可能少的图形元素表示尽可能多的数据， 从打印图形而言，即数据量与所用墨水比例越大越好。 没有必要的颜色、三维形态经常会影响读者对图形的认读。 这是Edward R. Tufte的观点， 但是过于极端也不好。
+* 坏的数据。 即使图形本身的做法没有问题， 选择了错误的或者不合适的数据也会误导读者， 甚至于用错误数据做的很专业的图形会比粗陋的图形更能误导读者。
+* 坏的感知。 不好的颜色选择、三维形状、坐标轴范围、宽高比都有可能对读者的认知有影响。
+
+2. 作图时应考虑的一些因素：
+
+* 数值型变量的不同值可以表示为：
+
+    * 同一坐标轴上的不同位置、
+    * 不同轴上的位置、
+    * 三维空间中的不同位置、
+    * 不同长度、
+    * 不同角度或者斜率、
+    * 不同面积、
+    * 颜色的不同明暗度、
+    * 不同颜色饱和度、
+    * 曲线的不同曲率、
+    * 三维体积，
+> 这些表示的选择项越往后越难以被读者正确辨识。 使用颜色时，应该使用渐变的明暗度或者渐变色。
+
+*  分类变量的不同值可以表示为：
+
+    * 不同分组、
+    * 不同颜色、
+    * 三维动态、
+    * 不同符号。
+> 这些表示的选择项越往后越难辨识。 使用颜色时，应该使用明显不同的颜色而不应该使用渐变色。
+
+对于最少是零的变量， 是否应该以零作为坐标轴的最低值需要考虑， 但没有一定的规则。 同一组数据在不同的坐标范围或者长宽比下曲线的斜率会有很大差别。
+
+## 1.5 散点图：ggplot入门
+
+* gapminder数据集有多个国家在多个年份的期望寿命与人均GDP值。绘制GDP对寿命的关系的散点图。
+
+```{r}
+library(ggplot2)
+p <- ggplot(gapminder, aes(gdpPercap, lifeExp))  # 完整写法：p <- ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) 
+p + geom_point()
+```
+> 实际上，上面的程序等同于调用`print(p + geom_point())`。 在R函数中或者在循环中需要显式地调用`print()`， 否则不会显示结果。 当载入了tidyverse系统时可以写成 `(p + geom_point()) |> print()`。
+
+
+### 1.5.1 逐步改善 - 增加拟合线
+* 用相同的映射做出散点图并叠加拟合曲线图
+    * `geom_smooth()`的默认设置调用了`gam()`函数来拟合曲线， 
+    可以用geom_smooth()的参数选择不同的拟合方法， 如直线拟合`geom_smooth(method="lm")`： 
+```{r}
+p <- ggplot(gapminder, aes(gdpPercap, lifeExp))
+p + geom_point() +
+    geom_smooth()   # geom_smooth() using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'
+
+p + geom_point() + geom_smooth(method="lm")
+```
+> 注意geom_xxx()函数计算所需的变量值是从ggplot()函数保存在变量p中的信息提取的。
+
+### 1.5.2 逐步改善 - 修改坐标轴
+以上的所有图形中， x轴变量（人均GDP）分布非正态，严重右偏， 使得大多数散点重叠地分布在直角坐标系的左下角。 将x轴用对数刻度可以改善， 函数为scale_x_log10():
+
+```{r}
+p + geom_point() + geom_smooth(method="gam") + scale_x_log10()
+```
+> 广义可加模型拟合的曲线基本是一条直线。 注意， 对数刻度实际上是对原始数据进行对数变换， 而`geom_smooth()`的拟合计算是在对数变换之后进行的。
+
+刚刚的图形的横坐标轴刻度不太友好， 可以调用`scales`扩展包的适当函数进行改善， 作为`scale_x_log10()`的`labels`选项：
+
+```{r}
+p + geom_point() +
+  geom_smooth(method="gam") +
+  scale_x_log10(labels=scales::dollar)
+```
+> `scale_xxx()`的labels选项指定如何标出坐标刻度数字， 参数值是一个函数对象， 如果`scales`包中找不到适当的功能， 可以自定义一个函数将数值转换为字符串。 `scales`包提供了`comma`, `date`, `dollar`, `math`, `number`, `ordinal`, `pvalue`, `scientific`, `time`等坐标刻度值转换函数。
+
+
+
+### 1.5.3 逐步改善 - 颜色`color`、符号`shape`、线型`type`等映射
+在`ggplot()`函数的`mapping`参数的`aes()`设定中将变量映射到x、y轴， 颜色、符号、线型等图形元素类型， 也可以作为图形设置将某些图形元素设置为固定值。
+
+#### 1.5.3.1. 例1：用不同颜色表示不同大洲， 就是将`continent`变量映射到`color`:指定了将大洲映射到颜色维， 并不具体指定所用的颜色
+```{r}
+p <- ggplot(gapminder, aes(
+    x = gdpPercap, 
+    y = lifeExp, 
+    color=continent))
+p + geom_point() + geom_smooth(method = "loess") + scale_x_log10(label=scales::dollar)
+```
+> 1. `method = "loess"` : 带有局部多项式曲线拟合
+> 2.  曲线使用了不同颜色但置信域颜色相同， 使得难以认读。 在图形右侧自动生成了颜色与continent变量值的对应关系图例。
+
+#### 1.5.3.2. 例2：将`continent`变量映射到`fill`:将置信区间阴影的颜色也用不同大洲区分
+```{r}
+p <- ggplot(gapminder, aes(
+    x = gdpPercap, 
+    y = lifeExp, 
+    color=continent,
+    fill=continent))
+p + geom_point() + geom_smooth(method = "loess") + scale_x_log10(label=scales::dollar)
+```
+#### 1.5.3.3 尝试将颜色指定为一个固定值
+我们发现， 散点并没有使用草绿色， 而且图形右侧有一个chartreuse4图例。 这是因为， **`aes()`仅用来指定变量与图形元素类型的映射**， 所以实际上是生成了一个仅有一个常数值"chartreuse4"的新变量， 用颜色表示这个新变量。为了指定固定颜色， 应将`color=`作为`geom_xxx()`函数的选项， 而不是放在`aes()`映射中， 如：
+
+```{r}
+p <- ggplot(gapminder, aes(
+    x = gdpPercap,
+    y = lifeExp,
+    color = "chartreuse4"))
+p + geom_point() +
+  geom_smooth(method="loess") +
+  scale_x_log10(labels=scales::dollar)
+
+
+p <- ggplot(gapminder, aes(
+    x = gdpPercap,
+    y = lifeExp))
+p + geom_point(color="chartreuse4") +
+  geom_smooth(method="loess") +
+  scale_x_log10(labels=scales::dollar)
+
+
+```
+
+
+### 1.5.4 逐步改善-修改`geom_xxx()`参数调整图像
+* geom_xxx()函数接受许多关于颜色`colour`、透明度`alpha`、符号、线型`shape`的设置参数。 比如， 下面的程序指定了散点的透明度， 以及拟合直线的粗细：
+```{r}
+p <- ggplot(gapminder, aes(
+    x = gdpPercap,
+    y = lifeExp))
+p + geom_point(alpha=0.2, colour="red", shape=21, size=1) +
+    geom_smooth(method = "gam", color="cadetblue1", se = FALSE, size = 4, alpha = 0.3) + 
+    scale_x_log10(labels=scales::dollar)
+```
+> * size指定了线的以毫米为单位的粗细， 
+> * se = FALSE关闭了置信区间显示。 
+> * alpha =设置了透明度， 取0和1之间的值， 数值越小越透明。 
+
+> 虽然这里设置了固定的透明度， 也可以在aes()中将透明度alpha映射到某个变量， 使得该变量值大小用点的透明度表示。
+
+### 1.5.5 逐步改善 - 增加标题
+
+```{r}
+p <- ggplot(gapminder, aes(
+    x = gdpPercap,
+    y = lifeExp))
+p + geom_point(alpha = 0.3) +
+  geom_smooth(method="gam") +
+  scale_x_log10(labels=scales::dollar) + 
+  labs(
+    x = "人均GDP",
+    y = "期望寿命（年数）",
+    title = "经济增长与期望寿命",
+    subtitle = "数据点为每个国家每年",
+    caption = "数据来源: gapminder"  )
+```
+> 可以看出， labs()规定了上方的标题、小标题， x轴、y轴的标题， 右下方的标注(caption)。 坐标轴刻度数值的规定则需要在scale_xxx()函数中给出。
+
+### 1.5.6 在geom函数中映射变量
+
+在前面的一个例图中， 在`ggplot()`函数中将`color`和`fill`映射到了`continent`变量， 使得不仅散点颜色代表了不同大洲， 还使得每个大洲单独拟合了曲线。 如果希望所有大洲拟合同一条曲线怎么办？ </br>
+
+在必要时， 可以在`geom_xxx()`函数中用`mapping = aes(<...>)`单独指定变量映射。 例如， 下面的程序在`geom_point()`中将不同大洲映射为不同颜色， 而不影响`geom_smooth()`中的颜色以及分组：
+
+```{r}
+p <- ggplot(gapminder, aes(
+    x = gdpPercap,
+    y = lifeExp))
+p + geom_point(mapping = aes(color = continent)) +
+  geom_smooth(method="loess") +
+  scale_x_log10(labels=scales::dollar)
+```
+* 也可以将一个分类变量映射到不同绘图符号。 例如，取gapminder 2007年数据子集， 将大洲映射到符号(`shape`)：
+
+```{r}
+library(dplyr)
+p <- ggplot(
+  data = filter(gapminder, year == 2007),
+  mapping = aes(
+    x = gdpPercap,
+    y = lifeExp, 
+    shape = continent))
+p + geom_point(alpha = 0.4, size = 4) +
+  scale_x_log10(labels=scales::dollar)
+```
+> 1. 映射仅适用于点数比较少的情况， 还用了size参数指定符号的大小（单位：毫米）
+> 2. 绘图时参与映射的分类变量会自动产生分类效果， `color映射`与`fill映射`到分类变量时常常会起到与添加`group维`相同的作用， 但为了逻辑清晰起见， 需要分组时还应该显式地映射group维。
+
+
+### 1.5.6 连续变量的颜色映射
+
+也可以将连续变量映射为渐变色。 除了表示二元函数的等值线图以外这种方法并不利于读者认读。</br>
+
+例如， 将人口数取自然对数映射为渐变色：
+```{r}
+p <- ggplot(gapminder, aes(
+    x = gdpPercap,
+    y = lifeExp,
+    color = log(pop)))
+p + geom_point() +
+  geom_smooth(method="loess") +
+  scale_x_log10(labels=scales::dollar)
+```
+
+### 1.5.7 连续变量的颜色映射
+在`ggsave()`中可以用`scale =`指定放大比例， 用`height =`指定高度， 用`width =`指定宽度，用`units =`指定高度和宽度的单位,单位可以是in, cm, mm。如：
+```{r}
+ggout01 <- p + geom_point()
+ggsave(filename="文件名.pdf", plot=ggout01,
+       height=12, width=8, units="cm")
+```
+
+## 1.6 折线图、分组、切片
+### 1.6.1 图形中的分组和折线图
+
+考虑`gapminder`数据集中每个国家的期望寿命随时间（年）的变化
+```{r 最初的图}
+ggplot(gapminder, aes(year, lifeExp)) + geom_line()
+```
+> `geom_line()`会自动将x坐标从小到大排序， 然后再连接相邻的点
+
+#### 1.6.1.1 `group`映射
+分组`(group)`与`x`、`y`、`color`、`fill`一样可以映射到一个变量， 但仅能映射到分类变量
+```{r}
+ggplot(gapminder, aes(year, lifeExp, group=country)) + geom_line()
+```
+> 结果图形中每一条曲线对应一个国家。 为了查探其中最下方的不稳定曲线是哪一个国家，使用筛选观测的功能：
+
+
+#### 1.6.1.2 最不稳定的国家
+```{r}
+gapminder |> filter(lifeExp < 30, year >= 1990)   # 国家是 Rwanda
+```
+* 每个点画出散点符号
+```{r}
+gapminder |>
+  filter(country == "Rwanda") |>
+  ggplot(aes(
+    x = year, 
+    y = lifeExp)) +
+  geom_line() +
+  geom_point()
+```
+> 过管道运算符`|>`将筛选行子集得到的数据框作为第一自变量传送给了`ggplot()`函数， 然后就可以继续用+号添加进一步的作图命令。
+
+```{r}
+gapminder |>
+  filter(country == "Rwanda") |>
+  ggplot(aes(
+    x = year, 
+    y = lifeExp))+
+  geom_area(fill="darkseagreen1", alpha=0.5)
+```
+
+
+
+
+
+
 
 ### 1.2.1 几何对象（geom）
 `geometric objects`，譬如散点`points`、 线性`lines`、柱状`bars`及方图`Histogram`等，可绘制的geom为：
@@ -218,6 +509,10 @@ ggplot2::theme_void </br>
 
 ## 1.3 ggplot2快速绘图
 
+
+
+
+
 ### 1.3.1 ggplot2内置数据集
 ```{r}
 library('ggplot2')
@@ -255,20 +550,20 @@ ggplot(data = mpg,
 
 #### 1.3.2.1 aes设置
 
-* colour, size, shape 等等
-  * colour: 按变量class分类绘制不同类不同颜色的散点图
-  * shape: 按变量drv不同绘制不同类不同形状散点图
-  * size: 变量cyl值大小绘制不同类不同size散点图
+* `colour`, `size`, `shape` 等等
+  * `colour`: 按变量class分类绘制不同类不同颜色的散点图
+  * `shape`: 按变量drv不同绘制不同类不同形状散点图
+  * `size`: 变量cyl值大小绘制不同类不同size散点图
 ```{r}
 library('ggplot2')
 ggplot(data = mpg, 
        mapping = aes(x = displ, y=hwy, colour=class)) +
   geom_point()
 
-ggplot(mpg, aes(displ, hwy, shape = drv))
+ggplot(mpg, aes(displ, hwy, shape = drv)) + 
   geom_point()
 
-ggplot(mpg, aes(displ, hwy, size = cyl))
+ggplot(mpg, aes(displ, hwy, size = cyl)) +
   geom_point()
 
 ```
