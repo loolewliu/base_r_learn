@@ -172,9 +172,9 @@ atan(1)
 ```
 ### 1.1.6 排序函数
 
-* `sort(x)`返回排序结果。 
+* `sort(x)`返回排序结果，默认是升序。 
 * `rev(x)`返回把各元素排列次序反转后的结果。
-* `order(x)`返回排序用的下标。如
+* `order(x)`返回排序(升序)用的下标。如
 
 ```{r}
 x <- c(11,44,22)
@@ -224,7 +224,7 @@ seq(from=1, to=10, length.out=3) # [1,10]之间取3个数，等间距
 ```{r}
 # rep 重复元素
 rep(c(1,2), time=2) # 向量重复出现2次
-rep(c(1,2), time=2, each=2) # 向量的每个元素重复2遍， 再重复的元素在重复2遍
+rep(c(1,2), each=2, time=2) # 向量的每个元素重复2遍， 再重复的元素在重复2遍
 
 ```
 
@@ -1460,7 +1460,7 @@ readr::read_csv("序号,收缩压
 ```{r}
 class(d.class)
 ```
-* 用as_tibble()可以将一个数据框转换为tibble类型, `dplyr`包提供了`filter()`、`select()`、`arrange()`、`mutate()` 等函数用来对tibble选取行子集、列子集，排序、修改或定义新变量，
+* 用`as_tibble()`可以将一个数据框转换为`tibble类型`, `dplyr`包提供了`filter()`、`select()`、`arrange()`、`mutate()` 等函数用来对tibble选取行子集、列子集，排序、修改或定义新变量，
 
 
 
@@ -1529,6 +1529,193 @@ sandbox()
 
 # 2.编程
 ## 2.1 输入与输出
+### 2.1.1 简单输入输出
+#### 2.1.1.1 `print()`函数
+
+* 显示某个变量或表达式的值
+* **命令行使用R时**， 直接以变量名或表达式作为命令可以起到用`print()`函数显示的相同效果
+```{r}
+y <- c(1,3,5) ; print(y[2:3])
+```
+#### 2.1.1.2 `cat()`函数
+
+* 用`cat()`函数把字符串、变量、表达式连接起来显示， 其中变量和表达式的类型一般是标量或向量，不能是矩阵、列表等复杂数据
+    * `cat()`显示中需要换行需要在自变量中包含字符串"\n"， 即换行符。
+```{r}
+cat("y =", y, "\n")   # 需要换行时, 需要添加 `\n`
+```
+* 添加`file=`选项,会覆盖的写入文件，如果从文件的末尾添加需要添加`append=TRUE`选项
+```{r}
+# cat("=== 结果文件 ===\n", file="res.txt")
+# cat("x =", x, "\n", file="res.txt", append=TRUE)
+```
+
+#### 2.1.1.3 `save()`和`load()`函数
+
+* `save()`命令要求把指定的若干个变量（直接用名字，不需要表示成字符串） 保存到用`file=`指定的文件中， 随后可以用`load()`命令恢复到工作空间中。
+```{r}
+# save(x, y, file="myvars20200315.RData")
+# load("myvars20200315.RData")
+```
+
+#### 2.1.1.4 `scan()``函数
+
+* 输出文本文件中的数值向量， 文件名用`file=`选项给出, `quite=TRUE`选项使得读入时不自动显示读入的数值项数
+```{r}
+cat(1:12, "\n", file="tmp/x.txt")
+x <- scan("tmp/x.txt")
+```
+
+### 2.1.2 读取CSV文件
+
+* `base_R`可以用`read.csv()`, `read.table()`, `read.delim`, `read.fwf()`等函数读入, 
+    * 建议在`readr`包的支持下用`read_csv()`, `read_table2()`, `read_delim()`, `read_fwf()`等函数读入
+    * `read.delim(file=, )`:第一个参数为读取的文件路径或者URL。
+    * `read.fwf()`:读取表格或固定宽度格式的文本行到数据框
+* `readr`的读入速度比基本R软件的read.csv()等函数的速度快得多，速度可以相差十倍，也不自动将字符型列转换成因子， 不自动修改变量名为合法变量名， 不设置行名。
+
+
+
+#### 2.1.2.1 csv格式
+* 中小规模的数据, CSV格式作为文件交换格式比较合适。兼容性强。大型的数据读入效率很低。
+* CSV格式的文件用逗号分隔开同一行的数据项， 一般第一行是各列的列名（变量名）。
+    * 数值型数据， 只要表示成数值常量形式即可。 
+    * 字符型数据， 可以用双撇号包围起来， 也可以不用撇号包围。 但是， 如果数据项本身包含逗号， 就需要用双撇号包围
+```{r}
+d <- read_csv("aa.csv")
+```
+
+#### 2.1.2.2 从字符串读入
+```{r}
+library(readr)
+d.small <- read_csv("name,x,y
+John, 33, 95
+Kim, 21, 64
+Sandy, 49, 100
+");d.small
+```
+
+#### 2.1.2.3 `read_csv()`选项
+> read_csv(
+  file,
+  col_names = TRUE,
+  col_types = NULL,
+  col_select = NULL,
+  id = NULL,
+  locale = default_locale(),
+  na = c("", "NA"),
+  quoted_na = TRUE,
+  quote = "\"",
+  comment = "",
+  trim_ws = TRUE,
+  skip = 0,
+  n_max = Inf,
+  guess_max = min(1000, n_max),
+  name_repair = "unique",
+  num_threads = readr_threads(),
+  progress = show_progress(),
+  show_col_types = should_show_types(),
+  skip_empty_rows = TRUE,
+  lazy = should_read_lazy()
+)
+
+
+1. `skip=`选项跳过开头的若干行
+
+
+2.  当数据不包含列名时， 只要指定`col_names=FALSE`，变量将自动命名为`X1`, `X2`, `...`，也可以用`col_names=`指定各列的名字
+```{r}
+d.small <- read_csv("John, 33, 95
+Kim, 21, 64
+Sandy, 49, 100
+", col_names=c("name", "x", "y") )
+```
+
+
+3. `locale =`指定编码，`readr`包的默认编码是`UTF-8`编码
+    * `GBK`编码的文件需要使用下面的程序
+```{r}
+d <- read_csv("data/bp.csv", locale = locale(encoding = "GBK"))
+```
+
+
+4. `na = c("", "NA")`：空缺的值读入为缺失值， 将”NA”也读入为缺失值
+    * 上面的bp.csv文件中， 先将血压列按字符型读入， 再增加一列转换为数值型的列，非数值转换为NA:
+```{r}
+d <- read_csv("data/bp.csv", locale=locale(encoding="GBK"))
+d[["收缩压数值"]] <- as.numeric(d[["收缩压"]])
+```
+
+
+5. `col_types = cols()`各列类型设置
+    * 默认情况下，`readr`包读取前1000行猜测合理的类型， 并在读取后显示猜测的每列类型。
+    * 但是有可能类型改变发生在1000行之后。 col_types选项可以指定每一列的类型，
+    * `cols()`函数可以用来规定各列类型， 并且有一个`.default`参数指定缺省类型,如`cols(.default = col_character())`
+        * "col_double()", "col_integer()", "col_character()", "col_factor()", "col_date()", "col_datetime"
+        * 对因子，需要在col_factor()中用`lelvels=`指定因子水平。
+```{r}
+d <- read_csv("data/bp.csv", locale=locale(encoding="GBK"),
+    col_types=cols(
+      `序号` = col_integer(),
+      `收缩压` = col_character()
+      ))
+```
+    * 当猜测的文件类型有问题的时候， 可以先将所有列都读成字符型， 然后用type_convert()函数转换， 
+```{r}
+d <- read_csv("filename.csv",
+              col_types=cols(.default = col_character()))
+d <- type_convert(d)
+```
+
+
+6. `n_max=` 指定读入多少行，通常用在测试大样本
+
+#### 2.1.2.4 因子类型设置
+
+```{r}
+d.class <- read_csv("data/class.csv", 
+  col_types=cols(
+  .default = col_double(),
+  name=col_character(),
+  sex=col_factor(levels=c("M", "F")) ))
+str(d.class)
+```
+> 其中`str()`函数可以显示数据框的行数(obs.)和变量数(variables)， 以及每个变量（列）的类属等信息。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

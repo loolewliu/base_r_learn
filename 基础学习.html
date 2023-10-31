@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="liulifeng@163.com" />
-<meta name="author" content="2023-10-30" />
+<meta name="author" content="2023-10-31" />
 
 
 <title>基础学习</title>
@@ -145,7 +145,7 @@ pointer-events: auto;
 <div class="cover-card table-cell table-middle">
 <span class="author_name">基础学习</span>
 <span class="author_bio mbm"><a href="mailto:liulifeng@163.com" class="email">liulifeng@163.com</a></span>
-<span class="author_bio mbm">2023-10-30</span>
+<span class="author_bio mbm">2023-10-31</span>
 </div>
 </div>
 </div>
@@ -159,7 +159,7 @@ pointer-events: auto;
 <ul>
 <li><a href="#section" id="toc-section">0.1</a></li>
 </ul></li>
-<li><a href="#数据机构" id="toc-数据机构">1.数据机构</a>
+<li><a href="#数据结构" id="toc-数据结构">1.数据结构</a>
 <ul>
 <li><a href="#数值型向量" id="toc-数值型向量">1.1 数值型向量</a>
 <ul>
@@ -286,7 +286,17 @@ cbind()和rbind()函数</a></li>
 <li><a href="#数据框" id="toc-数据框">1.10 数据框</a>
 <ul>
 <li><a href="#数据框定义" id="toc-数据框定义">1.10.1 数据框定义</a></li>
+<li><a href="#tibble类型" id="toc-tibble类型">1.10.2 tibble类型</a></li>
 </ul></li>
+<li><a href="#工作空间和变量赋值" id="toc-工作空间和变量赋值">1.11
+工作空间和变量赋值</a>
+<ul>
+<li><a href="#工作空间" id="toc-工作空间">1.11.1 工作空间</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#编程" id="toc-编程">2.编程</a>
+<ul>
+<li><a href="#输入与输出" id="toc-输入与输出">2.1 输入与输出</a></li>
 </ul></li>
 </ul>
 </div>
@@ -299,8 +309,8 @@ cbind()和rbind()函数</a></li>
 <h2>0.1</h2>
 </div>
 </div>
-<div id="数据机构" class="section level1">
-<h1>1.数据机构</h1>
+<div id="数据结构" class="section level1">
+<h1>1.数据结构</h1>
 <ul>
 <li>数据类型
 <ul>
@@ -1427,9 +1437,9 @@ data)， 比如， 用来保存数据的说明、模拟数据的真实模型参�
 <div id="从字符串生成日期数据" class="section level3">
 <h3>1.6.2 从字符串生成日期数据</h3>
 <div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="#cb377-1" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">today</span>()  <span class="co"># 返回当前日期: &quot;2023-10-19&quot;</span></span></code></pre></div>
-<pre><code>## [1] &quot;2023-10-30&quot;</code></pre>
+<pre><code>## [1] &quot;2023-10-31&quot;</code></pre>
 <div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="#cb379-1" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">now</span>()    <span class="co"># 返回当前日期时间: &quot;2023-10-19 20:00:57 CST&quot; , CST表示时区</span></span></code></pre></div>
-<pre><code>## [1] &quot;2023-10-30 22:27:07 CST&quot;</code></pre>
+<pre><code>## [1] &quot;2023-10-31 21:11:41 CST&quot;</code></pre>
 <ul>
 <li>用<code>lubridate::ymd()</code>, <code>lubridate::mdy()</code>,
 <code>lubridate::dmy()</code>将字符型向量转换为日期型向量
@@ -2363,7 +2373,209 @@ table)`对x的每个元素返回其在table中出现的位置序号。 找不到
 然后用dplyr包的inner_join()、left_join()、full_join()等函数横向合并数据集。参考<a href="#id_1.9.1">1.9.1</a></p>
 </blockquote>
 </div>
+<div id="数据框与矩阵的区别" class="section level4">
+<h4>1.10.1.7 数据框与矩阵的区别</h4>
+<ul>
+<li>数据框不能作为矩阵参加矩阵运算。
+需要时，可以用as.matrix()函数转换数据框或数据框的子集为矩阵。 如</li>
+</ul>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="#cb591-1" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(d[,<span class="fu">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;height&quot;</span>)])</span>
+<span id="cb591-2"><a href="#cb591-2" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(d2); d3   <span class="co"># 这里crossprod(A)表示。A^TA</span></span></code></pre></div>
+<pre><code>##          age height
+## age     2909  15970
+## height 15970  89269</code></pre>
 </div>
+</div>
+<div id="tibble类型" class="section level3">
+<h3>1.10.2 tibble类型</h3>
+<div id="生成方法" class="section level4">
+<h4>1.10.2.1 生成方法</h4>
+<p><a href="https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/Rbook-data.zip">全部数据</a></p>
+<ol style="list-style-type: decimal">
+<li>文件读取</br> tibble类型是一种改进的数据框。
+<code>readr</code>包的<code>read_csv()</code>函数是<code>read.csv()</code>函数的一个改进版本，
+它将CSV文件读入为tibble类型，如文件<code>class.csv</code>的读入:</li>
+</ol>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="#cb593-1" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb593-2"><a href="#cb593-2" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb593-3"><a href="#cb593-3" tabindex="-1"></a><span class="co"># setwd(&quot;F:/Code/R/00.base/base_r_learn&quot;)</span></span>
+<span id="cb593-4"><a href="#cb593-4" tabindex="-1"></a>d.class <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/class.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 19 Columns: 5
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (2): name, sex
+## dbl (3): age, height, weight
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><code>tibble()</code>函数生成小的tibble </br></li>
+</ol>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="#cb595-1" tabindex="-1"></a>d.bp <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb595-2"><a href="#cb595-2" tabindex="-1"></a>    <span class="st">`</span><span class="at">序号</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">15</span>),</span>
+<span id="cb595-3"><a href="#cb595-3" tabindex="-1"></a>    <span class="st">`</span><span class="at">收缩压</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">145</span>, <span class="dv">110</span>, <span class="st">&quot;未测&quot;</span>, <span class="dv">150</span>, <span class="st">&quot;拒绝&quot;</span>, <span class="dv">115</span>)) </span>
+<span id="cb595-4"><a href="#cb595-4" tabindex="-1"></a>d.bp <span class="co">#knitr::kable(d.bp)</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 2
+##    序号 收缩压
+##   &lt;dbl&gt; &lt;chr&gt; 
+## 1     1 145   
+## 2     5 110   
+## 3     6 未测  
+## 4     9 150   
+## 5    10 拒绝  
+## 6    15 115</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li><code>readr::read_csv()</code>也支持从一个多行字符串直接读入数据，
+如</li>
+</ol>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="#cb597-1" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;序号,收缩压</span></span>
+<span id="cb597-2"><a href="#cb597-2" tabindex="-1"></a><span class="st">1,145</span></span>
+<span id="cb597-3"><a href="#cb597-3" tabindex="-1"></a><span class="st">5,110</span></span>
+<span id="cb597-4"><a href="#cb597-4" tabindex="-1"></a><span class="st">6,NA</span></span>
+<span id="cb597-5"><a href="#cb597-5" tabindex="-1"></a><span class="st">9,150</span></span>
+<span id="cb597-6"><a href="#cb597-6" tabindex="-1"></a><span class="st">10,NA</span></span>
+<span id="cb597-7"><a href="#cb597-7" tabindex="-1"></a><span class="st">15,115</span></span>
+<span id="cb597-8"><a href="#cb597-8" tabindex="-1"></a><span class="st">&quot;</span>) <span class="co">#|&gt; knitr::kable()</span></span></code></pre></div>
+<pre><code>## Rows: 6 Columns: 2
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## dbl (2): 序号, 收缩压
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre><code>## # A tibble: 6 × 2
+##    序号 收缩压
+##   &lt;dbl&gt;  &lt;dbl&gt;
+## 1     1    145
+## 2     5    110
+## 3     6     NA
+## 4     9    150
+## 5    10     NA
+## 6    15    115</code></pre>
+</div>
+<div id="类型" class="section level4">
+<h4>1.10.2.2 类型</h4>
+<ul>
+<li><code>tibble</code>类型的类属依次为<code>spec_tbl_df</code>,
+<code>tbl_df</code>,<code>tbl</code>, <code>data.frame</code>：</li>
+</ul>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="#cb600-1" tabindex="-1"></a><span class="fu">class</span>(d.class)</span></code></pre></div>
+<pre><code>## [1] &quot;spec_tbl_df&quot; &quot;tbl_df&quot;      &quot;tbl&quot;         &quot;data.frame&quot;</code></pre>
+<ul>
+<li>用as_tibble()可以将一个数据框转换为tibble类型,
+<code>dplyr</code>包提供了<code>filter()</code>、<code>select()</code>、<code>arrange()</code>、<code>mutate()</code>
+等函数用来对tibble选取行子集、列子集，排序、修改或定义新变量，</li>
+</ul>
+</div>
+<div id="列子集问题" class="section level4">
+<h4>1.10.2.3 列子集问题</h4>
+<ul>
+<li><code>d[,ind]</code>:<strong>单中方括号</strong>取列子集时，
+即使仅取一列， 从tibble取出的一列结果仍是tibble而不是向量；</li>
+<li>双方括号格式或$格式，返回向量。</li>
+</ul>
+</div>
+<div id="行名问题" class="section level4">
+<h4>1.10.2.4 行名问题</h4>
+<p>tibble默认不使用行名(rownames)。
+有行名的数据框用<code>as_tibble()</code>转换为tibble时，
+可以用<code>rownames=&quot;变量名&quot;</code>选项将行名转换成tibble的一列，
+该列的变量名由选项值确定。 * 原来用行名完成的功能，
+可以改用dplyr包的left_join()等函数， 这些函数进行数据框的横向连接。 *
+旧式数据框支持行名，有如下的缺点： *
+行名本身往往也是有效的数据，如身份证号，
+将有效数据以数据框中的列和行名两种不同形式保存， 增加了复杂度； *
+为了使用某些变量辨识不同的行（观测）， 行名也具有局限性：
+行名必须是相互不同的， 必须是字符型，
+而用来区分各个观测的变量有可能有多个， 也可能不是字符型。 *
+行名要求互不相同是有局限性的， 如果用来辨识各行的变量有重复值，
+就可以构成对各行的一种自然的分组。</p>
+</div>
+<div id="bibble和数据框的转换" class="section level4">
+<h4>1.10.2.5 bibble和数据框的转换</h4>
+<ol style="list-style-type: decimal">
+<li>tibble 转化为 data.frame
+<ul>
+<li>如果不需要添加行名，
+则as.data.frame(dt)就可以转换为data.frame。</li>
+<li>如果需要添加行名， 设dt中第一列要转换为行名， 转化的模板为</li>
+</ul>
+<pre><code>da &lt;- as.data.frame(dt[,-1])
+rownames(da) &lt;- dt[[1]]</code></pre>
+<ul>
+<li>如果dt中要转化为行名的列为id列， 转化的模板为</li>
+</ul>
+<pre><code>da &lt;- as.data.frame(dt[,-match(&quot;id&quot;, names(dt))]),
+rownames(da) &lt;- dt[[&quot;id&quot;]]</code></pre></li>
+<li>data.frame 转化为 tibble
+<ul>
+<li>如果不需要保留行名， 则as_tibble(da)就可以。</li>
+<li>如果需要将行名转换为结果的一列，
+模板为:<code>dt &lt;- as_tibble(da, rownames=&quot;id&quot;)</code>,
+则原来的行名变成了dt的id列</li>
+<li>如果转换成tibble后仍保留原来的行名:<code>dt &lt;- as_tibble(da, rownames=NA)</code></li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="工作空间和变量赋值" class="section level2">
+<h2>1.11 工作空间和变量赋值</h2>
+<div id="工作空间" class="section level3">
+<h3>1.11.1 工作空间</h3>
+<p>R把在命令行定义的<strong>变量都保存到工作空间</strong>中，
+在退出R时可以选择是否保存工作空间 1.
+用<code>ls()</code>命令可以查看工作空间中的内容。 *
+随着多次在命令行使用R， 工作空间的变量越来越多，
+使得重名的可能性越来越大，
+而且工作空间中变量太多也让我们不容易查看其内容。 *
+在命令行定义的变量称为“全局变量”， 在编程实践中，
+全局变量是需要慎用的。</p>
+<ol start="2" style="list-style-type: decimal">
+<li>用<code>rm()</code>函数删除工作空间中的变量</li>
+</ol>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="#cb604-1" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code>##  [1] &quot;a&quot;         &quot;A&quot;         &quot;ages&quot;      &quot;ara&quot;       &quot;B&quot;         &quot;cols&quot;     
+##  [7] &quot;cu&quot;        &quot;d&quot;         &quot;D&quot;         &quot;d.bp&quot;      &quot;d.class&quot;   &quot;d1&quot;       
+## [13] &quot;d2&quot;        &quot;d3&quot;        &quot;di&quot;        &quot;dm&quot;        &quot;f&quot;         &quot;f2&quot;       
+## [19] &quot;h&quot;         &quot;ind&quot;       &quot;L&quot;         &quot;li&quot;        &quot;li1&quot;       &quot;li2&quot;      
+## [25] &quot;lmr&quot;       &quot;rec&quot;       &quot;res&quot;       &quot;s&quot;         &quot;sele&quot;      &quot;sex&quot;      
+## [31] &quot;sex_color&quot; &quot;str_rev&quot;   &quot;text&quot;      &quot;x&quot;         &quot;xx&quot;        &quot;y&quot;</code></pre>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="#cb606-1" tabindex="-1"></a><span class="fu">rm</span>(A, d1)</span>
+<span id="cb606-2"><a href="#cb606-2" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())    <span class="co"># 清除所以的变量</span></span></code></pre></div>
+<blockquote>
+<p>要避免工作空间杂乱， 最好的办法还是所有的运算都写到自定义函数中。
+自定义函数中定义的变量都是临时的， 不会保存到工作空间中。
+这样，仅需要时才把变量值在命令行定义，
+这样的变量一般是读入的数据或自定义的函数
+（自定义函数也保存在工作空间中）</p>
+</blockquote>
+<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="#cb607-1" tabindex="-1"></a>sandbox <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb607-2"><a href="#cb607-2" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&#39;沙盘：接连的空行回车可以退出。</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb607-3"><a href="#cb607-3" tabindex="-1"></a>  <span class="fu">browser</span>()</span>
+<span id="cb607-4"><a href="#cb607-4" tabindex="-1"></a>}</span>
+<span id="cb607-5"><a href="#cb607-5" tabindex="-1"></a><span class="fu">sandbox</span>()</span></code></pre></div>
+<pre><code>## 沙盘：接连的空行回车可以退出。
+## Called from: sandbox()</code></pre>
+<blockquote>
+<p>提示符变成了“Browser[n]”，其中n代表层次序号。
+在这样的browser命令行中随意定义变量， 定义的变量不会保存到工作空间中。
+用“Q”命令可以退出这个沙盘环境， 接连回车也可以退出。</p>
+</blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">待续</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="编程" class="section level1">
+<h1>2.编程</h1>
+<div id="输入与输出" class="section level2">
+<h2>2.1 输入与输出</h2>
 </div>
 </div>
 </article>
