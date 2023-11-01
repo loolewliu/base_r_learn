@@ -9,7 +9,7 @@ output:
     css: sspai.css #css模板，定义整个文档的格式，比如一级标题的字体字号等
     highlight: tango #代码高亮风格
     # number_sections: yes #是否自动按节编号
-    # theme: cayman # 1
+    # theme: cayman # 2
     # theme: tactile #2
     # theme: architect #3
     theme: leonids #4
@@ -26,13 +26,22 @@ https://zhuanlan.zhihu.com/p/391832351
 [官网:https://ggplot2.tidyverse.org/](https://ggplot2.tidyverse.org/)
 [全图](https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-visualization-cheatsheet-thumbs.png)
 
-# 1. ggplot2绘图步骤
-## 1.1 简介 
-### 1.1.1 ggplot2之父简
+# 1. base_R绘图
+
+
+
+
+
+
+
+# 2. ggplot2绘图
+[官网](https://ggplot2.tidyverse.org/reference/)
+## 2.1 简介 
+### 2.1.1 ggplot2之父简
 
 * ggplot2的作者为Hadley Wickham博士，一位为统计应用领域做出了突出贡献的统计学家，被号称为改变了R的男人；
 
-### 1.1.2 ggplot2绘图步骤
+### 2.1.2 ggplot2绘图步骤
 
 ggplot2是基于图层图形语法（the Grammar of Graphics），可简单粗暴的理解为，您可以先绘制好图形的每一部分，然后将各部分相加形成一张完善的图形，使用ggplot2时，会反复使用如下几个对象，简单介绍：
 
@@ -52,7 +61,7 @@ ggplot2是基于图层图形语法（the Grammar of Graphics），可简单粗�
 ```
 其中<...>表示额外的选项。 变量p包含做出的图形的所有数据与设定， 变量名可以任意取。
 
-### 1.1.3 数据集
+### 2.1.3 数据集
 ```{r}
 # devtools::install_github("kjhealy/socviz")
 # install.packages('gapminder')
@@ -68,7 +77,7 @@ library(socviz)
 6. ggplot2包中的`midwest`数据集包含了美国中西部的一些县的统计数据， 如面积等。
 7. ggplot2包的`钻石`数据集。
 
-## 1.2 作图的一般原则
+## 2.2 作图的一般原则
 1. 坏的图形可能有如下缺点：
 
 *. 坏的品味。统计图形应该用尽可能少的图形元素表示尽可能多的数据， 从打印图形而言，即数据量与所用墨水比例越大越好。 没有必要的颜色、三维形态经常会影响读者对图形的认读。 这是Edward R. Tufte的观点， 但是过于极端也不好。
@@ -101,7 +110,7 @@ library(socviz)
 
 对于最少是零的变量， 是否应该以零作为坐标轴的最低值需要考虑， 但没有一定的规则。 同一组数据在不同的坐标范围或者长宽比下曲线的斜率会有很大差别。
 
-## 1.3 散点图：ggplot入门
+## 2.3 散点图：ggplot入门
 
 * gapminder数据集有多个国家在多个年份的期望寿命与人均GDP值。绘制GDP对寿命的关系的散点图。
 
@@ -113,7 +122,7 @@ p + geom_point()
 > 实际上，上面的程序等同于调用`print(p + geom_point())`。 在R函数中或者在循环中需要显式地调用`print()`， 否则不会显示结果。 当载入了tidyverse系统时可以写成 `(p + geom_point()) |> print()`。
 
 
-### 1.3.1 逐步改善 - 增加拟合线
+### 2.3.1 增加拟合线`geom_smooth()`
 * 用相同的映射做出散点图并叠加拟合曲线图
     * `geom_smooth()`的默认设置调用了`gam()`函数来拟合曲线， 
     可以用geom_smooth()的参数选择不同的拟合方法， 如直线拟合`geom_smooth(method="lm")`： 
@@ -126,7 +135,7 @@ p + geom_point() + geom_smooth(method="lm")
 ```
 > 注意geom_xxx()函数计算所需的变量值是从ggplot()函数保存在变量p中的信息提取的。
 
-### 1.3.2 逐步改善 - 修改坐标轴
+### 2.3.2 修改坐标轴刻度`scale_x_log10()`
 以上的所有图形中， x轴变量（人均GDP）分布非正态，严重右偏， 使得大多数散点重叠地分布在直角坐标系的左下角。 将x轴用对数刻度可以改善， 函数为scale_x_log10():
 
 ```{r}
@@ -145,10 +154,11 @@ p + geom_point() +
 
 
 
-### 1.3.3 逐步改善 - 颜色`color`、符号`shape`、线型`type`等映射
+### 2.3.3 颜色`color`、形状`shape`、线型`type`等映射
+
 在`ggplot()`函数的`mapping`参数的`aes()`设定中将变量映射到x、y轴， 颜色、符号、线型等图形元素类型， 也可以作为图形设置将某些图形元素设置为固定值。
 
-#### 1.3.3.1. 例1：用不同颜色表示不同大洲， 就是将`continent`变量映射到`color`:指定了将大洲映射到颜色维， 并不具体指定所用的颜色
+#### 2.3.3.1. 例1：用不同颜色表示不同大洲， 就是将`continent`变量映射到`color`:指定了将大洲映射到颜色维， 并不具体指定所用的颜色
 ```{r}
 p <- ggplot(gapminder, aes(
     x = gdpPercap, 
@@ -159,17 +169,19 @@ p + geom_point() + geom_smooth(method = "loess") + scale_x_log10(label=scales::d
 > 1. `method = "loess"` : 带有局部多项式曲线拟合
 > 2.  曲线使用了不同颜色但置信域颜色相同， 使得难以认读。 在图形右侧自动生成了颜色与continent变量值的对应关系图例。
 
-#### 1.3.3.2. 例2：将`continent`变量映射到`fill`:将置信区间阴影的颜色也用不同大洲区分
+#### 2.3.3.2. 例2：将`continent`变量映射到`fill`:将置信区间阴影的颜色也用不同大洲区分
 ```{r}
 p <- ggplot(gapminder, aes(
     x = gdpPercap, 
     y = lifeExp, 
-    color=continent,
-    fill=continent))
-p + geom_point() + geom_smooth(method = "loess") + scale_x_log10(label=scales::dollar)
+    color=continent))
+p + geom_point() + 
+  geom_smooth(aes(fill=continent), method = "loess") + 
+  scale_x_log10(label=scales::dollar)
 ```
 > 添加`fill`映射，自动添加图例
-#### 1.3.3.3 尝试将颜色指定为一个固定值
+
+#### 2.3.3.3 尝试将颜色指定为一个固定值
 我们发现， 散点并没有使用草绿色， 而且图形右侧有一个chartreuse4图例。 这是因为， **`aes()`仅用来指定变量与图形元素类型的映射**， 所以实际上是生成了一个仅有一个常数值"chartreuse4"的新变量， 用颜色表示这个新变量。为了指定固定颜色， 应将`color=`作为`geom_xxx()`函数的选项， 而不是放在`aes()`映射中， 如：
 
 ```{r}
@@ -181,19 +193,15 @@ p + geom_point() +
   geom_smooth(method="loess") +
   scale_x_log10(labels=scales::dollar)
 
-
 p <- ggplot(gapminder, aes(
     x = gdpPercap,
     y = lifeExp))
 p + geom_point(color="chartreuse4") +
   geom_smooth(method="loess") +
   scale_x_log10(labels=scales::dollar)
-
-
 ```
 
-
-### 1.3.4 逐步改善-修改`geom_xxx()`参数调整图像
+### 2.3.4 修改`geom_xxx()`参数调整图像
 * geom_xxx()函数接受许多关于颜色`colour`、透明度`alpha`、符号、线型`shape`的设置参数。 比如， 下面的程序指定了散点的透明度， 以及拟合直线的粗细：
 ```{r}
 p <- ggplot(gapminder, aes(
@@ -206,10 +214,9 @@ p + geom_point(alpha=0.2, colour="red", shape=21, size=1) +
 > * size指定了线的以毫米为单位的粗细， Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 > * se = FALSE关闭了置信区间显示。 
 > * alpha =设置了透明度， 取0和1之间的值， 数值越小越透明。 
+> * 虽然这里设置了固定的透明度， 也可以在aes()中将透明度alpha映射到某个变量， 使得该变量值大小用点的透明度表示。
 
-> 虽然这里设置了固定的透明度， 也可以在aes()中将透明度alpha映射到某个变量， 使得该变量值大小用点的透明度表示。
-
-### 1.3.5 逐步改善 - 增加标题
+### 2.3.5 增加标题 `lab()`
 
 ```{r}
 p <- ggplot(gapminder, aes(
@@ -227,7 +234,7 @@ p + geom_point(alpha = 0.3) +
 ```
 > 可以看出， labs()规定了上方的标题、小标题， x轴、y轴的标题， 右下方的标注(caption)。 坐标轴刻度数值的规定则需要在scale_xxx()函数中给出。
 
-### 1.3.6 在`geom__`函数中映射变量
+### 2.3.6 在`geom__`函数中映射变量
 
 在前面的一个例图中， 在`ggplot()`函数中将`color`和`fill`映射到了`continent`变量， 使得不仅散点颜色代表了不同大洲， 还使得每个大洲单独拟合了曲线。 如果希望所有大洲拟合同一条曲线怎么办？ </br>
 
@@ -252,13 +259,13 @@ p <- ggplot(
     y = lifeExp, 
     shape = continent))
 p + geom_point(alpha = 0.4, size = 4) +
-  scale_x_log10(labels=scales::dollar)
+  scale_x_log10(labels=scales::dollar)   # x轴刻度做对数转换
 ```
 > 1. 映射仅适用于点数比较少的情况， 还用了size参数指定符号的大小（单位：毫米）
 > 2. 绘图时参与映射的分类变量会自动产生分类效果， `color映射`与`fill映射`到分类变量时常常会起到与添加`group维`相同的作用， 但为了逻辑清晰起见， 需要分组时还应该显式地映射group维。
 
 
-### 1.3.6 连续变量的颜色映射
+### 2.3.6 连续变量的颜色映射
 
 也可以将连续变量映射为渐变色。 除了表示二元函数的等值线图以外这种方法并不利于读者认读。</br>
 
@@ -273,7 +280,7 @@ p + geom_point() +
   scale_x_log10(labels=scales::dollar)
 ```
 
-### 1.3.7 连续变量的颜色映射
+### 2.3.7 保存
 在`ggsave()`中可以用`scale =`指定放大比例， 用`height =`指定高度， 用`width =`指定宽度，用`units =`指定高度和宽度的单位,单位可以是in, cm, mm。如：
 ```{r}
 ggout01 <- p + geom_point()
@@ -281,8 +288,8 @@ ggsave(filename="文件名.pdf", plot=ggout01,
        height=12, width=8, units="cm")
 ```
 
-## 1.4 折线图、分组、切片
-### 1.4.1 图形中的分组和折线图
+## 2.4 折线图、分组、切片
+### 2.4.1 图形中的分组和折线图
 
 考虑`gapminder`数据集中每个国家的期望寿命随时间（年）的变化
 ```{r 最初的图}
@@ -290,7 +297,7 @@ ggplot(gapminder, aes(year, lifeExp)) + geom_line()
 ```
 > `geom_line()`会自动将x坐标从小到大排序， 然后再连接相邻的点
 
-#### 1.4.1.1 `group`映射 - 分组
+#### 2.4.1.1 `group`映射 - 分组
 分组`(group)`与`x`、`y`、`color`、`fill`一样可以映射到一个变量， 但仅能映射到分类变量
 ```{r}
 ggplot(gapminder, aes(year, lifeExp, group=country)) + geom_line()
@@ -298,7 +305,7 @@ ggplot(gapminder, aes(year, lifeExp, group=country)) + geom_line()
 > 结果图形中每一条曲线对应一个国家。 为了查探其中最下方的不稳定曲线是哪一个国家，使用筛选观测的功能：
 
 
-#### 1.4.1.2 最不稳定的国家
+#### 2.4.1.2 最不稳定的国家
 ```{r}
 gapminder |> filter(lifeExp < 30, year >= 1990)   # 国家是 Rwanda
 ```
@@ -326,7 +333,7 @@ gapminder |>
 ```
 > 这种图形的纵坐标应该从0开始， 使得阴影部分的大小与纵坐标值成比例， 这也是ggplot2的默认做法。
 
-### 1.4.2 x坐标不是数值型变量而是因子或者字符型， 则两点之间不会相连
+### 2.4.2 x坐标不是数值型变量而是因子或者字符型， 则两点之间不会相连
 * `gapminder`的Rwanda子集中的year转换成因子，再画折线图：
 ```{r}
 gapminder |>
@@ -359,8 +366,8 @@ gapminder |>
 * 5：longdash；长破折号组成的虚线
 * 6：twodash。点长画线
 
-## 1.5 切片(facet)
-### 1.5.1 基础切片
+## 2.5 切片(facet)
+### 2.5.1 `facet_wrap`基础切片
 
 前面所有国家的图包含了过多的曲线， 使得图形表现得很拥挤。 可以将一个作图区域拆分成若干个小块， 称为切片或者分面（facet）， 按照某一个或两个分类变量的不同值将数据分为若干个子集， 每个数据子集分别在切片上作图。
 
@@ -406,8 +413,11 @@ ggplot(gapminder, aes(
 ```
 > 1. 这时不能使用统一的group = country映射， 否则拟合曲线就是对每个国家都单独有一条拟合曲线， 而不是每幅切片中仅有一条拟合曲线。 办法是仅在geom_line()中给出group = country的映射， 但在geom_smooth()中则不用group维。 注意group = country的设置从ggplot()函数中转移到了geom_line()函数中， 否则就意味着拟合线也需要按照国家分组， 而不是按大洲分组。
 
+> `group = country`设置在`geom_line()`函数
 
-### 1.5.2 `facet_grid()`两分类变量交叉分组分配切片
+
+
+### 2.5.2 `facet_grid()`两分类变量交叉分组分配切片
 
 ```{r}
 p <- ggplot(gss_sm, aes(
@@ -427,10 +437,10 @@ p + geom_point(alpha=0.2) +
 ```
 > 这里虽然没有映射group维， 但还是按性别和种族对数据集分成了6个子集， 每个切片中仅有一个自己的数据。
 
-## 1.6 数据变换与条形图
+## 2.6 数据变换与条形图
 有些`geom_xxx()`函数直接按照数据值作图， 如`geom_point()`、`geom_line()`， 而`geom_smooth()`这样的函数则会按照某种算法计算并对计算结果作图。 `geom_xxx()`都有默认的`stat_xxx()`函数用来计算， 也可以人为指定不同的统计规则。
 
-### 1.6.1 `geom_bar()`自动统计频数并做条形图
+### 2.6.1 `geom_bar()`自动统计频数并做条形图
 使条形的高度与每个组中的观察值的数目成正比
 * 对`gss_sm`数据集的`bigregion变量`作频数条形图：
 
@@ -441,8 +451,7 @@ ggplot(gss_sm, aes(x=bigregion)) +
 > 结果是每个大区的受访者人数的条形图。 图形中x映射是用户指定的， 而y轴则是自动计算的频数。 实际上， geom_bar()自动调用了统计函数`stat_freq()`对每个大区计算频数， 生成新变量`count`和`prop`。 geom_bar()默认使用count(频数)。
 
 
-
-### 1.6.2 `geom_col()` 数据中的值表示条形图的高度
+### 2.6.2 `geom_col()` 数据中的值表示条形图的高度
 虽然ggplot2可以做统计， 但最好还是预先统计好频数， 仅用ggplot2绘图
 ```{r}
 df1 <- gss_sm |>
@@ -459,7 +468,8 @@ ggplot(df1, aes(
   geom_col() + 
   labs(y = "Ratio")
 ```
-> x轴的分组较多时，区分各组的文字标签可能会重叠。 为此， 可以将文字标签旋转45度角;另外`coord_flip()`函数可以将x轴和y轴互换
+> x轴的分组较多时，区分各组的文字标签可能会重叠。 为此， 可以将文字标签旋转45度角;
+> `coord_flip()`函数可以将x轴和y轴互换
 
 ```{r}
 df1 <- gss_sm |>
@@ -485,12 +495,10 @@ ggplot(df1, aes(
   labs(y = "Ratio") +
   coord_flip()
 ```
-
 * `theme(组件 = element_功能())`
 * `hjust`和`vjust`仅在0和1之间限定, 0表示左对齐, 1表示右对齐.
 
-
-### 1.6.3 丰富的色彩
+### 2.6.3 丰富的色彩
 
  下面的例子作`gss_sm`数据集中`religion`变量的频数条形图， 并给不同的条形自动分配不同的颜色， 方法是指定`fill = religion`
  
@@ -503,10 +511,10 @@ p <- ggplot(df2, aes(
   y = n,
   fill = religion))
 p + geom_col() + labs(y = "Count")
-
 ```
-> 将`religion`同时映射到`x`维与`fill`维， 所以对应fill维在图形右侧出现了图例， 这是多余的。 调用guides(fill = "none")可以人为指定不做关于填充色的图例：
+> 将`religion`同时映射到`x`维与`fill`维，所以对应`fill`维在图形右侧出现了图例， 这是多余的。 
 
+* 调用`guides(fill = "none")`可以人为指定不做关于填充色的图例：
 ```{r}
 df2 <- gss_sm |> 
   select(religion) |>
@@ -521,9 +529,16 @@ p + geom_col() +
 ```
 > 从可视化理论的角度看， 上图中的不同颜色是多余的， 用同一颜色更能强调数据本身。
 
-### 1.6.4 分段与并列条形图
+### 2.6.4 分段与并列条形图
 上面的条形图展现了单个分类变量的频数分布。 两个分类变量的交叉频数分布可以用分段条形图或者并列条形图表现。</br>
 
+```{r}
+df3 <- gss_sm |>
+  select(bigregion, religion) |>
+  group_by(bigregion, religion) |>
+  summarise(n = n(), .groups="drop_last") |>
+  mutate(ratio = n / sum(n)) 
+```
 
 
 
@@ -544,6 +559,20 @@ p + geom_col() +
 ### theme()
 
 https://zhuanlan.zhihu.com/p/463041897
+
+
+### `guides()`图例布局函数
+  * `guide_legend()`函数: 离散型
+  * `guid_colorbar()`函数: 连续型
+
+
+
+
+
+
+
+
+
 
 
 
@@ -597,7 +626,7 @@ https://zhuanlan.zhihu.com/p/463041897
 #######################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 
 
-### 1.2.1 几何对象（geom）
+### 2.2.1 几何对象（geom）
 `geometric objects`，譬如散点`points`、 线性`lines`、柱状`bars`及方图`Histogram`等，可绘制的geom为：
 
 
@@ -654,7 +683,7 @@ ggplot2::geom_vline </br>
 ggplot2::get_element_tree </br>
 
 
-### 1.2.2 标度（scale）
+### 2.2.2 标度（scale）
 将数据取值映射到图形空间，使用颜色，形状，大小表示不同取值，使用图例，网格线展示标度），可使用的函数：
 > ggplot2::scale_ </br>
 ggplot2::scale_alpha_binned </br>
@@ -698,7 +727,7 @@ ggplot2::scale_y_discrete </br>
 ggplot2::scale_y_sqrt </br>
 ggplot2::scale_y_time </br>
 
-### 1.2.3 坐标系（coord）
+### 2.2.3 坐标系（coord）
 描述数据如何映射到图形，同时包含坐标轴和网格线axes, gridlines 
 
 >ggplot2::coord_ </br>
@@ -713,7 +742,7 @@ ggplot2::coord_quickmap </br>
 ggplot2::coord_sf </br>
 ggplot2::coord_trans </br>
 
-### 1.2.4 统计变换（stat）
+### 2.2.4 统计变换（stat）
 对数据的汇总，可使用的函数：
 > ggplot2::stat_ </br>
 ggplot2::stage </br>
@@ -753,14 +782,14 @@ ggplot2::stat_summary2d </br>
 ggplot2::stat_unique </br>
 ggplot2::stat_ydensity </br>
 
-### 1.2.5 分面（facet）
+### 2.2.5 分面（facet）
 将数据拆分为小子集，对各子集作图并联合展示，也成条件作图或网格图），可使用的函数：
 > ggplot2::facet_
 ggplot2::facet_grid </br>
 ggplot2::facet_wrap </br>
 ggplot2::facet_null </br>
 
-### 1.2.6 绘图主题（theme）
+### 2.2.6 绘图主题（theme）
 主题涉及图形更细的方面，如背景色，字体大小等
 >ggplot2::theme_ </br>
 ggplot2::theme_bw </br>
@@ -778,13 +807,13 @@ ggplot2::theme_test </br>
 ggplot2::theme_update </br>
 ggplot2::theme_void </br>
 
-## 1.3 ggplot2快速绘图
+## 2.3 ggplot2快速绘图
 
 
 
 
 
-### 1.3.1 ggplot2内置数据集
+### 2.3.1 ggplot2内置数据集
 ```{r}
 library('ggplot2')
 data(package = 'ggplot2')#查看ggplot2内置数据集
@@ -806,7 +835,7 @@ data(package = 'ggplot2')#查看ggplot2内置数据集
 # txhousing        Housing sales in TX
 ```
 
-### 1.3.2 三要素(data, aes, geom)
+### 2.3.2 三要素(data, aes, geom)
 * 数据集（data）
 * 图像属性（aes）, 即指定x、y轴要投影的数据
 * 几何对象（geom）, 此处为散点图
@@ -819,7 +848,7 @@ ggplot(data = mpg,
 
 ```
 
-#### 1.3.2.1 aes设置
+#### 2.3.2.1 aes设置
 
 * `colour`, `size`, `shape` 等等
   * `colour`: 按变量class分类绘制不同类不同颜色的散点图
@@ -839,14 +868,14 @@ ggplot(mpg, aes(displ, hwy, size = cyl)) +
 
 ```
 
-#### 1.3.2.2 分面（facet）
+#### 2.3.2.2 分面（facet）
 ```{r}
 ggplot(mpg, aes(displ, hwy)) + 
   geom_point() + 
   facet_wrap(~class)
 ```
 
-#### 1.3.2.3 几何对象（geom）
+#### 2.3.2.3 几何对象（geom）
 ```{r}
 library(gridExtra)
 p1 <- ggplot(mpg, aes(drv, hwy)) + geom_jitter()

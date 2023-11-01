@@ -420,6 +420,15 @@ str_rev <- function(x)
 str_rev(c("abc", "Statistics"))
 ```
 
+* `sapply()`函数配合`strsplit()`函数进行截取字符串
+  * 函数sapply()可以提取列表中每个成分的第n个元素，并将其放入向量中进行存储，
+  * "["是一个可以提取某个对象的一部分的函数。
+```{r}
+y <- c("100-D","100-A","110-c","110-A")
+sapply(strsplit(y,"-"), '[', 1)   # 第一部分
+sapply(strsplit(y,"-"), '[', 2)   # 第二部分
+``` 
+
 ### 1.3.7 正则表达式
 
 R 内置的三种匹配模式 <br>
@@ -1087,12 +1096,10 @@ rec <- list(name="李明", age=30,
   scores=c(85, 76, 90))
 rec
 
-
 typeof(rec)     # 查看类型
 is.list(rec)    # 判断某个对象是否列表类型
 
 vector("list", 5)   # 生成元素为空的长度为n的列表
-
 ```
 ### 1.8.2 列表元素访问
 #### 1.8.2.1 查
@@ -1117,7 +1124,7 @@ is.list(rec[1])
 ```
 
 #### 1.8.1.2 元素名
-* 列表一般都应该有元素名， 元素名可以看成是变量名， 列表中的每个元素看成一个变量。 用names()函数查看和修改元素名
+* 列表一般都应该有元素名， 元素名可以看成是变量名， 列表中的每个元素看成一个变量。 用`names()`函数查看和修改元素名
 ```{r}
 names(rec)                                       # 查看列表中所有的元素名
 names(rec)[names(rec)=="scores"] <- "三科分数"   # 修改元素名
@@ -1170,7 +1177,7 @@ res <- strsplit(x, ","); res                # 返回列表
 t(sapply(res, as.numeric))
 ```
 > 列表、向量或数据帧作为输入，并以向量或矩阵的形式给出输出。
-
+ 
 ## 1.9 矩阵与数组
 ### 1.9.1 矩阵
 矩阵用matrix函数定义，实际存储成一个向量，根据保存的行数和列数对应到矩阵的元素， 默认的存储次序为**按列**存储，用`byrow=TRUE`选项可以设置成**按行**填入。 
@@ -1196,13 +1203,15 @@ rownames(A) <- c('a', 'b', 'c')   # 给矩阵每行命名， 也可以访问矩�
 A[c('a', 'c'), 'Y']
 ```
 #### 1.9.2.3. `drop=FALSE`参数生成列向量
+
 矩阵取子集时， 如果取出的子集仅有一行或仅有一列， 结果就不再是矩阵而是变成了R向量， R向量既不是行向量也不是列向量
 ```{r}
 A[,1,drop=FALSE]
 ```
+
 ### 1.9.3 cbind()和rbind()函数
 
-* 若x1, x2, x3是等长的向量， `cbind(x1, x2, x3)`把它们看成列向量并在一起组成一个矩阵。
+* 若x1, x2, x3是等长的向量， `cbind(x1, x2, x3)`把它们看成**列**向量并在一起组成一个矩阵。
 ```{r}
 cbind(c(1,2), c(3,4), c(5,6))
 cbind(A,Z=c(1,2,3))
@@ -1236,7 +1245,6 @@ c(1,1) %*% B    # 行向量 ： 1X2 %*% 2X2 == 1X2
 B %*% c(1,1)    # 列向量 ： 2X2 %*% 2X1 == 1X2
 ```
 #### 1.9.4.4 内积
-
 设x, y是两个向量， 计算向量内积， 可以用sum(x*y)表示。
 
 #### 1.9.4.5 外积
@@ -1247,20 +1255,20 @@ B %*% c(1,1)    # 列向量 ： 2X2 %*% 2X1 == 1X2
 ```{r}
 D <- matrix(c(6,2,3,5,4,1), nrow=3, ncol=2); apply(D, 2, sum)
 ```
-2. `apply(A, 1, FUN)`把矩阵A的每一行分别输入到函数FUN中， 得到与每一行对应的结果
 
+2. `apply(A, 1, FUN)`把矩阵A的每一行分别输入到函数FUN中， 得到与每一行对应的结果
 ```{r}
 D <- matrix(c(6,2,3,5,4,1), nrow=3, ncol=2); apply(D, 1,mean)
 ```
-3. 函数FUN返回多个结果， 则`apply(A, 2, FUN)`结果为矩阵， 矩阵的每一列是输入矩阵相应列输入到FUN的结果， 结果列数等于A的列数
 
+3. 函数FUN返回多个结果， 则`apply(A, 2, FUN)`结果为矩阵， 矩阵的每一列是输入矩阵相应列输入到FUN的结果， 结果列数等于A的列数
 ```{r}
 apply(D, 2, range)    # 返回每列的min和max,在同一列
 ```
 
 4. 函数FUN返回多个结果， 为了对每行计算FUN的结果， 结果存入一个与输入的矩阵行数相同的矩阵， 应该用t(apply(A, 1, FUN))的形式
 ```{r}
-t(apply(D, 1, range) )
+t(apply(D, 1, range))
 ```
 
 ### 1.9.6 多维数组
@@ -1422,6 +1430,7 @@ dm[ind,]
 d2 <- as.matrix(d[,c("age", "height")])
 d3 <- crossprod(d2); d3   # 这里crossprod(A)表示。A^TA
 ```
+
 ### 1.10.2 tibble类型
 #### 1.10.2.1 生成方法
 [全部数据](https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/Rbook-data.zip)
@@ -1441,7 +1450,7 @@ d.class <- read_csv("data/class.csv")
 d.bp <- tibble(
     `序号` = c(1,5,6,9,10,15),
     `收缩压` = c(145, 110, "未测", 150, "拒绝", 115)) 
-d.bp #knitr::kable(d.bp)
+d.bp # knitr::kable(d.bp)
 ```
 
 3. `readr::read_csv()`也支持从一个多行字符串直接读入数据， 如
@@ -1471,6 +1480,7 @@ class(d.class)
 
 #### 1.10.2.4  行名问题
 tibble默认不使用行名(rownames)。 有行名的数据框用`as_tibble()`转换为tibble时， 可以用`rownames="变量名"`选项将行名转换成tibble的一列， 该列的变量名由选项值确定。
+
 * 原来用行名完成的功能， 可以改用dplyr包的left_join()等函数， 这些函数进行数据框的横向连接。
 * 旧式数据框支持行名，有如下的缺点：
     * 行名本身往往也是有效的数据，如身份证号， 将有效数据以数据框中的列和行名两种不同形式保存， 增加了复杂度；
@@ -1478,24 +1488,24 @@ tibble默认不使用行名(rownames)。 有行名的数据框用`as_tibble()`�
     * 行名要求互不相同是有局限性的， 如果用来辨识各行的变量有重复值， 就可以构成对各行的一种自然的分组。
 
 
-#### 1.10.2.5 bibble和数据框的转换
+#### 1.10.2.5 tibble和数据框的转换
 1. tibble 转化为 data.frame
     * 如果不需要添加行名， 则as.data.frame(dt)就可以转换为data.frame。
     * 如果需要添加行名， 设dt中第一列要转换为行名， 转化的模板为
 ```
-da <- as.data.frame(dt[,-1])
-rownames(da) <- dt[[1]]
+df <- as.data.frame(dt[,-1])
+rownames(df) <- dt[[1]]
 ```
     * 如果dt中要转化为行名的列为id列， 转化的模板为
 ```
-da <- as.data.frame(dt[,-match("id", names(dt))]),
-rownames(da) <- dt[["id"]]
+df <- as.data.frame(dt[,-match("id", names(dt))]),
+rownames(df) <- df[["id"]]
 ```
 
 2. data.frame 转化为 tibble
     * 如果不需要保留行名， 则as_tibble(da)就可以。
-    * 如果需要将行名转换为结果的一列， 模板为:`dt <- as_tibble(da, rownames="id")`, 则原来的行名变成了dt的id列
-    * 如果转换成tibble后仍保留原来的行名:`dt <- as_tibble(da, rownames=NA)`
+    * 如果需要将行名转换为结果的一列， 模板为:`dt <- as_tibble(df, rownames="id")`, 则原来的行名变成了dt的id列
+    * 如果转换成tibble后仍保留原来的行名:`dt <- as_tibble(df, rownames=NA)`
     
 ## 1.11 工作空间和变量赋值
 
@@ -1562,8 +1572,8 @@ cat("y =", y, "\n")   # 需要换行时, 需要添加 `\n`
 
 * 输出文本文件中的数值向量， 文件名用`file=`选项给出, `quite=TRUE`选项使得读入时不自动显示读入的数值项数
 ```{r}
-cat(1:12, "\n", file="tmp/x.txt")
-x <- scan("tmp/x.txt")
+#cat(1:12, "\n", file="tmp/x.txt")
+#x <- scan("tmp/x.txt")
 ```
 
 ### 2.1.2 读取CSV文件
@@ -1582,7 +1592,7 @@ x <- scan("tmp/x.txt")
     * 数值型数据， 只要表示成数值常量形式即可。 
     * 字符型数据， 可以用双撇号包围起来， 也可以不用撇号包围。 但是， 如果数据项本身包含逗号， 就需要用双撇号包围
 ```{r}
-d <- read_csv("aa.csv")
+# d <- read_csv("aa.csv")
 ```
 
 #### 2.1.2.2 从字符串读入
@@ -1662,7 +1672,7 @@ d <- read_csv("data/bp.csv", locale=locale(encoding="GBK"),
 ```
     * 当猜测的文件类型有问题的时候， 可以先将所有列都读成字符型， 然后用type_convert()函数转换， 
 ```{r}
-d <- read_csv("filename.csv",
+d <- read_csv("data/bp.csv",
               col_types=cols(.default = col_character()))
 d <- type_convert(d)
 ```
@@ -1674,13 +1684,474 @@ d <- type_convert(d)
 
 ```{r}
 d.class <- read_csv("data/class.csv", 
-  col_types=cols(
-  .default = col_double(),
-  name=col_character(),
-  sex=col_factor(levels=c("M", "F")) ))
+                    col_types=cols(.default = col_double(),
+                                   name = col_character(),
+                                   sex = col_factor(levels=c("M", "F")) ))
 str(d.class)
 ```
 > 其中`str()`函数可以显示数据框的行数(obs.)和变量数(variables)， 以及每个变量（列）的类属等信息。
+
+
+
+
+
+# 3. 数据整理 - `tidyverse`系统
+## 3.1 tidyverse系统介绍
+`tidyverse`包实际上就是一些常用R包的集合，包括`ggplot2（可视化`）、`dplyr（数据操作）`、`tidyr（数据对齐）`、`tibble（更现代的数据框）`、`stringr（字符串操作)`
+* readr包用于读入数据， 
+* tidyr包用于进行长、宽表转换，通常用于**行**数据整理 
+* dplyr包用于数据整理与汇总， 通常用于**行**数据整理 
+* purr包进行map-reduce类操作
+* magrittr包管道符 %>%
+
+数据集经常需要选**行子集**、选**列子集**、**排序**、**定义新变量**、横向**合并**、长宽转换等操作， 而且经常会用若干个连续的操作分步处理， R的管道运算符`|>`和`magrittr`包的`%>%`特别适用于这种分步处理。
+```{r}
+library(tidyverse)   # 载入tidyverse包， 则magrittr包，readr包，dplyr包和tidyr包都会被自动载入
+```
+
+* 数据集例子1
+```{r}
+d.class <- read_csv("data/class.csv", col_types=cols(.default = col_double(),
+                                                     name=col_character(),
+                                                     sex=col_factor(levels=c("M", "F"))
+                                                     ))
+```
+> 这个数据框有19个观测， 有如下5个变量：name, sex, age, height, weight
+
+* 数据集例子2
+
+`NHANES`扩展包提供的`NHANES`， 这是一个规模更大的示例数据框， 可以看作是美国扣除住院病人以外的人群的一个随机样本， 有10000个观测，有76个变量， 主题是个人的健康与营养方面的信息。 仅作为教学使用而不足以作为严谨的科研用数据。 原始数据的情况详见http://www.cdc.gov/nchs/nhanes.htm
+
+```{r}
+if (require(NHANES)) {
+  library(NHANES)
+}else{
+  install.packages('NHANES')
+  library(NHANES)
+}
+
+print(dim(NHANES))
+```
+> 变量ID是受试者编号， SurveyYr是调查年份， 同一受试者可能在多个调查年份中有数据。 变量中包括性别、年龄、种族、收入等人口学数据， 包括体重、身高、脉搏、血压等基本体检数据， 以及是否糖尿病、是否抑郁、是否怀孕、已生产子女数等更详细的健康数据， 运动习惯、饮酒、性生活等行为方面的数据。 这个教学用数据集最初的使用者是Cashmere高中的Michelle Dalrymple 和新西兰奥克兰大学的Chris Wild。
+
+###  3.1.1 查看数据框一般信息`dplyr::glimpse()`
+* 显示数据框的大小、各列变量名、类型
+```{r}
+dplyr::glimpse(d.class)
+```
+
+###  3.1.2 `filter()`选择行子集
+* 数据框的任何行子集仍为数据框，即使只有一行而且都是数值也是如此。
+  * 行子集可以用行下标选取， 如`d.class[8:12,]`。 
+  * `head()`取出数据框的前面若干行， 
+  * `tail()`取出数据框的最后若干行。
+
+`dplyr::filter()`函数可以按条件选出符合条件的行组成的子集
+例1：从d.class中选出年龄在13岁和13岁以下的女生：
+```{r}
+d.class |> filter(age <=13, sex=="F") |> knitr::kable()
+```
+> 1. `filter(.data, ..., .by = NULL, .preserve = FALSE)` 
+  * 第一个参数是要选择的数据框， 后续的参数是条件， 这些条件是需要同时满足的
+> 2. `filter()`会自动舍弃行名， 如果需要行名只能将其转换成数据框的一列[1.10.2.5](./基础学习.html#tibble类型)。
+> 3.  `filter()`的结果为行子集数据框。 用在管道操作当中的时候第一自变量省略（是管道传递下来的）。
+
+###  3.1.2 `slice()` 按行序号选择行子集
+基本R的utils包的函数head(x, n)可以用来选择数据框x前面n行， tail(x, n)可以用来选择数据框x后面n行，如：
+* 如：得到第3:5行
+```{r}
+d.class |> head(n=5) |> tail(n=3) |> knitr::kable()
+```
+
+`dplyr`包的函数`slice(.data, ...)`可以用来选择指定序号的行子集， **正的序号**表示保留，**负的序号**表示排除
+```{r}
+d.class |> slice(3:5) |> knitr::kable()
+```
+
+其他几个slice_xxx()方便函数，用`prop=0.1`取代`n=5`表示按照比例提取行数。
+* `slice_head(n=5)`提取前n行；
+* `slice_tail(n=5)`提取最后n行；
+* `slice_min(x, n=1)`提取x值最小的n行；
+* `slice_max(x, n=1)`提取x值最大的n行；
+* `slice_sample(n=5)`随机**无放回**抽取n行，也可以用`sample_n(size = n)`函数。
+
+###  3.1.3 `sample_n()` 对观测随机抽样
+`sample_n(tbl, size=n, replace = FALSE, weight = NULL)`函数
+* `replace = FALSE`: 默认随机无放回抽取size行, `replace=TRUE`可以变成有放回抽样
+* `weight=列名`：选项指定数据框中的一列作为抽样权重， 进行不等概抽样
+```{r}
+d.class |>
+  sample_n(size = 3) |>
+  knitr::kable()
+```
+
+
+### 3.1.4 `distinct()`去除重复行
+`distinct(.data, ..., .keep_all = FALSE)`函数
+
+* 筛选出性别与年龄的所有不同组合, 若要保留数据库的其它变量，添加参数`.keep_all=TRUE`：
+```{r}
+d.class |>
+  distinct(sex, age, .keep_all = TRUE) |>
+  knitr::kable()
+```
+
+### 3.1.5 `drop_na()`去除指定的变量有缺失值的行
+`drop_na(data, ...)` 可以对数据框指定一到多个变量， 删去指定的变量有缺失值的行。 不指定变量时有任何变量缺失的行都会被删去。
+```{r}
+NHANES |> drop_na() |>  nrow()   # 查看得知：所有的行都有缺失值。
+```
+
+```{r}
+NHANES |> drop_na(AlcoholDay) |> nrow()  # 剔除AlcoholDay列有缺失的观测并计数
+```
+
+### 3.1.6 `select()`选择列子集
+#### 3.1.6.1 指定变量名
+```{r}
+d.class |>
+  select(name, age) |>
+  head(n=3) |>
+  knitr::kable()
+```
+
+#### 3.1.6.2 冒号表示列范围
+```{r}
+d.class |>
+  select(name:age) |>
+  head(n=3) |>
+  knitr::kable()
+```
+
+#### 3.1.6.3 数字序号表示列范围
+```{r}
+d.class |>
+  select(1:3) |>
+  head(n=3) |>
+  knitr::kable()
+```
+
+#### 3.1.6.4 负号写在前表示扣除
+
+```{r}
+d.class |>
+  select(-name, -age) |>
+  head(n=3) |>
+  knitr::kable()
+```
+
+#### 3.1.6.5 `where(示性函数)`选择满足条件的列
+比如， 选择所有数据型列
+```{r}
+d.class |>
+  select(where(is.numeric)) |>
+  head(n=3) |>
+  knitr::kable()
+```
+
+#### 3.1.6.6 `all_of()` 引入已经保存变量的列名
+如果要选择的变量名已经保存为一个字符型向量， 可以用all_of()函数引入，
+
+* `all_of()`要求指定的所有变量名都是数据框中**存在**的；
+```{r}
+vars <- c("name", "sex")
+d.class |>
+  select(all_of(vars)) |>
+  head(n=3) |>
+  knitr::kable()
+```
+> R的字符串函数（如`paste()`）和正则表达式函数可以用来生成变量名子集， 然后在`select`中配合`all_of()`使用。
+
+
+#### 3.1.6.7 `any_of()` 引入已经保存变量的列名
+* 如果指定的变量有些可能是不存在的， 想将确实存在的那些变量选取进来， 应使用`any_of()`。
+```{r}
+vars <- c("name", "gender")
+d.class |>
+  select(any_of(vars)) |>
+  head(n=3) |>
+  knitr::kable()
+```
+
+#### 3.1.6.8 `新变量=老变量`的格式同时改名
+```{r}
+d.class |>
+  select(id = name, gender=sex) |>
+  head(n=3) |>
+  knitr::kable()
+```
+
+#### 3.1.6.9 其它
+* `starts_with("se")`: 选择名字以“se”`开头的变量列；
+* `ends_with("ght")`: 选择名字以“ght”`结尾的变量列；
+* `contains("no")`: 选择名字中含有子串“no”`的变量列；
+* `matches("^[[:alpha:]]+[[:digit:]]+$")`， 选择列名匹配某个正则表达式模式的变量列， 这里匹配前一部分是字母，后一部分是数字的变量名，如`abc12`。
+* `num_range("x", 1:3)`，选择x1, x2, x3。
+* `everything()`: 代指所有选中的变量， 这可以用来将指定的变量次序提前， 其它变量排在后面。
+
+### 3.1.7 `pull()`取出单个变量为向量
+* 选择单个变量并使得结果为普通向量
+  * `pull()`可以指定单个变量名， 也可以指定变量序号，
+  * 负的变量序号从最后一个变量数起。 
+  * 缺省变量名和序号时取出最后一个变量。
+  
+```{r}
+d.class |> 
+  head(n=3) |>
+  pull(name) |>
+  paste(collapse=":")
+```
+
+* 如果要取出的变量名保存在一个字符型变量varname中
+```{r}
+varname <- "name"
+d.class |> 
+  head(n=3) |>
+  select(one_of(varname)) |>
+  pull() |>
+  paste(collapse=":")
+```
+
+### 3.1.8 `arrange()`排序
+* `desc()`包裹想要降序排列的变量
+* 排序时不论升序还是降序， 所有的**缺失值**都自动排到末尾。
+```{r}
+d.class |>
+  arrange(sex, desc(age)) |>
+  knitr::kable()
+```
+* base_R的利用`order()`排序
+```{r}
+newdata <- d.class[order(d.class$sex, -d.class$age),] # 或
+newdata <- d.class[order(d.class$sex, d.class$age, decreasing = c(FALSE,TRUE)),]
+```
+
+### 3.1.9 `rename()`修改变量名
+* 用“新名字=旧名字”格式修改变量名
+  * `rename()`函数可能出现在其它包中，保险起见写成`dplyr::rename()`。
+```{r}
+d2.class <- d.class |>
+  dplyr::rename(h=height, w=weight)
+```
+
+### 3.1.10 `relocate()` 调整变量次序
+`relocate(.data, ..., .before = NULL, .after = NULL)`
+* `.before`: 指定一个变量名或变量序号， 使得指定的变量调整到此变量前面， 
+* `.after`: 指定一个变量， 使得指定的变量调整到此变量后面
+
+```{r}
+d.class |>
+  relocate(height, weight, .after=name) |>
+  head(n=3) |>
+  knitr::kable()
+```
+
+### 3.1.11 `mutate()`计算新变量
+#### 3.1.11.1 一般
+为数据框计算新变量， 返回含有新变量以及原变量的新数据框。
+```{r}
+d.class |>
+  mutate(
+    rwh=weight/height, 
+    sexc=if_else(sex=="F", "女", "男")) |>
+  head(n=3) |>
+  knitr::kable()
+```
+* `if_else()`是`dplyr`包对基本R函数`ifelse()`的一个改进版本， 能够好处理**缺失值**和**结果类属**的问题。
+
+#### 3.1.11.2 复杂
+新变量计算比较复杂时，可以用多个语句组成复合语句
+```{r}
+d.class |>
+  mutate(
+    sexc={
+      x <- rep("男", length(sex))       # 一个重要的r思想:全部赋值再修改
+      x[!is.na(sex) & sex=="F"] <- "女"
+      x
+    } ) |>
+  head(3)|>
+  knitr::kable()
+```
+
+#### 3.1.11.3 统计函数结果
+```{r}
+d.class |>
+  mutate(
+    cheight = height - mean(height)) |>
+  knitr::kable()
+```
+
+#### 3.1.11.4 新变量名与老变量名
+`mutate(.data,.by = NULL,.keep = c("all", "used", "unused", "none"), .before = NULL, .after = NULL)`
+
+* 新变量可以与老变量名相同， 这样就在输出中修改了老变量。
+* `.keep="used"`仅保留新变量以及计算新变量时用到的变量。
+* `.before=1`选项: 使得新定义的变量添加到原有变量的最前面
+* `.after=变量名`: 使得新添加的变量放在指定的变量后面
+
+
+> 新变量也可以直接为数据框的新变量赋值：
+
+```{r}
+d.class[["rwh"]] <- d.class[["weight"]] / d.class[["height"]]
+```
+
+
+
+
+
+#### 3.1.12 `tranmute()`生成新变量的数据框
+* 函数`transmute()`用法与`mutate()`类似， 但是仅保留新定义的变量， 不保留原来的所有变量
+```{r}
+d.class |>
+  transmute(
+    height_cm = round(height*2.54),
+    weight_kg = round(weight*0.4535924),
+    bmi =  weight_kg / (height_cm / 100)^2) |>
+  head(n=3) |>
+  knitr::kable()
+```
+
+
+```{r}
+d.class |>
+  lm(weight ~ height, data = _) |> coef()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
