@@ -1691,16 +1691,12 @@ str(d.class)
 ```
 > 其中`str()`函数可以显示数据框的行数(obs.)和变量数(variables)， 以及每个变量（列）的类属等信息。
 
-
-
-
-
 # 3. 数据整理 - `tidyverse`系统
 ## 3.1 tidyverse系统介绍
 `tidyverse`包实际上就是一些常用R包的集合，包括`ggplot2（可视化`）、`dplyr（数据操作）`、`tidyr（数据对齐）`、`tibble（更现代的数据框）`、`stringr（字符串操作)`
 * readr包用于读入数据， 
-* tidyr包用于进行长、宽表转换，通常用于**行**数据整理 
-* dplyr包用于数据整理与汇总， 通常用于**行**数据整理 
+* tidyr包用于进行长、宽表转换，通常用于**行**数据整理。[tidyr官网](https://tidyr.tidyverse.org/reference/)
+* dplyr包用于数据整理与汇总， 通常用于**行**数据整理。[dplyr官网](https://dplyr.tidyverse.org/reference/)
 * purr包进行map-reduce类操作
 * magrittr包管道符 %>%
 
@@ -1997,9 +1993,6 @@ d.class[["rwh"]] <- d.class[["weight"]] / d.class[["height"]]
 ```
 
 
-
-
-
 ### 3.1.12 `tranmute()`生成新变量的数据框
 * 函数`transmute()`用法与`mutate()`类似， 但是仅保留新定义的变量， 不保留原来的所有变量
 ```{r}
@@ -2025,9 +2018,8 @@ d.class |>
 class_F <- d.class |> filter(sex=="F") |> select(-sex, -age)  # 或
 d.class |> filter(sex=="F") |> select(-sex, -age) -> class_F
 
-d.class |>
-  lm(weight ~ height, data = _)
-
+# d.class |>
+#   lm(weight ~ height, data = _)
 ```
 
 ### 3.1.14 `expand_grid()` 多个因素的试验设计搭配
@@ -2041,23 +2033,124 @@ tidyr::expand_grid(
 ```
 > 结果的数据框d有三个变量: group是大组，共分3个大组，每组4个观测； subgroup是子组，在每个大组内分为2个子组，每个子组2个观测。 共有个3X2X2 观测（行）。
 
-### 3.1.15 宽表转换为长表
+### 3.1.15 `pivot_longer()`宽表转换为长表 
 * **整洁数据**的要求是每行为一个观测， 每列为一个变量（属性
-  * **宽表**:  每个受试者有多次随访的记录值，如果每个受试者的所有随访记录值存放在一个观测(行)中
-  * **长表**
+  * **宽表**: 每个受试者有多次随访的记录值，如果每个受试者的所有随访记录值存放在一个观测(行)中
+  * **长表**: 每个受试者的随访记录值同一时间的多个属性用了多个观测保存
 
 
+### 3.1.16 `pivot_wider()`长表转换为宽表 
 
 
+### 3.1.17 拆分数据列
+#### 3.1.17.1 `separate()`列拆分为各自的变量列
+* 数据源
+```{r}
+d.sep <- read_csv(
+"testid, succ/total
+1, 1/10
+2, 3/5
+3, 2/8
+")
 
+d.sep |> 
+    separate(
+        `succ/total`,
+        into=c("succ", "total"),
+        sep="/",
+        convert=TRUE) |> 
+    knitr::kable()
+```
+* `into`指定拆分后新变量名
+* `sep`指定分隔符
+* `convert=TRUE`分割后的值自动转换为适当的类型 
+* `extra`指出拆分时有多余内容的处理方法， 
+* `fill`指出有不足内容的处理方法。
 
+#### 3.1.17.2 `extract()`正则规则拆分
+* 按照某种正则表达式表示的模式从指定列拆分出对应于正则表达式中捕获组的一列或多列内容
+```{r}
+dexp <- tibble(
+  design = c("AA", "AB", "BA", "BB"),
+  response = c(120, 110, 105, 95)) |> knitr::kable(dexp)
+```
+```{r}
+dexp |>
+    extract(
+        design,
+        into = c("fac1", "fac2"),
+        regex = "(.)(.)"
+    ) |>
+    knitr::kable()
+```
 
+### 3.1.18 `unite()`合并数据列 - `separate()`的反向操作
+* `tidyr::unite()`函数可以将同一行的两列或多列的内容合并成一列
+```{r}
+d.sep |>
+    separate('succ/total', into = c("sicc", "total"), sep = "/", convert = TRUE) |>
+    unite(ratio, sicc, total, sep=":") |>
+    knitr::kable()
+```
 
+> unite()的第一个参数是要修改的数据框， 这里用管道|>传递进来， 
+> 第二个参数是合并后的变量名（ratio变量）， 其它参数是要合并的变量名，
+> sep指定分隔符。 
+> 实际上用mutate()、paste()或者sprintf()也能完成合并
 
+### 3.1.19 `bind_rows()`数据框纵向(行)合并
+`dplyr`包的`bind_rows()`函数也可以对两个或多个数据框纵向合并。 要求变量集合是相同的，变量次序可以不同**(列名一样，顺序可以不同)**。
+```{r}
+d3.class <- d.class |>
+  select(name, sex, age) |>
+  filter(sex=="M")
+d4.class <- d.class |>
+  select(name, age, sex) |>
+  filter(sex=="F")
 
+d3.class |>
+    bind_rows(d4.class) |>
+    knitr::kable()
+```
 
+### 3.1.20 `bind_cols()`横向(列)合并 - 两个行数相同的数据框按行号对齐合并
+#### 3.1.20.1 连接介绍
+实际数据往往没有存放在单一的表中， 需要从多个表查找数据。 多个表之间的连接， 一般靠**关键列（key）**对准来连接。 连接可以是一对一的， 一对多的。 多对多连接应用较少， 因为多对多连接是所有两两组合。</br>
 
+在规范的数据库中，每个表都应该有主键， 这可以是一列，也可以是多列的组合。 为了确定某列是主键， 可以用count()和filter()，如
 
+```{r}
+d.class |>
+  count(name) |>
+  filter(n>1) |>
+  nrow()
+```
+> 没有发现重复出现的name， 说明d.class中name可以作为主键
+
+#### 3.1.20.2 `inner_join()`一对一内连接
+例子：为了演示一对一的横向连接， 我们将d.class取11和12岁的子集， 然后拆分为两个数据集d1.class和d2.class, 两个数据集都有主键name， d1.class包含变量name, sex, d2.class包含变量name, age, height, weight, 并删去某些观测：
+```{r}
+d1.class <- d.class |>
+  filter(age <= 12) |>
+  select(name, sex) |>
+  filter(!(name %in%  "Sandy"))
+d2.class <- d.class |>
+  filter(age <= 12) |>
+  select(name, age, height, weight)
+```
+用`dplyr`包的`inner_join()`函数将两个数据框按**键值**横向合并， 仅保留能匹配的观测。因为d1.class中丢失了Sandy的观测， 所以合并后的数据框中也没有Sandy的观测：
+```{r}
+d1.class |>
+    inner_join(d2.class) |>
+    knitr::kable()
+```
+* 横向连接自动找到了共同的变量name作为连接的键值， 
+    * 可以在`inner_join()`中用`join_by(键)`指定键值变量名， 
+        * 如果有不同的键名， 可以用`join_by(左键 == 右键)`的格式指定， 这里用了==是因为这类似于SQL中左右连接时的连接条件， 这里是相等情况下的连接， 而R中用两个等于号表示是否相等的判断。
+* 如果你确信左右表的连接都是**一对一**的， 如果出现重复匹配意味着数据错误， 可以在`inner_join()`中加选项`multiple = "error"`， 其默认值是`"warn"`， 即会显示警告信息。
+* 如果左右表的**一对一**连接不应该有遗漏， 如果有任何不匹配意味着数据有错， 可以在`inner_join()`中加选项`unmatched = "error"`， 其默认值是`"drop"`, 即会删除不匹配的行。。
+
+#### 3.1.20.3 `left_join()` 多对一左连接
 
 
 
