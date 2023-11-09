@@ -174,7 +174,7 @@ atan(1)
 
 * `sort(x)`返回排序结果，默认是升序。 
 * `rev(x)`返回把各元素排列次序反转后的结果。
-* `order(x)`返回排序(升序)用的下标。如
+* `order(x)`返回排序(升序)用的下标。如  
 
 ```{r}
 x <- c(11,44,22)
@@ -250,7 +250,7 @@ c(1:4) > c(4:1)
 * 与NA比较产生NA，如
 ```{r}
 c(1, NA, 3) > 2    # [1] FALSE    NA  TRUE
-NA == NA           # [1] NA
+#NA == NA           # [1] NA
 ```
 
 * 为了判断向量每个元素是否NA， 用is.na()函数，如
@@ -289,7 +289,7 @@ match(c(1, 3), c(2,3,4,3))  ## [1] NA  2
 * 标量之间的逻辑比较，`&&`和`||`分别为短路的标量逻辑与和短路的标量逻辑或
 `if(TRUE || sqrt(-1)>0) next` ,其中的`sqrt(-1)`部分不会执行。 其中条件的结果为`TRUE`, 第二部分没有参加计算， 否则第二部分的计算会发生函数自变量范围错误。
 
-#### 1.1.2.3 逻辑运算函数
+### 1.2.3 逻辑运算函数
 
 `if`结构、`while`结构都需要**逻辑标量**而且不能是缺失值。 这时，应该对缺失值结果单独考虑。
 
@@ -309,7 +309,7 @@ any(NA)                 ## [1] NA
 ```{r}
 which(c(T, F, T, NA))
 which(c(2:5) > 4)
-x <- c(2, 3, 5, 7, 11, 13);x <- x[-which(x == 5)]
+x <- c(2, 3, 5, 7, 11, 13);x <- x[-which(x == 5)];x
 ```
 函数`identical(x,y)`比较两个R对象`x`与`y`的内容是否完全相同， 结果只会取标量`TRUE`与`FALSE`两种。 如
 ```{r}
@@ -410,6 +410,13 @@ paste0(c("A", "B", "C"), 1:3, collapse = ";")
 x <- c(as = "abcdef", qu = "merry", "yuiop[", "b", "plot")
 strsplit(x, 'e')   # 返回列表的字符串
 strsplit("a.b.c", ".", fixed = TRUE)    # 按点号拆分, 等价于 strsplit("a.b.c", "\\.") 等价于 strsplit("a.b.c", "\\.", perl = TRUE)
+
+x <- c("NM001.1", "NM0003.3")
+strsplit(x, '.', perl = TRUE)
+
+
+
+
 ```
 
 * 一个将字符串逆序的函数
@@ -1632,7 +1639,6 @@ Sandy, 49, 100
 
 1. `skip=`选项跳过开头的若干行
 
-
 2.  当数据不包含列名时， 只要指定`col_names=FALSE`，变量将自动命名为`X1`, `X2`, `...`，也可以用`col_names=`指定各列的名字
 ```{r}
 d.small <- read_csv("John, 33, 95
@@ -1645,6 +1651,7 @@ Sandy, 49, 100
 3. `locale =`指定编码，`readr`包的默认编码是`UTF-8`编码
     * `GBK`编码的文件需要使用下面的程序
 ```{r}
+library(readr)
 d <- read_csv("data/bp.csv", locale = locale(encoding = "GBK"))
 ```
 
@@ -1672,9 +1679,9 @@ d <- read_csv("data/bp.csv", locale=locale(encoding="GBK"),
 ```
     * 当猜测的文件类型有问题的时候， 可以先将所有列都读成字符型， 然后用type_convert()函数转换， 
 ```{r}
-d <- read_csv("data/bp.csv",
-              col_types=cols(.default = col_character()))
-d <- type_convert(d)
+#library(readr)
+#d <- read_csv("data/bp.csv", col_types=cols(.default = col_character()))
+#d <- type_convert(d)
 ```
 
 
@@ -1690,6 +1697,167 @@ d.class <- read_csv("data/class.csv",
 str(d.class)
 ```
 > 其中`str()`函数可以显示数据框的行数(obs.)和变量数(variables)， 以及每个变量（列）的类属等信息。
+
+
+## 2.2 程序控制
+### 2.2.1 表达式
+* 任何一个语句都可以看成是一个表达式。 表达式之间以分号分隔或用换行分隔
+* 复合表达式的值为最后一个表达式的值， 组合用大括号表示, 如：
+```{r}
+{
+  x <- 15
+  x
+}
+```
+### 2.2.2 分支结构
+
+* if 结构: `if(条件) 表达式1`
+* if...else..结构: `if(条件) 表达式1 else 表达式2`
+  * “条件”为一个标量的真或假值, **不允许取缺失值**， 表达式可以是用大括号包围的复合表达式
+* 多分支结构,可以在中间增加`else if语句`
+```{r}
+x <- c(0.05, 0.6, 0.3, 0.9)
+
+for (i in seq(along.with=x)){
+  if (x[i] <= 0.2){
+    cat("small\n")
+  }else if(x[i] <= 0.8){
+    cat("medium\n")
+  }else{
+    cat("large\n")
+  }
+}
+```
+
+#### 2.2.2.1 逻辑下标代替分支结构
+* R是向量化语言，尽可能少用标量运算。
+  * 如：x为一个向量，要定义y与x等长， 且y的每一个元素当且仅当x的对应元素为正数时等于1， 否则等于零。
+
+```{r}
+x <- c(-1,2,0.2)
+y <- numeric(length(x))
+y[x>0] <- 1 ; y
+```
+#### 2.2.2.2 `ifelse(test, yes, no)`函数
+* 一个逻辑向量中的多个条件， 分别选择不同结果
+  * `ifelse`的`test`中运行有缺失值， 对应结果也是缺失值。
+```{r}
+x <- c(-1,2,0.2) ; ifelse(x>0, 1, 0) 
+```
+* `dplyr`包的`if_else`函数与基本R的`ifelse`功能基本相同， 但允许指定条件为缺失值时的不同处理方法。
+
+#### 2.2.2.3 `switch()`函数：建立多分枝结构
+如：某校的百分制转换等级的规则
+* 90-100: A
+* 70-89: B
+* 50-69: C
+* 30-49: D
+* 10-29: E
+* 0-9: F
+
+```{r}
+gr_v <- c("A", "B", "C", "D", "E", "F", "")
+for(gr in gr_v){
+  cat(gr, ":", switch(gr,
+                      "A" = c(90:100),
+                      "B" = c(70:89),
+                      "C" = c(50:69),
+                      "D" = c(30:49),
+                      "E" = c(10:29),
+                      "F" = c(0:9),
+                      NA), "\n")
+}
+
+```
+> 当 gr 等于 "A"时，取"A"的值
+> `switch()`中的最后一个选择通常用于所有前面选择都不匹配时的一个例外情况处理
+
+* `switch()`中允许对多个值采取同一行动或者返回同一结果， 如：
+```{r}
+for(ch in c("a", "b", "x")){
+  cat(ch, ":", switch(ch,
+    "a"=, "b"=, "c"=, "d" = "hello",
+    "world"), "\n")
+}
+```
+> 在上例中，a, b, c, d 返回相同的值"hello"， 而其它值则返回"world"。
+
+
+* `dplyr`包的`case_when`函数可以`switch()`的向量化推广
+```{r}
+x <- c("a", "b", "x")
+dplyr::case_when(
+  x %in% c("a", "b", "c", "d") 
+  ~ "hello",
+  TRUE
+  ~ "world"
+)
+```
+
+### 2.2.3 循环结构
+#### 2.2.3.1 计算循环
+为了对向量每个元素、矩阵每行、矩阵每列循环处理，语法为 `for(循环变量 in 序列) 语句`, 如：
+
+```{r}
+set.seed(100); x <- rnorm(5); y = numeric(length(x))
+for (i in seq_along(x)){    # seq_along(x) 等价于 1:length(x)
+  if (x[i] < 0){
+    y[i] <- 0
+  }else{
+    y[i] <- 1
+  }
+}
+print(y)
+```
+> 在R中应尽量避免for循环： 其速度比向量化版本慢一个数量级以上， 而且写出的程序不够典雅。
+
+* 改写为：
+```{r}
+set.seed(100); x <- rnorm(5)
+y <- ifelse(x>=0, 1, 0);print(y)
+```
+* 许多计数循环都可以用`lapply`、`vapply`、`sapply`、`apply`、`map`、`Map`等函数替代
+* 用`break`语句退出所在的循环。
+* 用`next`语句进入所在循环的下一轮。
+* 使用for循环的注意事项：
+  1. 如果对向量每个元素遍历并保存结果， 应在循环之前先将结果变量产生等长的存储， 在循环内为已经分配好存储空间的输出向量的元素赋值。 为了产生长度为n的数值型向量，用numeric(n)； 为了产生长度为n的列表，用vector("list", n)。
+  2. 对一个向量元素遍历时如果用下标访问， 需要用`seq_along(x)`的做法而不是`1:length(x)`的做法。
+  3. 如果直接对向量元素遍历， 这有可能会丢失向量的属性（如日期型）， 用下标访问则不存在此问题。
+如：
+```{r}
+x <- as.POSIXct(c("1981-05-31", "2020-02-22"))
+for(xi in x){print(xi)}
+cat("------------------------", "\n")
+for(i in seq_along(x)){print(x[i])}
+```
+#### 2.2.3.2 `while()`循环和`repeat()`循环
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 3. 数据整理 - `tidyverse`系统
 ## 3.1 tidyverse系统介绍
@@ -2070,18 +2238,22 @@ d.sep |>
 #### 3.1.17.2 `extract()`正则规则拆分
 * 按照某种正则表达式表示的模式从指定列拆分出对应于正则表达式中捕获组的一列或多列内容
 ```{r}
+library(tidyverse)
+library(tibble)
 dexp <- tibble(
-  design = c("AA", "AB", "BA", "BB"),
-  response = c(120, 110, 105, 95)) |> knitr::kable(dexp)
+    design = c("AA", "AB", "BA", "BB"),
+    response = c(120, 110, 105, 95)) 
+knitr::kable(dexp)
 ```
+
+
 ```{r}
 dexp |>
-    extract(
-        design,
-        into = c("fac1", "fac2"),
-        regex = "(.)(.)"
-    ) |>
-    knitr::kable()
+  extract(
+    design,
+    into = c("fac1", "fac2"),
+    regex = "(.)(.)"
+  ) |> knitr::kable()
 ```
 
 ### 3.1.18 `unite()`合并数据列 - `separate()`的反向操作
